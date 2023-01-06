@@ -53,7 +53,7 @@ export abstract class PipeEnrichment {
 
 export abstract class PipeSource {
   public readonly sourceArn: string;
-  public sourceParameters?: CfnPipe.PipeSourceParametersProperty | IResolvable;
+  public readonly sourceParameters?: CfnPipe.PipeSourceParametersProperty | IResolvable;
   constructor(sourceArn: string, props?: CfnPipe.PipeSourceParametersProperty | IResolvable) {
     this.sourceArn = sourceArn;
     this.sourceParameters = props;

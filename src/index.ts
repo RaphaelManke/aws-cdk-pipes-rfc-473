@@ -1,5 +1,4 @@
-export class Hello {
-  public sayHello() {
-    return 'hello, world!';
-  }
-}
+import { Pipe } from './pipe';
+import { SqsSource } from './sources/SqsSource';
+import { SqsTarget } from './targets/SqsTarget';
+export { Pipe, SqsSource, SqsTarget };

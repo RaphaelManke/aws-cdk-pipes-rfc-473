@@ -138,6 +138,7 @@ export class Pipe extends PipeBase {
     this.pipeName = pipeName;
 
     props.source.grantRead(this.pipeRole);
+    props.target.grantPush(this.pipeRole);
 
 
     const resource = new CfnPipe(this, 'Resource', {

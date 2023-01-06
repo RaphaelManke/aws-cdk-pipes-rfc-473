@@ -54,10 +54,14 @@ export abstract class PipeEnrichment {
 export abstract class PipeSource {
   public readonly sourceArn: string;
   public readonly sourceParameters?: CfnPipe.PipeSourceParametersProperty | IResolvable;
+
+
   constructor(sourceArn: string, props?: CfnPipe.PipeSourceParametersProperty | IResolvable) {
     this.sourceArn = sourceArn;
     this.sourceParameters = props;
   }
+
+  public abstract grantRead(grantee: IRole): void;
 }
 
 export abstract class PipeTarget {
@@ -129,6 +133,9 @@ export class Pipe extends PipeBase {
       assumedBy: new ServicePrincipal('pipes.amazonaws.com'),
     });
     this.pipeName = pipeName;
+
+    props.source.grantRead(this.pipeRole);
+
 
     const resource = new CfnPipe(this, 'Resource', {
       name: props.name,

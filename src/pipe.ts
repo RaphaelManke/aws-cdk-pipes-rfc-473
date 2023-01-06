@@ -61,9 +61,10 @@ export abstract class PipeSource {
 }
 
 export abstract class PipeTarget {
-  public abstract readonly targetArn: string;
-  public targetParameters: CfnPipe.PipeTargetParametersProperty | IResolvable;
-  constructor(props:CfnPipe.PipeTargetParametersProperty | IResolvable) {
+  public readonly targetArn: string;
+  public readonly targetParameters: CfnPipe.PipeTargetParametersProperty | IResolvable;
+  constructor(targetArn:string, props:CfnPipe.PipeTargetParametersProperty | IResolvable) {
+    this.targetArn = targetArn;
     this.targetParameters = props;
   }
 }

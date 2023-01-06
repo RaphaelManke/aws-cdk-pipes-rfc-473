@@ -71,6 +71,9 @@ export abstract class PipeTarget {
     this.targetArn = targetArn;
     this.targetParameters = props;
   }
+
+  public abstract grantPush(grantee: IRole): void;
+
 }
 
 interface PipeProps {

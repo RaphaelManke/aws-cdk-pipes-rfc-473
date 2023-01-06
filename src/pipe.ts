@@ -43,7 +43,7 @@ export enum DesiredState {
   STOPPED = 'STOPPED',
 }
 
-abstract class PipeEnrichment {
+export abstract class PipeEnrichment {
   public abstract readonly enrichmentArn: string;
   public enrichmentParameters: CfnPipe.PipeEnrichmentParametersProperty | IResolvable;
   constructor(props: CfnPipe.PipeEnrichmentParametersProperty | IResolvable) {
@@ -51,15 +51,16 @@ abstract class PipeEnrichment {
   }
 }
 
-abstract class PipeSource {
-  public abstract readonly sourceArn: string;
-  public sourceParameters: CfnPipe.PipeSourceParametersProperty | IResolvable;
-  constructor(props: CfnPipe.PipeSourceParametersProperty | IResolvable) {
+export abstract class PipeSource {
+  public readonly sourceArn: string;
+  public sourceParameters?: CfnPipe.PipeSourceParametersProperty | IResolvable;
+  constructor(sourceArn: string, props?: CfnPipe.PipeSourceParametersProperty | IResolvable) {
+    this.sourceArn = sourceArn;
     this.sourceParameters = props;
   }
 }
 
-abstract class PipeTarget {
+export abstract class PipeTarget {
   public abstract readonly targetArn: string;
   public targetParameters: CfnPipe.PipeTargetParametersProperty | IResolvable;
   constructor(props:CfnPipe.PipeTargetParametersProperty | IResolvable) {

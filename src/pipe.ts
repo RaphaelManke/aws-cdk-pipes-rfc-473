@@ -76,7 +76,7 @@ export abstract class PipeTarget {
 
 }
 
-interface PipeProps {
+export interface PipeProps {
   /**
     *
     */

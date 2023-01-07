@@ -1,7 +1,7 @@
 import { App, Stack } from 'aws-cdk-lib';
 import { Template } from 'aws-cdk-lib/assertions';
 import { Queue } from 'aws-cdk-lib/aws-sqs';
-import { Pipe } from '../src/pipe';
+import { Pipe, PipeFilterPattern, PipeSourceFilter, PipeSqsFilterPattern } from '../src/pipe';
 import { SqsSource } from '../src/sources/SqsSource';
 import { SqsTarget } from '../src/targets/SqsTarget';
 
@@ -9,12 +9,22 @@ test('Stack does synth', () => {
   const stack = new Stack( new App(), 'test-stack' );
   const sourceQueue = new Queue(stack, 'test-source-queue', {});
   const targetQueue = new Queue(stack, 'test-target-queue', {});
+
+  const pipeSourceFilter = new PipeSourceFilter([
+    PipeFilterPattern.fromJson({ foo: 'bar' }),
+    PipeSqsFilterPattern.fromSqsMessageAttributes({ md5OfBody: 'string', body: { foo: 'bar' } }),
+  ]);
+
+
   new Pipe(stack, 'test-pipe', {
-    source: new SqsSource(sourceQueue),
+    source: new SqsSource(sourceQueue, {
+
+    }),
+    sourceFilter: pipeSourceFilter,
+
     target: new SqsTarget({ queue: targetQueue }),
   });
   const template = Template.fromStack(stack);
-
 
   template.hasResource('AWS::Pipes::Pipe', {});
   template.hasResource('AWS::IAM::Role', {});

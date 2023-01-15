@@ -64,10 +64,7 @@ export abstract class PipeSource {
   | CfnPipe.PipeSourceParametersProperty
   | IResolvable;
 
-  constructor(
-    sourceArn: string,
-    props?: CfnPipe.PipeSourceParametersProperty,
-  ) {
+  constructor(sourceArn: string, props?: CfnPipe.PipeSourceParametersProperty) {
     this.sourceArn = sourceArn;
     this.sourceParameters = props;
   }
@@ -95,33 +92,31 @@ export interface IPipeFilterPattern {
   pattern: string;
 }
 
-export class PipeFilterPattern {
-  static fromJson(patternObject: Record<string, any>) :IPipeFilterPattern {
+export class PipeGenericFilterPattern {
+  static fromJson(patternObject: Record<string, any>): IPipeFilterPattern {
     return { pattern: JSON.stringify(patternObject) };
   }
-
 }
 
-
-export class PipeSqsFilterPattern extends PipeFilterPattern {
+export class PipeSqsFilterPattern extends PipeGenericFilterPattern {
   static fromSqsMessageAttributes(attributes: {
     messageId?: string;
-    'receiptHandle'?: string;
-    'body'?: any;
-    'attributes'?: {
-      'ApproximateReceiveCount'?: string;
-      'SentTimestamp'?: string;
-      'SequenceNumber'?: string;
-      'MessageGroupId'?: string;
-      'SenderId'?: string;
-      'MessageDeduplicationId'?: string;
-      'ApproximateFirstReceiveTimestamp'?: string;
+    receiptHandle?: string;
+    body?: any;
+    attributes?: {
+      ApproximateReceiveCount?: string;
+      SentTimestamp?: string;
+      SequenceNumber?: string;
+      MessageGroupId?: string;
+      SenderId?: string;
+      MessageDeduplicationId?: string;
+      ApproximateFirstReceiveTimestamp?: string;
     };
-    'messageAttributes'?: any;
-    'md5OfBody'?: string;
-  }) :IPipeFilterPattern {
+    messageAttributes?: any;
+    md5OfBody?: string;
+  }): IPipeFilterPattern {
     return {
-      pattern: JSON.stringify( attributes ),
+      pattern: JSON.stringify(attributes),
     };
   }
 }
@@ -132,7 +127,6 @@ export class PipeSourceFilter {
   constructor(filter: IPipeFilterPattern[]) {
     this.filters = filter;
   }
-
 }
 
 export interface PipeProps {

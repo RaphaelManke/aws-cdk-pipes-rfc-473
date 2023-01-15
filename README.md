@@ -4,3 +4,222 @@ This is a PoC implementation of a L2 construct for AWS EventBridge Pipe
 
 The RFC Issue: https://github.com/aws/aws-cdk-rfcs/issues/473
 The CDK Issue: https://github.com/aws/aws-cdk/issues/23495
+
+## Pipe
+
+Am AWS EventBridge Pipe has itself is a fully managed service that does the heavy lifting of polling a source, then be able to filter out payloads based on filter criteria. This reduces the target invocations and can reduce costs.
+After filtering events the resulting events can be enriched in the enrichment phase of a Pipe. The result of the enrichment is then pushed to the Target.
+Before passing a payload to the enrichment and Target the payload can be transformed using a input Transformation.
+To give the EventBridge Pipe access to the services that are connected in a pipe, each Pipe assumes a IAM Role. This role must have iam policies attached to read from a source, invoke a enrichment service and finally push to a target service.
+
+So a Pipe has the following components:
+
+- [Role](#Role)
+- [Source](#Source)
+- [Filter](#Filter) (optional)
+- [Enrichment](#Enrichment) (optional)
+  - [Input transformation](#Input%20Transformation) (optional)
+- [Target](#Target)
+  - [Input transformation](#Input%20Transformation) (optional)
+
+besides these (core) components that are used while processing data, there are additional attributes that describe a Pipe
+
+- Name
+  - This the (physical-) identifier for the AWS resource, the actual Pipe. It is used in the ARN of the provisioned resource.
+- Description
+  - This is text field for humans to identify what the pipe does.
+- Tags
+  - AWS tags for the resource
+
+### Possible implementation
+
+```typescript
+interface PipeProps {
+  readonly source: PipeSource;
+  readonly target: PipeTarget;
+
+  readonly filter?: PipeFilter;
+  readonly enrichment?: PipeEnrichment;
+  readonly role?: IRole; // role is optional, if not provided a new role is created
+  readonly description: string;
+  readonly tags?: Tags;
+}
+
+interface Pipe {
+  readonly role: IRole;
+  readonly source: PipeSource;
+  readonly target: PipeTarget;
+
+  readonly filter?: PipeFilter;
+  readonly enrichment?: PipeEnrichment;
+  readonly description: string;
+  readonly tags?: Tags;
+
+  constructor(scope: Scope, id: string, props: PipeProps);
+}
+```
+
+### Open questions
+
+1. Should the input Transformation be part of the `PipeProps` (alternative: a property of the `PipeEnrichment` and `PipeTarget` props) ?
+   1. Pro `PipeProps`:
+      1. In the case of a Refactoring, for example replace the target the input transformation doesn't have to be touched/moved
+   2. Con `PipeProps`:
+      1. Input transformation can occur twice in a Pipe definition. The naming needs to make sure for which phase the the transformation is meant. E.g. `EnrichmentInputTransformation` and `TargetInputTransformation`
+      2. Setting the `EnrichmentInputTransformation` without an `PipeEnrichment` makes no sense and needs additional validation code. This can be omitted if the `inputTransformation` is a property of the `PipeEnrichment` or `PipeTarget` classes.
+2. Should the `PipeFilter` be part of the `PipeSource` property definition instead of a attribute on the `Pipe`class?
+   1. Pro:
+      1. The possible filter keys depend on the source
+      2. cloudformation itself put the `FilterCriteria` into the [PipeSourceParameters](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipesourceparameters.html)
+   2. Con:
+      1. To align with the AWS console it should be on the same level as the `Source` itself. User that have tested pipes in the console can easier understand the api.
+      2. It would be more robust to future AWS changes because the Filter can always be defined based on the cloudformation generated type definitions and don't have to be explicitly build for a new source.
+
+## Source
+
+A source is a AWS Service that needs to be polled.
+The following Sources are possible:
+
+- [Amazon DynamoDB stream](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-dynamodb.html)
+- [Amazon Kinesis stream](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-kinesis.html)
+- [Amazon MQ broker](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-mq.html)
+- [Amazon MSK stream](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-msk.html)
+- [Self managed Apache Kafka stream](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-kafka.html)
+- [Amazon SQS queue](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-sqs.html)
+
+The CfnPipe resource reference the source only by their ARN. Right now there is no validation in der CDK framework that checks if a ARN is valid or not.
+To overcome this shortcoming a PipeSource class representing a source is needed. This PipeSource is then implemented by all the supported sources.
+
+```typescript
+export abstract class PipeSource {
+  public readonly sourceArn: string;
+
+  public readonly sourceParameters?:
+    | CfnPipe.PipeSourceParametersProperty
+    | IResolvable;
+
+  constructor(sourceArn: string, props?: CfnPipe.PipeSourceParametersProperty) {
+    this.sourceArn = sourceArn;
+    this.sourceParameters = props;
+  }
+
+  public abstract grantRead(grantee: IRole): void;
+}
+```
+
+This PipeSource class has a sourceArn that is mapped to the CfnPipe `sourceArn` attribute.
+The `sourceParameters` are the config options for the source. Depending on the source theses attributes are present under a different key. E.g. for a SQS queue the configuration attributes are:
+
+```typescript
+{
+	sqsQueueParameters : {...}
+}
+```
+
+The specific Source class implementation hides this detail for the user and provide a interface with only the possible configuration options that are possible for the specific source.
+
+```typescript
+interface PipeSourceSqsQueueParametersProperty {
+  readonly batchSize?: number;
+  readonly maximumBatchingWindowInSeconds?: number;
+}
+```
+
+This interface for example is provided by the cloudformation specification and can be used as a base for possible configurations (additional validation can be added if useful).
+
+To be able to consume a source the EventBridge Pipe has a IAM-role. This role needs to have a policy to read from the source.
+The `grantRead` method need to be implemented for that purpose.
+E.g. the SQS can leverage its L2 `.grantConsumeMessages()` method.
+
+### Example SQS source
+
+An example api for a source that polls for a SQS-queue then can look like:
+
+```typescript
+export class SqsSource extends PipeSource {
+  private queue: IQueue;
+
+  constructor(
+    queue: IQueue,
+    props?: CfnPipe.PipeSourceSqsQueueParametersProperty
+  ) {
+    super(queue.queueArn, { sqsQueueParameters: props });
+    this.queue = queue;
+  }
+
+  public grantRead(grantee: IRole): void {
+    this.queue.grantConsumeMessages(grantee);
+  }
+}
+```
+
+It takes an existing SQS-queue and polling properties that are possible for that kind of source and does implement a grantRead method which creates the required IAM policy for the Pipe role.
+
+## Role
+
+A IAM role is required that can be assumed by the `pipes.amazonaws.com` principal. This role needs IAM policies attached to read from a `PipeSource`, invoke a `PipeEnrichment` and push to a `PipeTarget`.
+The user can bring its own role. If the user does not provide a role, a new role will be created. In both cases the role should be exposed by the `Pipe` class so it is transparent for user which role is used within the Pipe.
+
+### Open questions
+
+1. How can be assured the pipes service has access to encrypted sources and targets? The role or pipes principal needs access to KMS.
+2. Can we allow `IRole` or do we need to make a restriction to allow `Role` only?
+   1. We have to make sure the generated policies are attached to the role in both cases. If restricted to `Role` this can easily done by using L2 construct methods of the role or the source, enrichment or target and pass the role along. If a `IRole` is provided the role policies cannot be extended.
+
+## Filter
+
+A filter does pattern matching based on the incoming payload and the specified filter criteria's. The matching is done in the same way the [EventBridge pattern](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns.html) are matched.
+The possible fields that can be used to filter incoming payloads are depending on the source.
+
+## Example Implementation
+
+The implementation is split into two types.
+
+1. generic Filter
+   1. this filter is the basic class for defining a filter. It represent 1:1 the cloudformation filter specification.
+2. Source specific filter
+   1. this filter gives the user guidance on which attributes for this specific source a filter can be created. It then takes care of that the actual data-key e.g. `data, body, dynamodb` [see docs](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-event-filtering.html).
+
+```typescript
+interface IPipeFilterPattern {
+	pattern: string;
+}
+
+class PipeGenericFilterPattern {
+	static fromJson(patternObject: Record<string, any>) :IPipeFilterPattern {
+		return { pattern: JSON.stringify(patternObject) };
+	}
+}
+
+interface SqsMessageAttributes : {
+	messageId?: string;
+	receiptHandle?: string;
+	body?: any;
+	attributes?: {
+		ApproximateReceiveCount?: string;
+		SentTimestamp?: string;
+		SequenceNumber?: string;
+		MessageGroupId?: string;
+		SenderId?: string;
+		MessageDeduplicationId?: string;
+		ApproximateFirstReceiveTimestamp?: string;
+	};
+	messageAttributes?: any;
+	md5OfBody?: string;
+}
+
+class PipeSqsFilterPattern extends PipeGenericFilterPattern {
+	static fromSqsMessageAttributes(attributes: SqsMessageAttributes) :IPipeFilterPattern {
+		return {
+			pattern: JSON.stringify( attributes ),
+		};
+
+	}
+}
+```
+
+## Target
+
+## Enrichment
+
+## Input Transformation

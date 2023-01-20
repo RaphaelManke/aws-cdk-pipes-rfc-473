@@ -1,13 +1,27 @@
-# AWS CDK L2 Construct EventBridge Pipe
+# AWS CDK RFC-473 - EventBridge Pipes
 
-This is a PoC implementation of a L2 construct for AWS EventBridge Pipe
+## Readme
 
-The RFC Issue: https://github.com/aws/aws-cdk-rfcs/issues/473
-The CDK Issue: https://github.com/aws/aws-cdk/issues/23495
+# Amazon Eventbridge Pipes Construct Library
+
+This library contains constructs for working with Amazon EventBridge Pipes.
+
+EventBridge Pipes let you create source to target connections between several
+
+aws services. While transporting messages from a source to a target the messages
+
+can be filtered, transformed and enriched.
+
+![diagram of pipes](https://docs.aws.amazon.com/images/eventbridge/latest/userguide/images/pipes_overview.png)
+
+For more details see the service
+
+[documentation](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes.html).
+[Cloudformation docs](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pipes-pipe.html)
 
 ## Pipe
 
-Am AWS EventBridge Pipe has itself is a fully managed service that does the heavy lifting of polling a source, then be able to filter out payloads based on filter criteria. This reduces the target invocations and can reduce costs.
+AWS EventBridge Pipe has itself is a fully managed service that does the heavy lifting of polling a source, then be able to filter out payloads based on filter criteria. This reduces the target invocations and can reduce costs.
 After filtering events the resulting events can be enriched in the enrichment phase of a Pipe. The result of the enrichment is then pushed to the Target.
 Before passing a payload to the enrichment and Target the payload can be transformed using a input Transformation.
 To give the EventBridge Pipe access to the services that are connected in a pipe, each Pipe assumes a IAM Role. This role must have iam policies attached to read from a source, invoke a enrichment service and finally push to a target service.
@@ -31,7 +45,23 @@ besides these (core) components that are used while processing data, there are a
 - Tags
   - AWS tags for the resource
 
-### Possible implementation
+```mermaid
+graph LR
+classDef required fill:#00941b
+classDef optional fill:#5185f5
+
+Source:::required
+Filter:::optional
+Enrichment_Input_Transformation[Input transformation]:::optional
+Enrichment:::optional
+Target_Input_Transformation[Input transformation]:::optional
+Target:::required
+
+Source --> Filter --> Enrichment_Input_Transformation --> Enrichment --> Target_Input_Transformation --> Target
+
+```
+
+### Example implementation
 
 ```typescript
 interface PipeProps {
@@ -131,7 +161,7 @@ To be able to consume a source the EventBridge Pipe has a IAM-role. This role ne
 The `grantRead` method need to be implemented for that purpose.
 E.g. the SQS can leverage its L2 `.grantConsumeMessages()` method.
 
-### Example SQS source
+### Example implementation
 
 An example api for a source that polls for a SQS-queue then can look like:
 
@@ -171,7 +201,7 @@ The user can bring its own role. If the user does not provide a role, a new role
 A filter does pattern matching based on the incoming payload and the specified filter criteria's. The matching is done in the same way the [EventBridge pattern](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns.html) are matched.
 The possible fields that can be used to filter incoming payloads are depending on the source.
 
-## Example Implementation
+### Example Implementation
 
 The implementation is split into two types.
 
@@ -220,6 +250,260 @@ class PipeSqsFilterPattern extends PipeGenericFilterPattern {
 
 ## Target
 
+A Target is the end of the Pipe. After the payload from the source is pulled, filtered and enriched it is forwarded to the target.
+For now the following targets are supported:
+
+- [API destination](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-api-destinations.html)
+- [API Gateway](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-api-gateway-target.html)
+- [Batch job queue](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-event-target.html#pipes-targets-specifics-batch)
+- [CloudWatch log group](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-event-target.html#pipes-targets-specifics-cwl)
+- [ECS task](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-event-target.html#pipes-targets-specifics-ecs-task)
+- Event bus in the same account and Region
+- Firehose delivery stream
+- Inspector assessment template
+- Kinesis stream
+- Lambda function (SYNC or ASYNC)
+- Redshift cluster data API queries
+- SageMaker Pipeline
+- SNS topic
+- SQS queue
+- Step Functions state machine
+  - Express workflows (ASYNC)
+  - Standard workflows (SYNC or ASYNC)
+
+The CfnPipe resource reference the target only by their ARN. Right now there is no validation in der CDK framework that checks if a ARN is valid or not.
+To overcome this shortcoming a PipeTarget class representing a target is needed. This PipeTarget is then implemented by all the supported targets.
+
+The implementation is then similar to the Source implementation:
+
+### Example implementation
+
+```typescript
+interface IPipeTarget {
+  targetArn: string;
+  targetParameters: CfnPipe.PipeTargetParametersProperty;
+
+  grantPush(grantee: IRole): void;
+}
+
+export interface SqsTargetProps {
+  queue: IQueue;
+  sqsQueueParameters?: CfnPipe.PipeTargetSqsQueueParametersProperty;
+}
+
+export class SqsTarget implements IPipeTarget {
+  private queue: IQueue;
+  targetArn: string;
+  targetParameters: CfnPipe.PipeTargetParametersProperty;
+
+  constructor(props: SqsTargetProps) {
+    this.queue = props.queue;
+    this.targetArn = props.queue.queueArn;
+    this.targetParameters = { sqsQueueParameters: props.sqsQueueParameters };
+  }
+
+  public grantPush(grantee: IRole): void {
+    this.queue.grantSendMessages(grantee);
+  }
+}
+```
+
 ## Enrichment
 
+In the enrichment step the filtered payloads can be used to invoke one of the following services
+
+- API destination
+- Amazon API Gateway
+- Lambda function
+- Step Functions state machine
+  - only express workflow
+
+The invocation is a synchron call to the service. The result of the enrichment step then can be used to combine it with the filtered payload to target.
+The enrichment has two main properties for all types of supported services
+
+- enrichment ARN
+- input transformation
+
+The enrichment ARN is the AWS resource ARN that should be invoked. The Role must have access to invoke this ARN.
+The input transformation is used to map values from the filter step output to the input to the enrichment step.
+For API destination and Api Gateway enrichments there can additional request parameter be set like header, query params. These properties can either be static or dynamic based on the payload from the previous step or extracted from the input transformation.
+
+### Example implementation
+
+```typescript
+export abstract class PipeEnrichment {
+  public readonly enrichmentArn: string;
+  public enrichmentParameters: CfnPipe.PipeEnrichmentParametersProperty;
+
+  constructor(
+    enrichmentArn: string,
+    props: CfnPipe.PipeEnrichmentParametersProperty
+  ) {
+    this.enrichmentParameters = props;
+    this.enrichmentArn = enrichmentArn;
+  }
+
+  abstract grantInvoke(grantee: IRole): void;
+}
+
+export class LambdaEnrichment extends PipeEnrichment {
+  private lambda: IFunction;
+
+  constructor(
+    lambda: IFunction,
+    props: { inputTransformation?: PipeInputTransformation }
+  ) {
+    super(lambda.functionArn, {
+      inputTemplate: props.inputTransformation?.inputTemplate,
+    });
+    this.lambda = lambda;
+  }
+
+  grantInvoke(grantee: IRole): void {
+    this.lambda.grantInvoke(grantee);
+  }
+}
+```
+
 ## Input Transformation
+
+Input transformations are used to transform or extend payloads to a desired structure. This transformation mechanism can be used prior to the enrichment or target step.
+
+There are two types of mappings. Both types can be either static values or use values from the output of the previous step. Additionally there are a few values that come from the pipe itself (see `reservedVariables` enum).
+
+- string
+  - static
+  - dynamic
+- json
+  - static
+  - dynamic
+
+### Example implementation
+
+```typescript
+enum reservedVariables {
+  PIPES_ARN = "<aws.pipes.pipe-arn>",
+  PIPES_NAME = "<aws.pipes.pipe-name>",
+  PIPES_TARGET_ARN = "<aws.pipes.target-arn>",
+  PIPE_EVENT_INGESTION_TIME = "<aws.pipes.event.ingestion-time>",
+  PIPE_EVENT = "<aws.pipes.event>",
+  PIPE_EVENT_JSON = "<aws.pipes.event.json>",
+}
+
+type StaticString = string;
+type JsonPath = `<$.${string}>`;
+type KeyValue = Record<string, string | reservedVariables>;
+type StaticJsonFlat = Record<string, StaticString | JsonPath | KeyValue>;
+type InputTransformJson = Record<
+  string,
+  StaticString | JsonPath | KeyValue | StaticJsonFlat
+>;
+
+type PipeInputTransformationValue = StaticString | InputTransformJson;
+
+export interface IInputTransformationProps {
+  inputTemplate: PipeInputTransformationValue;
+}
+
+export class PipeInputTransformation {
+  static fromJson(inputTemplate: Record<string, any>): PipeInputTransformation {
+    return new PipeInputTransformation({ inputTemplate });
+  }
+
+  readonly inputTemplate: string;
+
+  constructor(props: IInputTransformationProps) {
+    this.inputTemplate = JSON.stringify(props);
+  }
+}
+```
+
+### Open Question
+
+1. The EventBridge L2 construct has a InputTransformation as well [see cdk docs](https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_events.RuleTargetInput.html). Should this be reused/extended?
+2. Should there be specific InputTransformation helper that are specific to a source similar to the Source filter.
+
+#### Example config
+
+- SQS -> Filter -> API Gateway -> SQS
+  ```json
+  {
+    "Arn": "arn:aws:pipes:eu-central-1:XXXXXXXXXXX:pipe/PipeSqsToSqs",
+    "CreationTime": "2023-01-04T10:57:58+01:00",
+    "CurrentState": "RUNNING",
+    "DesiredState": "RUNNING",
+    "Enrichment": "arn:aws:execute-api:eu-central-1:XXXXXXXXXXX:yia5vn3gz0/prod/GET/pets",
+    "EnrichmentParameters": {
+      "HttpParameters": {
+        "HeaderParameters": {
+          "FoHEader": "Bar"
+        },
+        "QueryStringParameters": {
+          "FooQuery": "$.detail.price"
+        }
+      }
+    },
+    "LastModifiedTime": "2023-01-20T09:02:00+01:00",
+    "Name": "PipeSqsToSqs",
+    "RoleArn": "arn:aws:iam::XXXXXXXXXXX:role/service-role/Amazon_EventBridge_Pipe_PipeSqsToSqs_26d9f0aa",
+    "Source": "arn:aws:sqs:eu-central-1:XXXXXXXXXXX:PipeSource",
+    "SourceParameters": {
+      "FilterCriteria": {
+        "Filters": [
+          {
+            "Pattern": "{\"awsRegion\":[{\"prefix\":\"eu\"}]}"
+          }
+        ]
+      },
+      "SqsQueueParameters": {
+        "BatchSize": 1
+      }
+    },
+    "StateReason": "USER_INITIATED",
+    "Tags": {},
+    "Target": "arn:aws:sqs:eu-central-1:XXXXXXXXXXX:PipeTarget",
+    "TargetParameters": {}
+  }
+  ```
+- SQS -> Filter -> API Destination -> SQS
+  ```json
+  {
+    "Arn": "arn:aws:pipes:eu-central-1:XXXXXXXXXXX:pipe/PipeSqsToSqs",
+    "CreationTime": "2023-01-04T10:57:58+01:00",
+    "CurrentState": "UPDATING",
+    "DesiredState": "RUNNING",
+    "Enrichment": "arn:aws:events:eu-central-1:XXXXXXXXXXX:api-destination/Foo/fe7e2cbd-43da-435c-8e86-a2fa1a83f467",
+    "EnrichmentParameters": {
+      "HttpParameters": {
+        "HeaderParameters": {
+          "Dynamic": "$.detail.id",
+          "FooBAr": "Static"
+        },
+        "QueryStringParameters": {
+          "FooQueryDynamic": "$.detail.bar",
+          "FooStaticQuery": "FooStaticQuery"
+        }
+      }
+    },
+    "LastModifiedTime": "2023-01-20T09:10:01+01:00",
+    "Name": "PipeSqsToSqs",
+    "RoleArn": "arn:aws:iam::XXXXXXXXXXX:role/service-role/Amazon_EventBridge_Pipe_PipeSqsToSqs_26d9f0aa",
+    "Source": "arn:aws:sqs:eu-central-1:XXXXXXXXXXX:PipeSource",
+    "SourceParameters": {
+      "FilterCriteria": {
+        "Filters": [
+          {
+            "Pattern": "{\"awsRegion\":[{\"prefix\":\"eu\"}]}"
+          }
+        ]
+      },
+      "SqsQueueParameters": {
+        "BatchSize": 1
+      }
+    },
+    "StateReason": "USER_INITIATED",
+    "Tags": {},
+    "Target": "arn:aws:sqs:eu-central-1:XXXXXXXXXXX:PipeTarget",
+    "TargetParameters": {}
+  }
+  ```

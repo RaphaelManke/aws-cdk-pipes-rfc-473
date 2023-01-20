@@ -49,13 +49,15 @@ export enum DesiredState {
 }
 
 export abstract class PipeEnrichment {
-  public abstract readonly enrichmentArn: string;
-  public enrichmentParameters:
-  | CfnPipe.PipeEnrichmentParametersProperty
-  | IResolvable;
-  constructor(props: CfnPipe.PipeEnrichmentParametersProperty | IResolvable) {
+  public readonly enrichmentArn: string;
+  public enrichmentParameters: CfnPipe.PipeEnrichmentParametersProperty;
+
+  constructor( enrichmentArn: string, props: CfnPipe.PipeEnrichmentParametersProperty) {
     this.enrichmentParameters = props;
+    this.enrichmentArn = enrichmentArn;
   }
+
+  abstract grantInvoke(grantee: IRole): void;
 }
 
 export abstract class PipeSource {
@@ -72,14 +74,54 @@ export abstract class PipeSource {
   public abstract grantRead(grantee: IRole): void;
 }
 
-export abstract class PipeTarget {
+export interface IPipeTarget {
+  targetArn: string;
+  targetParameters: CfnPipe.PipeTargetParametersProperty;
+
+  grantPush(grantee: IRole): void;
+};
+
+enum reservedVariables {
+  PIPES_ARN = '<aws.pipes.pipe-arn>',
+  PIPES_NAME = '<aws.pipes.pipe-name>',
+  PIPES_TARGET_ARN = '<aws.pipes.target-arn>',
+  PIPE_EVENT_INGESTION_TIME = '<aws.pipes.event.ingestion-time>',
+  PIPE_EVENT = '<aws.pipes.event>',
+  PIPE_EVENT_JSON = '<aws.pipes.event.json>'
+}
+
+type StaticString = string;
+type JsonPath = `<$.${string}>`;
+type KeyValue = Record<string, string | reservedVariables>;
+type StaticJsonFlat = Record<string, StaticString| JsonPath | KeyValue >;
+type InputTransformJson = Record<string, StaticString| JsonPath | KeyValue | StaticJsonFlat>;
+
+
+type PipeInputTransformationValue = StaticString | InputTransformJson
+
+
+export interface IInputTransformationProps {
+  inputTemplate: PipeInputTransformationValue;
+}
+
+export class PipeInputTransformation {
+  static fromJson(inputTemplate: Record<string, any>): PipeInputTransformation {
+    return new PipeInputTransformation({ inputTemplate });
+  }
+
+  readonly inputTemplate: string;
+
+  constructor(props: IInputTransformationProps) {
+    this.inputTemplate = JSON.stringify(props);
+  }
+}
+
+export abstract class PipeTarget implements IPipeTarget {
   public readonly targetArn: string;
-  public readonly targetParameters:
-  | CfnPipe.PipeTargetParametersProperty
-  | IResolvable;
+  public readonly targetParameters: CfnPipe.PipeTargetParametersProperty ;
   constructor(
     targetArn: string,
-    props: CfnPipe.PipeTargetParametersProperty | IResolvable,
+    props: CfnPipe.PipeTargetParametersProperty,
   ) {
     this.targetArn = targetArn;
     this.targetParameters = props;
@@ -87,6 +129,7 @@ export abstract class PipeTarget {
 
   public abstract grantPush(grantee: IRole): void;
 }
+
 
 export interface IPipeFilterPattern {
   pattern: string;
@@ -222,3 +265,5 @@ export class Pipe extends PipeBase {
     this.pipeArn = resource.attrArn;
   }
 }
+
+

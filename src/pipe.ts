@@ -91,10 +91,10 @@ enum reservedVariables {
 }
 
 type StaticString = string;
-type JsonPath = `<$.${string}>`;
+// type JsonPath = `<$.${string}>`;
 type KeyValue = Record<string, string | reservedVariables>;
-type StaticJsonFlat = Record<string, StaticString| JsonPath | KeyValue >;
-type InputTransformJson = Record<string, StaticString| JsonPath | KeyValue | StaticJsonFlat>;
+type StaticJsonFlat = Record<string, StaticString| KeyValue >;
+type InputTransformJson = Record<string, StaticString| KeyValue | StaticJsonFlat>;
 
 
 type PipeInputTransformationValue = StaticString | InputTransformJson
@@ -117,8 +117,8 @@ export class PipeInputTransformation {
 }
 
 export abstract class PipeTarget implements IPipeTarget {
-  public readonly targetArn: string;
-  public readonly targetParameters: CfnPipe.PipeTargetParametersProperty ;
+  public targetArn: string;
+  public targetParameters: CfnPipe.PipeTargetParametersProperty ;
   constructor(
     targetArn: string,
     props: CfnPipe.PipeTargetParametersProperty,
@@ -141,25 +141,39 @@ export class PipeGenericFilterPattern {
   }
 }
 
+export interface ISqsAttributes {
+  approximateReceiveCount?: string;
+  sentTimestamp?: string;
+  sequenceNumber?: string;
+  messageGroupId?: string;
+  senderId?: string;
+  messageDeduplicationId?: string;
+  approximateFirstReceiveTimestamp?: string;
+}
+
+export interface ISqsMessagePipeFilter {
+  messageId?: string;
+  receiptHandle?: string;
+  body?: any;
+  attributes?: ISqsAttributes;
+  messageAttributes?: any;
+  md5OfBody?: string;
+};
+
 export class PipeSqsFilterPattern extends PipeGenericFilterPattern {
-  static fromSqsMessageAttributes(attributes: {
-    messageId?: string;
-    receiptHandle?: string;
-    body?: any;
-    attributes?: {
-      ApproximateReceiveCount?: string;
-      SentTimestamp?: string;
-      SequenceNumber?: string;
-      MessageGroupId?: string;
-      SenderId?: string;
-      MessageDeduplicationId?: string;
-      ApproximateFirstReceiveTimestamp?: string;
+  static fromSqsMessageAttributes(attributes: ISqsMessagePipeFilter): IPipeFilterPattern {
+    const sqsProps = {
+      ApproximateReceiveCount: attributes.attributes?.approximateReceiveCount,
+      SentTimestamp: attributes.attributes?.sentTimestamp,
+      SequenceNumber: attributes.attributes?.sequenceNumber,
+      MessageGroupId: attributes.attributes?.messageGroupId,
+      SenderId: attributes.attributes?.senderId,
+      MessageDeduplicationId: attributes.attributes?.messageDeduplicationId,
+      ApproximateFirstReceiveTimestamp: attributes.attributes?.approximateFirstReceiveTimestamp,
     };
-    messageAttributes?: any;
-    md5OfBody?: string;
-  }): IPipeFilterPattern {
+
     return {
-      pattern: JSON.stringify(attributes),
+      pattern: JSON.stringify({ ...attributes, attributes: attributes.attributes? sqsProps : undefined }),
     };
   }
 }

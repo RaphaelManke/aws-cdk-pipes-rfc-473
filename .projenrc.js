@@ -6,6 +6,9 @@ const project = new awscdk.AwsCdkConstructLibrary({
   defaultReleaseBranch: 'main',
   name: 'aws-cdk-pipes-rfc',
   repositoryUrl: 'https://github.com/raphael.manke/aws-cdk-pipes-rfc.git',
+  releaseToNpm: false,
+  depsUpgrade: false,
+
 
   // deps: [],                /* Runtime dependencies of this module. */
   // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */

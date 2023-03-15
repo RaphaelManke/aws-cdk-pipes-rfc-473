@@ -318,7 +318,7 @@ In the enrichment step the filtered payloads can be used to invoke one of the fo
 - Step Functions state machine
   - only express workflow
 
-The invocation is a synchron call to the service. The result of the enrichment step then can be used to combine it with the filtered payload to target.
+The invocation is a synchros call to the service. The result of the enrichment step then can be used to combine it with the filtered payload to target.
 The enrichment has two main properties for all types of supported services
 
 - enrichment ARN

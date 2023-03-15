@@ -1,0 +1,8 @@
+scopeconfig:
+  - scope: node
+
+fileignoreconfig:
+  - filename: src/PipeInputTransformation.ts
+    checksum: ae01f55ea11fec45f66696ca5d9eee11e33d8662bc59afc9b924b56c2b039222
+  - filename: API.md
+    checksum: 6e0d25215159d0122ca3d73cdb8cccd34fdbc75c5b496340228a94b3a153237d

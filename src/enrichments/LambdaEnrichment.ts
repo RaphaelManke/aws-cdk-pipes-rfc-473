@@ -1,6 +1,7 @@
 import { IRole } from 'aws-cdk-lib/aws-iam';
 import { IFunction } from 'aws-cdk-lib/aws-lambda';
-import { PipeEnrichment, PipeInputTransformation } from '../pipe';
+import { PipeEnrichment } from '../PipeEnrichment';
+import { PipeInputTransformation } from '../PipeInputTransformation';
 
 export class LambdaEnrichment extends PipeEnrichment {
   private lambda : IFunction;

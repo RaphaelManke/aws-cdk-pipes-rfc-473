@@ -1,7 +1,7 @@
 import { IRole } from 'aws-cdk-lib/aws-iam';
 import { CfnPipe } from 'aws-cdk-lib/aws-pipes';
 import { IQueue } from 'aws-cdk-lib/aws-sqs';
-import { IPipeTarget } from '../pipe';
+import { IPipeTarget } from '../PipeTarget';
 
 export interface SqsTargetProps {
   queue: IQueue;

@@ -1,13 +1,16 @@
 import { IRole, Role, ServicePrincipal } from 'aws-cdk-lib/aws-iam';
 import { CfnPipe } from 'aws-cdk-lib/aws-pipes';
 import {
-  IResolvable,
   IResource,
   Lazy,
   Names,
   Resource,
 } from 'aws-cdk-lib/core';
 import { Construct } from 'constructs';
+import { PipeEnrichment } from './PipeEnrichment';
+import { IPipeSource } from './PipeSource';
+import { PipeSourceFilter as IPipeSourceFilter } from './PipeSourceFilter';
+import { PipeTarget } from './PipeTarget';
 
 /**
  * Interface all Pipe constructs must implement
@@ -37,160 +40,17 @@ export interface IPipe extends IResource {
   readonly pipeRole: IRole;
 }
 
-abstract class PipeBase extends Resource implements IPipe {
-  public abstract readonly pipeName: string;
-  public abstract readonly pipeArn: string;
-  public abstract readonly pipeRole: IRole;
-}
-
 export enum DesiredState {
   RUNNING = 'RUNNING',
   STOPPED = 'STOPPED',
 }
 
-export abstract class PipeEnrichment {
-  public readonly enrichmentArn: string;
-  public enrichmentParameters: CfnPipe.PipeEnrichmentParametersProperty;
 
-  constructor( enrichmentArn: string, props: CfnPipe.PipeEnrichmentParametersProperty) {
-    this.enrichmentParameters = props;
-    this.enrichmentArn = enrichmentArn;
-  }
-
-  abstract grantInvoke(grantee: IRole): void;
-}
-
-export abstract class PipeSource {
-  public readonly sourceArn: string;
-  public readonly sourceParameters?:
-  | CfnPipe.PipeSourceParametersProperty
-  | IResolvable;
-
-  constructor(sourceArn: string, props?: CfnPipe.PipeSourceParametersProperty) {
-    this.sourceArn = sourceArn;
-    this.sourceParameters = props;
-  }
-
-  public abstract grantRead(grantee: IRole): void;
-}
-
-export interface IPipeTarget {
-  targetArn: string;
-  targetParameters: CfnPipe.PipeTargetParametersProperty;
-
-  grantPush(grantee: IRole): void;
-};
-
-enum reservedVariables {
-  PIPES_ARN = '<aws.pipes.pipe-arn>',
-  PIPES_NAME = '<aws.pipes.pipe-name>',
-  PIPES_TARGET_ARN = '<aws.pipes.target-arn>',
-  PIPE_EVENT_INGESTION_TIME = '<aws.pipes.event.ingestion-time>',
-  PIPE_EVENT = '<aws.pipes.event>',
-  PIPE_EVENT_JSON = '<aws.pipes.event.json>'
-}
-
-type StaticString = string;
-// type JsonPath = `<$.${string}>`;
-type KeyValue = Record<string, string | reservedVariables>;
-type StaticJsonFlat = Record<string, StaticString| KeyValue >;
-type InputTransformJson = Record<string, StaticString| KeyValue | StaticJsonFlat>;
-
-
-type PipeInputTransformationValue = StaticString | InputTransformJson
-
-
-export interface IInputTransformationProps {
-  inputTemplate: PipeInputTransformationValue;
-}
-
-export class PipeInputTransformation {
-  static fromJson(inputTemplate: Record<string, any>): PipeInputTransformation {
-    return new PipeInputTransformation({ inputTemplate });
-  }
-
-  readonly inputTemplate: string;
-
-  constructor(props: IInputTransformationProps) {
-    this.inputTemplate = JSON.stringify(props);
-  }
-}
-
-export abstract class PipeTarget implements IPipeTarget {
-  public targetArn: string;
-  public targetParameters: CfnPipe.PipeTargetParametersProperty ;
-  constructor(
-    targetArn: string,
-    props: CfnPipe.PipeTargetParametersProperty,
-  ) {
-    this.targetArn = targetArn;
-    this.targetParameters = props;
-  }
-
-  public abstract grantPush(grantee: IRole): void;
-}
-
-
-export interface IPipeFilterPattern {
-  pattern: string;
-}
-
-export class PipeGenericFilterPattern {
-  static fromJson(patternObject: Record<string, any>): IPipeFilterPattern {
-    return { pattern: JSON.stringify(patternObject) };
-  }
-}
-
-export interface ISqsAttributes {
-  approximateReceiveCount?: string;
-  sentTimestamp?: string;
-  sequenceNumber?: string;
-  messageGroupId?: string;
-  senderId?: string;
-  messageDeduplicationId?: string;
-  approximateFirstReceiveTimestamp?: string;
-}
-
-export interface ISqsMessagePipeFilter {
-  messageId?: string;
-  receiptHandle?: string;
-  body?: any;
-  attributes?: ISqsAttributes;
-  messageAttributes?: any;
-  md5OfBody?: string;
-};
-
-export class PipeSqsFilterPattern extends PipeGenericFilterPattern {
-  static fromSqsMessageAttributes(attributes: ISqsMessagePipeFilter): IPipeFilterPattern {
-    const sqsProps = {
-      ApproximateReceiveCount: attributes.attributes?.approximateReceiveCount,
-      SentTimestamp: attributes.attributes?.sentTimestamp,
-      SequenceNumber: attributes.attributes?.sequenceNumber,
-      MessageGroupId: attributes.attributes?.messageGroupId,
-      SenderId: attributes.attributes?.senderId,
-      MessageDeduplicationId: attributes.attributes?.messageDeduplicationId,
-      ApproximateFirstReceiveTimestamp: attributes.attributes?.approximateFirstReceiveTimestamp,
-    };
-
-    return {
-      pattern: JSON.stringify({ ...attributes, attributes: attributes.attributes? sqsProps : undefined }),
-    };
-  }
-}
-
-export class PipeSourceFilter {
-  public filters: IPipeFilterPattern[];
-
-  constructor(filter: IPipeFilterPattern[]) {
-    this.filters = filter;
-  }
-}
-
-export interface PipeProps {
+export interface IPipeProps {
   /**
    *
    */
-  readonly source: PipeSource;
+  readonly source: IPipeSource;
   /**
    *
    */
@@ -199,7 +59,7 @@ export interface PipeProps {
   /**
    *
    */
-  readonly sourceFilter?: PipeSourceFilter;
+  readonly sourceFilter?: IPipeSourceFilter;
 
   /**
    *
@@ -238,12 +98,18 @@ export interface PipeProps {
   };
 }
 
+abstract class PipeBase extends Resource implements IPipe {
+  public abstract readonly pipeName: string;
+  public abstract readonly pipeArn: string;
+  public abstract readonly pipeRole: IRole;
+}
+
 export class Pipe extends PipeBase {
   public readonly pipeName: string;
   public readonly pipeArn: string;
   public readonly pipeRole: IRole;
 
-  constructor(scope: Construct, id: string, props: PipeProps) {
+  constructor(scope: Construct, id: string, props: IPipeProps) {
     const pipeName =
       props.name || Lazy.string({ produce: () => Names.uniqueId(this) });
     super(scope, id, { physicalName: pipeName });
@@ -279,5 +145,3 @@ export class Pipe extends PipeBase {
     this.pipeArn = resource.attrArn;
   }
 }
-
-

@@ -525,21 +525,6 @@ new PipeSourceFilter(filter: IPipeFilterPattern[])
 
 ---
 
-#### Methods <a name="Methods" id="Methods"></a>
-
-| **Name** | **Description** |
-| --- | --- |
-| <code><a href="#aws-cdk-pipes-rfc.PipeSourceFilter.toString">toString</a></code> | Returns a string representation of an object. |
-
----
-
-##### `toString` <a name="toString" id="aws-cdk-pipes-rfc.PipeSourceFilter.toString"></a>
-
-```typescript
-public toString(): string
-```
-
-Returns a string representation of an object.
 
 
 #### Properties <a name="Properties" id="Properties"></a>

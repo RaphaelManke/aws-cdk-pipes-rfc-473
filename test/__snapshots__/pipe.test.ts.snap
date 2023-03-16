@@ -95,7 +95,6 @@ Object {
               },
             ],
           },
-          "SqsQueueParameters": Object {},
         },
         "Target": Object {
           "Fn::GetAtt": Array [

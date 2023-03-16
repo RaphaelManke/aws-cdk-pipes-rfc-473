@@ -2,14 +2,19 @@ import { IRole } from 'aws-cdk-lib/aws-iam';
 import { CfnPipe } from 'aws-cdk-lib/aws-pipes';
 import { IQueue } from 'aws-cdk-lib/aws-sqs';
 import { PipeSource } from '../PipeSource';
-import { IPipeFilterPattern, PipeGenericFilterPattern } from '../PipeSourceFilter';
+import { IPipeFilterPattern, IPipeSourceFilter, PipeGenericFilterPattern } from '../PipeSourceFilter';
 
+
+export interface ISqsSourceProps {
+  filter?: IPipeSourceFilter;
+  config?: CfnPipe.PipeSourceSqsQueueParametersProperty;
+}
 
 export class SqsSource extends PipeSource {
   private queue: IQueue;
 
-  constructor(queue: IQueue, props?:CfnPipe.PipeSourceSqsQueueParametersProperty) {
-    super(queue.queueArn, { sqsQueueParameters: props });
+  constructor(queue: IQueue, props?:ISqsSourceProps) {
+    super(queue.queueArn, { sqsQueueParameters: props?.config, filterCriteria: props?.filter });
     this.queue = queue;
 
   }

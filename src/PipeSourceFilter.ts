@@ -19,8 +19,4 @@ export class PipeSourceFilter implements IPipeSourceFilter {
   constructor(filter: IPipeFilterPattern[]) {
     this.filters = filter;
   }
-
-  public toString(): string {
-    return JSON.stringify(this.filters);
-  }
 }

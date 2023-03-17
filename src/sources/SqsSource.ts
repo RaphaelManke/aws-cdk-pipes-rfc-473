@@ -1,20 +1,28 @@
 import { IRole } from 'aws-cdk-lib/aws-iam';
-import { CfnPipe } from 'aws-cdk-lib/aws-pipes';
 import { IQueue } from 'aws-cdk-lib/aws-sqs';
 import { PipeSource } from '../PipeSource';
 import { IPipeFilterPattern, IPipeSourceFilter, PipeGenericFilterPattern } from '../PipeSourceFilter';
 
 
 export interface ISqsSourceProps {
-  filter?: IPipeSourceFilter;
-  config?: CfnPipe.PipeSourceSqsQueueParametersProperty;
+  filterCriteria?: IPipeSourceFilter;
+  batchSize?: number;
+  maximumBatchingWindowInSeconds?: number;
 }
 
 export class SqsSource extends PipeSource {
   private queue: IQueue;
 
-  constructor(queue: IQueue, props?:ISqsSourceProps) {
-    super(queue.queueArn, { sqsQueueParameters: props?.config, filterCriteria: props?.filter });
+  constructor(queue: IQueue, props?: ISqsSourceProps) {
+    const sqsQueueParameters = {
+      batchSize: props?.batchSize,
+      maximumBatchingWindowInSeconds: props?.maximumBatchingWindowInSeconds,
+    };
+
+    super(queue.queueArn, {
+      sqsQueueParameters: isNonEmptyObject(sqsQueueParameters) ? sqsQueueParameters : undefined,
+      filterCriteria: props?.filterCriteria,
+    });
     this.queue = queue;
 
   }
@@ -66,4 +74,8 @@ export class PipeSqsFilterPattern extends PipeGenericFilterPattern {
       }),
     };
   }
+}
+
+function isNonEmptyObject(obj: any) {
+  return Object.values(obj).filter(Boolean).length > 0;
 }

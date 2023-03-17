@@ -11,7 +11,7 @@ describe('SqsSource', () => {
     const sourceQueue = new Queue(stack, 'test-source-queue', {});
 
     // ACT
-    const source = new SqsSource(sourceQueue, {});
+    const source = new SqsSource(sourceQueue);
     new CfnPipe(stack, 'test-pipe', {
       roleArn: 'test-role-arn',
       source: source.sourceArn,
@@ -33,10 +33,10 @@ describe('SqsSource', () => {
 
     // ACT
     const source = new SqsSource(sourceQueue, {
-      filter: {
+      filterCriteria: {
         filters: [
           {
-            pattern: JSON.stringify( {
+            pattern: JSON.stringify({
               foo: 'bar',
             }),
           },
@@ -66,10 +66,8 @@ describe('SqsSource', () => {
 
     // ACT
     const source = new SqsSource(sourceQueue, {
-      config: {
-        batchSize: 10,
-        maximumBatchingWindowInSeconds: 10,
-      },
+      batchSize: 10,
+      maximumBatchingWindowInSeconds: 10,
     });
     new CfnPipe(stack, 'test-pipe', {
       roleArn: 'test-role-arn',
@@ -82,7 +80,5 @@ describe('SqsSource', () => {
     // ASSERT
     const template = Template.fromStack(stack);
     expect(template).toMatchSnapshot();
-
-
   });
 });

@@ -1,11 +1,10 @@
 import { IRole } from 'aws-cdk-lib/aws-iam';
 import { IQueue } from 'aws-cdk-lib/aws-sqs';
 import { PipeSource } from '../PipeSource';
-import { IPipeFilterPattern, IPipeSourceFilter, PipeGenericFilterPattern } from '../PipeSourceFilter';
+import { IPipeFilterPattern, PipeGenericFilterPattern } from '../PipeSourceFilter';
 
 
 export interface ISqsSourceProps {
-  filterCriteria?: IPipeSourceFilter;
   batchSize?: number;
   maximumBatchingWindowInSeconds?: number;
 }
@@ -21,7 +20,6 @@ export class SqsSource extends PipeSource {
 
     super(queue.queueArn, {
       sqsQueueParameters: isNonEmptyObject(sqsQueueParameters) ? sqsQueueParameters : undefined,
-      filterCriteria: props?.filterCriteria,
     });
     this.queue = queue;
 

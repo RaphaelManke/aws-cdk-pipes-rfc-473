@@ -10,7 +10,7 @@ import { Construct } from 'constructs';
 import { PipeEnrichment } from './PipeEnrichment';
 import { IPipeSource } from './PipeSource';
 import { PipeSourceFilter as IPipeSourceFilter } from './PipeSourceFilter';
-import { PipeTarget } from './PipeTarget';
+import { IPipeTarget } from './PipeTarget';
 
 /**
  * Interface all Pipe constructs must implement
@@ -54,13 +54,11 @@ export interface IPipeProps {
   /**
    *
    */
-  readonly target: PipeTarget;
-
+  readonly sourceFilter?: IPipeSourceFilter;
   /**
    *
    */
-  readonly sourceFilter?: IPipeSourceFilter;
-
+  readonly target: IPipeTarget;
   /**
    *
    *

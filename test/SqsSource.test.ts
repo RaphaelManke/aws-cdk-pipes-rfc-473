@@ -26,39 +26,6 @@ describe('SqsSource', () => {
 
   });
 
-  it('should accept filter', () => {
-    // ARRANGE
-    const stack = new Stack(new App(), 'test-stack');
-    const sourceQueue = new Queue(stack, 'test-source-queue', {});
-
-    // ACT
-    const source = new SqsSource(sourceQueue, {
-      filterCriteria: {
-        filters: [
-          {
-            pattern: JSON.stringify({
-              foo: 'bar',
-            }),
-          },
-        ],
-      },
-    });
-
-    new CfnPipe(stack, 'test-pipe', {
-      roleArn: 'test-role-arn',
-      source: source.sourceArn,
-      target: 'test-target-arn',
-      sourceParameters: source.sourceParameters,
-    },
-    );
-
-    // ASSERT
-    const template = Template.fromStack(stack);
-    expect(template).toMatchSnapshot();
-
-
-  });
-
   it('should accept config', () => {
     // ARRANGE
     const stack = new Stack(new App(), 'test-stack');

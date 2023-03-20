@@ -4,8 +4,18 @@ import { IQueue } from 'aws-cdk-lib/aws-sqs';
 import { IPipeTarget } from '../PipeTarget';
 
 export interface SqsTargetProps {
-  queue: IQueue;
-  sqsQueueParameters?: CfnPipe.PipeTargetSqsQueueParametersProperty;
+  /**
+   * `CfnPipe.PipeTargetSqsQueueParametersProperty.MessageDeduplicationId`
+   *
+   * @link http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipetargetsqsqueueparameters.html#cfn-pipes-pipe-pipetargetsqsqueueparameters-messagededuplicationid
+   */
+  readonly messageDeduplicationId?: string;
+  /**
+   * `CfnPipe.PipeTargetSqsQueueParametersProperty.MessageGroupId`
+   *
+   * @link http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipetargetsqsqueueparameters.html#cfn-pipes-pipe-pipetargetsqsqueueparameters-messagegroupid
+   */
+  readonly messageGroupId?: string;
 }
 
 export class SqsTarget implements IPipeTarget {
@@ -13,10 +23,15 @@ export class SqsTarget implements IPipeTarget {
   targetArn: string;
   targetParameters: CfnPipe.PipeTargetParametersProperty;
 
-  constructor(props: SqsTargetProps) {
-    this.queue = props.queue;
-    this.targetArn = props.queue.queueArn;
-    this.targetParameters = { sqsQueueParameters: props.sqsQueueParameters };
+  constructor(queue: IQueue, props?: SqsTargetProps) {
+    this.queue = queue;
+    this.targetArn = queue.queueArn;
+    this.targetParameters = {
+      sqsQueueParameters: {
+        messageDeduplicationId: props?.messageDeduplicationId,
+        messageGroupId: props?.messageGroupId,
+      },
+    };
   }
 
   public grantPush(grantee: IRole): void {

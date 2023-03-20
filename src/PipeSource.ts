@@ -56,15 +56,4 @@ export interface IPipeSource {
   grantRead(grantee: IRole): void;
 }
 
-export abstract class PipeSource implements IPipeSource {
-  public sourceArn: string;
-  public sourceParameters?: IPipeSourceProperties;
 
-
-  constructor(sourceArn: string, props?: IPipeSourceProperties) {
-    this.sourceArn = sourceArn;
-    this.sourceParameters = props;
-  }
-
-  public abstract grantRead(grantee: IRole): void;
-}

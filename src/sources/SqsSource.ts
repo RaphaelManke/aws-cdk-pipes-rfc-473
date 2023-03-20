@@ -1,7 +1,9 @@
+import { IResolvable } from 'aws-cdk-lib';
 import { IRole } from 'aws-cdk-lib/aws-iam';
+import { CfnPipe } from 'aws-cdk-lib/aws-pipes';
 import { IQueue } from 'aws-cdk-lib/aws-sqs';
-import { PipeSource } from '../PipeSource';
-import { IPipeFilterPattern, PipeGenericFilterPattern } from '../PipeSourceFilter';
+import { IPipeSource } from '../PipeSource';
+import { IPipeFilterPattern, IPipeSourceFilter } from '../PipeSourceFilter';
 
 
 export interface ISqsSourceProps {
@@ -9,20 +11,22 @@ export interface ISqsSourceProps {
   maximumBatchingWindowInSeconds?: number;
 }
 
-export class SqsSource extends PipeSource {
+export class SqsSource implements IPipeSource {
   private queue: IQueue;
 
+  sourceArn: string;
+  sourceParameters?: IResolvable | CfnPipe.PipeSourceParametersProperty | undefined;
   constructor(queue: IQueue, props?: ISqsSourceProps) {
-    const sqsQueueParameters = {
+    this.queue = queue;
+
+    this.sourceArn = queue.queueArn;
+    const queueParameters = {
       batchSize: props?.batchSize,
       maximumBatchingWindowInSeconds: props?.maximumBatchingWindowInSeconds,
     };
-
-    super(queue.queueArn, {
-      sqsQueueParameters: isNonEmptyObject(sqsQueueParameters) ? sqsQueueParameters : undefined,
-    });
-    this.queue = queue;
-
+    this.sourceParameters = {
+      sqsQueueParameters: isNonEmptyObject(queueParameters) ? queueParameters : undefined,
+    };
   }
 
   public grantRead(grantee: IRole): void {
@@ -50,7 +54,7 @@ export interface ISqsMessagePipeFilter {
   md5OfBody?: string;
 }
 
-export class PipeSqsFilterPattern extends PipeGenericFilterPattern {
+export class PipeSqsFilterPattern implements IPipeSourceFilter {
   static fromSqsMessageAttributes(
     attributes: ISqsMessagePipeFilter,
   ): IPipeFilterPattern {
@@ -71,6 +75,12 @@ export class PipeSqsFilterPattern extends PipeGenericFilterPattern {
         attributes: attributes.attributes ? sqsProps : undefined,
       }),
     };
+  }
+
+  filters: IPipeFilterPattern[];
+
+  constructor(props: IPipeFilterPattern[]) {
+    this.filters = props;
   }
 }
 

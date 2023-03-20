@@ -12,25 +12,22 @@ type StaticString = string;
 // type JsonPath = `<$.${string}>`;
 type KeyValue = Record<string, string | reservedVariables>;
 type StaticJsonFlat = Record<string, StaticString | KeyValue>;
-type InputTransformJson = Record<
-string,
-StaticString | KeyValue | StaticJsonFlat
->;
+type InputTransformJson = Record<string, StaticString | KeyValue | StaticJsonFlat>;
 
 type PipeInputTransformationValue = StaticString | InputTransformJson;
 
-export interface IInputTransformationProps {
-  inputTemplate: PipeInputTransformationValue;
+export interface IInputTransformation {
+  inputTemplate: string;
 }
 
-export class PipeInputTransformation {
+export class PipeInputTransformation implements IInputTransformation {
   static fromJson(inputTemplate: Record<string, any>): PipeInputTransformation {
     return new PipeInputTransformation({ inputTemplate });
   }
 
   readonly inputTemplate: string;
 
-  constructor(props: IInputTransformationProps) {
-    this.inputTemplate = JSON.stringify(props);
+  constructor(inputTemplate: PipeInputTransformationValue) {
+    this.inputTemplate = JSON.stringify(inputTemplate);
   }
 }

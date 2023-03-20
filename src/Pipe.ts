@@ -7,7 +7,7 @@ import {
   Resource,
 } from 'aws-cdk-lib/core';
 import { Construct } from 'constructs';
-import { PipeEnrichment } from './PipeEnrichment';
+import { IPipeEnrichment } from './PipeEnrichment';
 import { IPipeSource } from './PipeSource';
 import { PipeSourceFilter as IPipeSourceFilter } from './PipeSourceFilter';
 import { IPipeTarget } from './PipeTarget';
@@ -48,44 +48,45 @@ export enum DesiredState {
 
 export interface IPipeProps {
   /**
-   *
+   * The source of the pipe
    */
   readonly source: IPipeSource;
   /**
-   *
+   * The filter pattern for the pipe source
    */
-  readonly sourceFilter?: IPipeSourceFilter;
+  readonly filter?: IPipeSourceFilter;
   /**
-   *
+  *
+  */
+  readonly enrichment?: IPipeEnrichment;
+  /**
+   * The target of the pipe
    */
   readonly target: IPipeTarget;
   /**
-   *
-   *
+  * Name of the pipe in the AWS console
+  *
+  * @link http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pipes-pipe.html#cfn-pipes-pipe-name
+  */
+  readonly name?: string;
+  /**
+   * The role used by the pipe which has permissions to read from the source and write to the target.
+   * If an enriched target is used, the role also have permissions to call the enriched target.
+   * If no role is provided, a role will be created.
    */
   readonly role?: IRole;
   /**
-   * `AWS::Pipes::Pipe.Description`
+   * A description of the pipe displayed in the AWS console
    *
    * @link http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pipes-pipe.html#cfn-pipes-pipe-description
    */
   readonly description?: string;
   /**
-   * `AWS::Pipes::Pipe.DesiredState`
+   * The desired state of the pipe. If the state is set to STOPPED, the pipe will not process events.
    *
    * @link https://docs.aws.amazon.com/eventbridge/latest/pipes-reference/API_Pipe.html#eventbridge-Type-Pipe-DesiredState
    */
   readonly desiredState?: DesiredState;
-  /**
-   *
-   */
-  readonly enrichment?: PipeEnrichment;
-  /**
-   * `AWS::Pipes::Pipe.Name`
-   *
-   * @link http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pipes-pipe.html#cfn-pipes-pipe-name
-   */
-  readonly name?: string;
   /**
    * `AWS::Pipes::Pipe.Tags`
    *
@@ -121,7 +122,7 @@ export class Pipe extends PipeBase {
 
     const sourceParameters = {
       ...props.source.sourceParameters,
-      filterCriteria: props.sourceFilter,
+      filterCriteria: props.filter,
     };
 
     props.source.grantRead(this.pipeRole);

@@ -37,14 +37,15 @@ describe('Pipe', () => {
       description: 'test-pipe',
 
       source: new SqsSource(sourceQueue, {
-      }),
-      sourceFilter: pipeSourceFilter,
 
-      target: new SqsTarget({ queue: targetQueue }),
+      }),
+      filter: pipeSourceFilter,
 
       enrichment: new LambdaEnrichment(enrichmentLambda, {
         inputTransformation: PipeInputTransformation.fromJson({ foo: 'bar' }),
       }),
+      target: new SqsTarget(targetQueue),
+
     });
 
 

@@ -48,6 +48,18 @@ export interface IPipeSourceProperties {
   readonly sqsQueueParameters?: CfnPipe.PipeSourceSqsQueueParametersProperty | IResolvable;
 }
 
+export interface IPipeSourceCommonParameters {
+  /**
+    * The maximum number of records to include in each batch.
+    */
+  readonly batchSize?: number;
+
+  /**
+     * The maximum length of a time to wait for events.
+     */
+  readonly maximumBatchingWindowInSeconds?: number;
+}
+
 
 export interface IPipeSource {
   sourceArn: string;

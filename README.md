@@ -507,3 +507,368 @@ export class PipeInputTransformation {
     "TargetParameters": {}
   }
   ```
+
+  Source Policy: 
+
+  ```json
+  {
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "sqs:ReceiveMessage",
+                "sqs:DeleteMessage",
+                "sqs:GetQueueAttributes"
+            ],
+            "Resource": [
+                "arn:aws:sqs:eu-central-1:XXXXXXXXXXX:ExampleApiQueue"
+            ]
+        }
+    ]
+  }
+  ```
+
+- Kinesis -> Cloudwatch logs
+  ```json
+  {
+    "Arn": "arn:aws:pipes:eu-central-1:XXXXXXXXXXX:pipe/KinesisPipe",
+    "CreationTime": "2023-03-25T13:46:14+01:00",
+    "CurrentState": "RUNNING",
+    "DesiredState": "RUNNING",
+    "EnrichmentParameters": {},
+    "LastModifiedTime": "2023-03-25T13:46:21+01:00",
+    "Name": "KinesisPipe",
+    "RoleArn": "arn:aws:iam::XXXXXXXXXXX:role/service-role/Amazon_EventBridge_Pipe_KinesisPipe_1b3885bc",
+    "Source": "arn:aws:kinesis:eu-central-1:XXXXXXXXXXX:stream/KinesisPipe",
+    "SourceParameters": {
+        "KinesisStreamParameters": {
+            "BatchSize": 1,
+            "MaximumBatchingWindowInSeconds": 1,
+            "OnPartialBatchItemFailure": "AUTOMATIC_BISECT",
+            "ParallelizationFactor": 1,
+            "StartingPosition": "LATEST"
+        }
+    },
+    "StateReason": "No records processed",
+    "Tags": {},
+    "Target": "arn:aws:logs:eu-central-1:XXXXXXXXXXX:log-group:/aws/events/rabbitmq",
+    "TargetParameters": {}
+  }
+  ``` 
+
+  Source Policy: 
+
+  ```json
+  {
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "kinesis:DescribeStream",
+                "kinesis:DescribeStreamSummary",
+                "kinesis:GetRecords",
+                "kinesis:GetShardIterator",
+                "kinesis:ListStreams",
+                "kinesis:ListShards"
+            ],
+            "Resource": [
+                "arn:aws:kinesis:eu-central-1:XXXXXXXXXXX:stream/KinesisPipe"
+            ]
+        }
+    ]
+  }
+  ```
+
+- Amazon MQ RabbitMQ -> Cloudwatch logs
+  ```json
+  {
+    "Arn": "arn:aws:pipes:eu-central-1:XXXXXXXXXXX:pipe/RabbitMqPipe",
+    "CreationTime": "2023-03-25T13:58:42+01:00",
+    "CurrentState": "RUNNING",
+    "DesiredState": "RUNNING",
+    "EnrichmentParameters": {},
+    "LastModifiedTime": "2023-03-25T13:59:31+01:00",
+    "Name": "RabbitMqPipe",
+    "RoleArn": "arn:aws:iam::XXXXXXXXXXX:role/service-role/Amazon_EventBridge_Pipe_RabbitMqPipe_20c02f10",
+    "Source": "arn:aws:mq:eu-central-1:XXXXXXXXXXX:broker:AcrivMqVpc:b-0303c682-33a0-4bbd-98ea-b0133df0c55f",
+    "SourceParameters": {
+        "RabbitMQBrokerParameters": {
+            "BatchSize": 1,
+            "Credentials": {
+                "BasicAuth": "arn:aws:secretsmanager:eu-central-1:XXXXXXXXXXX:secret:rabbitmq-gdPMEk"
+            },
+            "QueueName": "Pipes",
+            "VirtualHost": "/"
+        }
+    },
+    "StateReason": "USER_INITIATED",
+    "Tags": {},
+    "Target": "arn:aws:logs:eu-central-1:XXXXXXXXXXX:log-group:/aws/events/RabbitMq",
+    "TargetParameters": {}
+  }
+  ```
+
+  Source Policy: 
+
+  ```json
+  {
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "mq:DescribeBroker"
+            ],
+            "Resource": [
+                "arn:aws:mq:eu-central-1:XXXXXXXXXXX:broker:AcrivMqVpc:b-0303c682-33a0-4bbd-98ea-b0133df0c55f"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "secretsmanager:GetSecretValue"
+            ],
+            "Resource": [
+                "arn:aws:secretsmanager:eu-central-1:XXXXXXXXXXX:secret:rabbitmq-gdPMEk"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ec2:DescribeNetworkInterfaces",
+                "ec2:DescribeSubnets",
+                "ec2:DescribeSecurityGroups",
+                "ec2:DescribeVpcs"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ec2:CreateNetworkInterface",
+                "ec2:DeleteNetworkInterface"
+            ],
+            "Resource": "*",
+            "Condition": {
+                "StringEqualsIfExists": {
+                    "ec2:SubnetID": [
+                        "subnet-08a5ecbe78da46956"
+                    ]
+                }
+            }
+        }
+    ]
+  }
+  ```
+
+
+
+- Amazon MQ Active MQ -> Cloudwatch logs
+  ```json
+  {
+    "Arn": "arn:aws:pipes:eu-central-1:XXXXXXXXXXX:pipe/ApacheMqPipe",
+    "CreationTime": "2023-03-25T14:09:40+01:00",
+    "CurrentState": "RUNNING",
+    "DesiredState": "RUNNING",
+    "EnrichmentParameters": {},
+    "LastModifiedTime": "2023-03-25T14:10:44+01:00",
+    "Name": "ApacheMqPipe",
+    "RoleArn": "arn:aws:iam::XXXXXXXXXXX:role/service-role/Amazon_EventBridge_Pipe_ApacheMqPipe_2481bec9",
+    "Source": "arn:aws:mq:eu-central-1:XXXXXXXXXXX:broker:ActiveMq-Broker1:b-045db734-ca3e-4f03-acb5-8191beeb009d",
+    "SourceParameters": {
+        "ActiveMQBrokerParameters": {
+            "BatchSize": 1,
+            "Credentials": {
+                "BasicAuth": "arn:aws:secretsmanager:eu-central-1:XXXXXXXXXXX:secret:rabbitmq-gdPMEk"
+            },
+            "QueueName": "Pipes"
+        }
+    },
+    "StateReason": "USER_INITIATED",
+    "Tags": {},
+    "Target": "arn:aws:logs:eu-central-1:XXXXXXXXXXX:log-group:/aws/events/ApacheMqPipe",
+    "TargetParameters": {}
+  }
+  ```
+
+  Source Policy:
+
+  ```json
+  {
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "mq:DescribeBroker"
+            ],
+            "Resource": [
+                "arn:aws:mq:eu-central-1:XXXXXXXXXXX:broker:ActiveMq-Broker1:b-045db734-ca3e-4f03-acb5-8191beeb009d"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "secretsmanager:GetSecretValue"
+            ],
+            "Resource": [
+                "arn:aws:secretsmanager:eu-central-1:XXXXXXXXXXX:secret:rabbitmq-gdPMEk"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ec2:DescribeNetworkInterfaces",
+                "ec2:DescribeSubnets",
+                "ec2:DescribeSecurityGroups",
+                "ec2:DescribeVpcs"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ec2:CreateNetworkInterface",
+                "ec2:DeleteNetworkInterface"
+            ],
+            "Resource": "*",
+            "Condition": {
+                "StringEqualsIfExists": {
+                    "ec2:SubnetID": [
+                        "subnet-05c76962865a020d0"
+                    ]
+                }
+            }
+        }
+    ]
+  }
+  ```
+
+- MSK Cluster -> Cloudwatch logs
+  
+  ```json
+  {
+    "Arn": "arn:aws:pipes:eu-central-1:XXXXXXXXXXX:pipe/MSKPipe",
+    "CreationTime": "2023-03-25T14:35:12+01:00",
+    "CurrentState": "RUNNING",
+    "DesiredState": "RUNNING",
+    "EnrichmentParameters": {},
+    "LastModifiedTime": "2023-03-25T14:37:59+01:00",
+    "Name": "MSKPipe",
+    "RoleArn": "arn:aws:iam::XXXXXXXXXXX:role/service-role/Amazon_EventBridge_Pipe_MSKPipe_6f65c436",
+    "Source": "arn:aws:kafka:eu-central-1:XXXXXXXXXXX:cluster/demo-cluster-1/5c830310-fea4-4adc-9a67-2da4bcf9130b-s2",
+    "SourceParameters": {
+        "ManagedStreamingKafkaParameters": {
+            "BatchSize": 1,
+            "ConsumerGroupID": "pipes-consumer-group-id",
+            "StartingPosition": "TRIM_HORIZON",
+            "TopicName": "pipes-topic"
+        }
+    },
+    "StateReason": "USER_INITIATED",
+    "Tags": {},
+    "Target": "arn:aws:logs:eu-central-1:XXXXXXXXXXX:log-group:/aws/events/MskPipe",
+    "TargetParameters": {}
+  }
+  ````
+
+  Source Policy:
+  **Note:**: The policy has no connect or read permissions on the cluster. I think this policy is not working. 
+
+  ```json
+  {
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "kafka:DescribeCluster",
+                "kafka:DescribeClusterV2",
+                "kafka:GetBootstrapBrokers"
+            ],
+            "Resource": [
+                "arn:aws:kafka:eu-central-1:XXXXXXXXXXX:cluster/demo-cluster-1/5c830310-fea4-4adc-9a67-2da4bcf9130b-s2"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ec2:DescribeNetworkInterfaces",
+                "ec2:DescribeSubnets",
+                "ec2:DescribeSecurityGroups",
+                "ec2:DescribeVpcs"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ec2:CreateNetworkInterface",
+                "ec2:DeleteNetworkInterface"
+            ],
+            "Resource": "*",
+            "Condition": {
+                "StringEqualsIfExists": {
+                    "ec2:SubnetID": [
+                        "subnet-085642ba241b81254",
+                        "subnet-08a5ecbe78da46956",
+                        "subnet-05c76962865a020d0"
+                    ]
+                }
+            }
+        }
+    ]
+  }
+  ```
+  
+- Self Managed Kafka Cluster -> Cloudwatch logs
+  
+  ```json
+  {
+    "Arn": "arn:aws:pipes:eu-central-1:XXXXXXXXXXX:pipe/KafkaPipe",
+    "CreationTime": "2023-03-25T15:44:18+01:00",
+    "CurrentState": "CREATE_FAILED",
+    "DesiredState": "RUNNING",
+    "EnrichmentParameters": {},
+    "LastModifiedTime": "2023-03-25T15:44:28+01:00",
+    "Name": "KafkaPipe",
+    "RoleArn": "arn:aws:iam::XXXXXXXXXXX:role/service-role/Amazon_EventBridge_Pipe_KafkaPipe_0b2197cf",
+    "Source": "smk://some.bootstrap.server:12345",
+    "SourceParameters": {
+        "SelfManagedKafkaParameters": {
+            "BatchSize": 1,
+            "Credentials": {
+                "ClientCertificateTlsAuth": "arn:aws:secretsmanager:eu-central-1:XXXXXXXXXXX:secret:rabbitmq-gdPMEk"
+            },
+            "ServerRootCaCertificate": "arn:aws:secretsmanager:eu-central-1:XXXXXXXXXXX:secret:rabbitmq-gdPMEk",
+            "StartingPosition": "LATEST",
+            "TopicName": "PipesTopic"
+        }
+    },
+    "Tags": {},
+    "Target": "arn:aws:logs:eu-central-1:XXXXXXXXXXX:log-group:/aws/events/KafkaPipe",
+    "TargetParameters": {}
+  }
+  ````
+
+  Source Policy:
+  **Note:**: The policy has no connect or read permissions on the cluster. I think this policy is not working. 
+
+  ```json
+  {
+      "Version": "2012-10-17",
+      "Statement": [
+          {
+              "Effect": "Allow",
+              "Action": [
+                  "secretsmanager:GetSecretValue"
+              ],
+              "Resource": [
+                  "arn:aws:secretsmanager:eu-central-1:XXXXXXXXXXX:secret:rabbitmq-gdPMEk"
+              ]
+          }
+      ]
+  }
+  ```

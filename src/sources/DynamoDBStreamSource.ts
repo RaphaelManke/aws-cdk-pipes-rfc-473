@@ -1,29 +1,19 @@
-import { IResolvable } from 'aws-cdk-lib';
 import { ITable } from 'aws-cdk-lib/aws-dynamodb';
 import { IRole } from 'aws-cdk-lib/aws-iam';
 import { CfnPipe } from 'aws-cdk-lib/aws-pipes';
-import { IPipeSource } from '../PipeSource';
+import { PipeSourceDeadLetterConfig } from './PipeSourceDeadLetterConfig';
+import { PipeSourceOnPartialBatchItemFailure } from './PipeSourceOnPartialBatchItemFailure';
+import { PipeSourceStartingPosition } from './PipeSourceStartingPosition';
+import { IPipeSource, IPipeSourceCommonParameters } from '../PipeSource';
 
 
-export interface IDynamoDBStreamSourceProps {
-  /**
-         * `CfnPipe.PipeSourceDynamoDBStreamParametersProperty.BatchSize`
-         *
-         * @link http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipesourcedynamodbstreamparameters.html#cfn-pipes-pipe-pipesourcedynamodbstreamparameters-batchsize
-         */
-  readonly batchSize?: number;
+export interface IDynamoDBStreamSourceProps extends IPipeSourceCommonParameters {
   /**
    * `CfnPipe.PipeSourceDynamoDBStreamParametersProperty.DeadLetterConfig`
    *
    * @link http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipesourcedynamodbstreamparameters.html#cfn-pipes-pipe-pipesourcedynamodbstreamparameters-deadletterconfig
    */
-  readonly deadLetterConfig?: CfnPipe.DeadLetterConfigProperty | IResolvable;
-  /**
-   * `CfnPipe.PipeSourceDynamoDBStreamParametersProperty.MaximumBatchingWindowInSeconds`
-   *
-   * @link http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipesourcedynamodbstreamparameters.html#cfn-pipes-pipe-pipesourcedynamodbstreamparameters-maximumbatchingwindowinseconds
-   */
-  readonly maximumBatchingWindowInSeconds?: number;
+  readonly deadLetterConfig?: PipeSourceDeadLetterConfig;
   /**
    * `CfnPipe.PipeSourceDynamoDBStreamParametersProperty.MaximumRecordAgeInSeconds`
    *
@@ -41,7 +31,7 @@ export interface IDynamoDBStreamSourceProps {
    *
    * @link http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipesourcedynamodbstreamparameters.html#cfn-pipes-pipe-pipesourcedynamodbstreamparameters-onpartialbatchitemfailure
    */
-  readonly onPartialBatchItemFailure?: string;
+  readonly onPartialBatchItemFailure?: PipeSourceOnPartialBatchItemFailure;
   /**
    * `CfnPipe.PipeSourceDynamoDBStreamParametersProperty.ParallelizationFactor`
    *
@@ -53,7 +43,7 @@ export interface IDynamoDBStreamSourceProps {
    *
    * @link http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipesourcedynamodbstreamparameters.html#cfn-pipes-pipe-pipesourcedynamodbstreamparameters-startingposition
    */
-  readonly startingPosition: string;
+  readonly startingPosition: PipeSourceStartingPosition;
 }
 
 
@@ -70,6 +60,10 @@ export class DynamoDBStreamSource implements IPipeSource {
       throw new Error('Table must have a stream enabled');
     }
 
+    const deadLetterConfig: CfnPipe.DeadLetterConfigProperty | undefined = props.deadLetterConfig ? {
+      arn: props.deadLetterConfig.queue.queueArn,
+    } : undefined;
+
     this.sourceArn = table.tableStreamArn;
     this.sourceParameters = {
       dynamoDbStreamParameters: {
@@ -80,7 +74,7 @@ export class DynamoDBStreamSource implements IPipeSource {
         maximumRetryAttempts: props.maximumRetryAttempts,
         onPartialBatchItemFailure: props.onPartialBatchItemFailure,
         parallelizationFactor: props.parallelizationFactor,
-        deadLetterConfig: props.deadLetterConfig,
+        deadLetterConfig: deadLetterConfig,
       },
     };
 

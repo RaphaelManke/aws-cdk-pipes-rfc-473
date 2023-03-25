@@ -237,6 +237,8 @@ The role used by the pipe.
 
 ### PipeEnrichment <a name="PipeEnrichment" id="aws-cdk-pipes-rfc.PipeEnrichment"></a>
 
+- *Implements:* <a href="#aws-cdk-pipes-rfc.IPipeEnrichment">IPipeEnrichment</a>
+
 #### Initializers <a name="Initializers" id="aws-cdk-pipes-rfc.PipeEnrichment.Initializer"></a>
 
 ```typescript
@@ -357,23 +359,25 @@ PipeGenericFilterPattern.fromJson(patternObject: {[ key: string ]: any})
 
 ### PipeInputTransformation <a name="PipeInputTransformation" id="aws-cdk-pipes-rfc.PipeInputTransformation"></a>
 
+- *Implements:* <a href="#aws-cdk-pipes-rfc.IInputTransformation">IInputTransformation</a>
+
 #### Initializers <a name="Initializers" id="aws-cdk-pipes-rfc.PipeInputTransformation.Initializer"></a>
 
 ```typescript
 import { PipeInputTransformation } from 'aws-cdk-pipes-rfc'
 
-new PipeInputTransformation(props: IInputTransformationProps)
+new PipeInputTransformation(inputTemplate: string | {[ key: string ]: string | {[ key: string ]: string} | {[ key: string ]: string | {[ key: string ]: string}}})
 ```
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#aws-cdk-pipes-rfc.PipeInputTransformation.Initializer.parameter.props">props</a></code> | <code><a href="#aws-cdk-pipes-rfc.IInputTransformationProps">IInputTransformationProps</a></code> | *No description.* |
+| <code><a href="#aws-cdk-pipes-rfc.PipeInputTransformation.Initializer.parameter.inputTemplate">inputTemplate</a></code> | <code>string \| {[ key: string ]: string \| {[ key: string ]: string} \| {[ key: string ]: string \| {[ key: string ]: string}}}</code> | *No description.* |
 
 ---
 
-##### `props`<sup>Required</sup> <a name="props" id="aws-cdk-pipes-rfc.PipeInputTransformation.Initializer.parameter.props"></a>
+##### `inputTemplate`<sup>Required</sup> <a name="inputTemplate" id="aws-cdk-pipes-rfc.PipeInputTransformation.Initializer.parameter.inputTemplate"></a>
 
-- *Type:* <a href="#aws-cdk-pipes-rfc.IInputTransformationProps">IInputTransformationProps</a>
+- *Type:* string | {[ key: string ]: string | {[ key: string ]: string} | {[ key: string ]: string | {[ key: string ]: string}}}
 
 ---
 
@@ -415,88 +419,6 @@ public readonly inputTemplate: string;
 ```
 
 - *Type:* string
-
----
-
-
-### PipeSource <a name="PipeSource" id="aws-cdk-pipes-rfc.PipeSource"></a>
-
-- *Implements:* <a href="#aws-cdk-pipes-rfc.IPipeSource">IPipeSource</a>
-
-#### Initializers <a name="Initializers" id="aws-cdk-pipes-rfc.PipeSource.Initializer"></a>
-
-```typescript
-import { PipeSource } from 'aws-cdk-pipes-rfc'
-
-new PipeSource(sourceArn: string, props?: PipeSourceParametersProperty)
-```
-
-| **Name** | **Type** | **Description** |
-| --- | --- | --- |
-| <code><a href="#aws-cdk-pipes-rfc.PipeSource.Initializer.parameter.sourceArn">sourceArn</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#aws-cdk-pipes-rfc.PipeSource.Initializer.parameter.props">props</a></code> | <code>aws-cdk-lib.aws_pipes.CfnPipe.PipeSourceParametersProperty</code> | *No description.* |
-
----
-
-##### `sourceArn`<sup>Required</sup> <a name="sourceArn" id="aws-cdk-pipes-rfc.PipeSource.Initializer.parameter.sourceArn"></a>
-
-- *Type:* string
-
----
-
-##### `props`<sup>Optional</sup> <a name="props" id="aws-cdk-pipes-rfc.PipeSource.Initializer.parameter.props"></a>
-
-- *Type:* aws-cdk-lib.aws_pipes.CfnPipe.PipeSourceParametersProperty
-
----
-
-#### Methods <a name="Methods" id="Methods"></a>
-
-| **Name** | **Description** |
-| --- | --- |
-| <code><a href="#aws-cdk-pipes-rfc.PipeSource.grantRead">grantRead</a></code> | *No description.* |
-
----
-
-##### `grantRead` <a name="grantRead" id="aws-cdk-pipes-rfc.PipeSource.grantRead"></a>
-
-```typescript
-public grantRead(grantee: IRole): void
-```
-
-###### `grantee`<sup>Required</sup> <a name="grantee" id="aws-cdk-pipes-rfc.PipeSource.grantRead.parameter.grantee"></a>
-
-- *Type:* aws-cdk-lib.aws_iam.IRole
-
----
-
-
-#### Properties <a name="Properties" id="Properties"></a>
-
-| **Name** | **Type** | **Description** |
-| --- | --- | --- |
-| <code><a href="#aws-cdk-pipes-rfc.PipeSource.property.sourceArn">sourceArn</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#aws-cdk-pipes-rfc.PipeSource.property.sourceParameters">sourceParameters</a></code> | <code>aws-cdk-lib.aws_pipes.CfnPipe.PipeSourceParametersProperty \| aws-cdk-lib.IResolvable</code> | *No description.* |
-
----
-
-##### `sourceArn`<sup>Required</sup> <a name="sourceArn" id="aws-cdk-pipes-rfc.PipeSource.property.sourceArn"></a>
-
-```typescript
-public readonly sourceArn: string;
-```
-
-- *Type:* string
-
----
-
-##### `sourceParameters`<sup>Optional</sup> <a name="sourceParameters" id="aws-cdk-pipes-rfc.PipeSource.property.sourceParameters"></a>
-
-```typescript
-public readonly sourceParameters: PipeSourceParametersProperty | IResolvable;
-```
-
-- *Type:* aws-cdk-lib.aws_pipes.CfnPipe.PipeSourceParametersProperty | aws-cdk-lib.IResolvable
 
 ---
 
@@ -546,110 +468,28 @@ public readonly filters: IPipeFilterPattern[];
 ---
 
 
-### PipeTarget <a name="PipeTarget" id="aws-cdk-pipes-rfc.PipeTarget"></a>
-
-- *Implements:* <a href="#aws-cdk-pipes-rfc.IPipeTarget">IPipeTarget</a>
-
-#### Initializers <a name="Initializers" id="aws-cdk-pipes-rfc.PipeTarget.Initializer"></a>
-
-```typescript
-import { PipeTarget } from 'aws-cdk-pipes-rfc'
-
-new PipeTarget(targetArn: string, props: PipeTargetParametersProperty)
-```
-
-| **Name** | **Type** | **Description** |
-| --- | --- | --- |
-| <code><a href="#aws-cdk-pipes-rfc.PipeTarget.Initializer.parameter.targetArn">targetArn</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#aws-cdk-pipes-rfc.PipeTarget.Initializer.parameter.props">props</a></code> | <code>aws-cdk-lib.aws_pipes.CfnPipe.PipeTargetParametersProperty</code> | *No description.* |
-
----
-
-##### `targetArn`<sup>Required</sup> <a name="targetArn" id="aws-cdk-pipes-rfc.PipeTarget.Initializer.parameter.targetArn"></a>
-
-- *Type:* string
-
----
-
-##### `props`<sup>Required</sup> <a name="props" id="aws-cdk-pipes-rfc.PipeTarget.Initializer.parameter.props"></a>
-
-- *Type:* aws-cdk-lib.aws_pipes.CfnPipe.PipeTargetParametersProperty
-
----
-
-#### Methods <a name="Methods" id="Methods"></a>
-
-| **Name** | **Description** |
-| --- | --- |
-| <code><a href="#aws-cdk-pipes-rfc.PipeTarget.grantPush">grantPush</a></code> | *No description.* |
-
----
-
-##### `grantPush` <a name="grantPush" id="aws-cdk-pipes-rfc.PipeTarget.grantPush"></a>
-
-```typescript
-public grantPush(grantee: IRole): void
-```
-
-###### `grantee`<sup>Required</sup> <a name="grantee" id="aws-cdk-pipes-rfc.PipeTarget.grantPush.parameter.grantee"></a>
-
-- *Type:* aws-cdk-lib.aws_iam.IRole
-
----
-
-
-#### Properties <a name="Properties" id="Properties"></a>
-
-| **Name** | **Type** | **Description** |
-| --- | --- | --- |
-| <code><a href="#aws-cdk-pipes-rfc.PipeTarget.property.targetArn">targetArn</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#aws-cdk-pipes-rfc.PipeTarget.property.targetParameters">targetParameters</a></code> | <code>aws-cdk-lib.aws_pipes.CfnPipe.PipeTargetParametersProperty</code> | *No description.* |
-
----
-
-##### `targetArn`<sup>Required</sup> <a name="targetArn" id="aws-cdk-pipes-rfc.PipeTarget.property.targetArn"></a>
-
-```typescript
-public readonly targetArn: string;
-```
-
-- *Type:* string
-
----
-
-##### `targetParameters`<sup>Required</sup> <a name="targetParameters" id="aws-cdk-pipes-rfc.PipeTarget.property.targetParameters"></a>
-
-```typescript
-public readonly targetParameters: PipeTargetParametersProperty;
-```
-
-- *Type:* aws-cdk-lib.aws_pipes.CfnPipe.PipeTargetParametersProperty
-
----
-
-
 ## Protocols <a name="Protocols" id="Protocols"></a>
 
-### IInputTransformationProps <a name="IInputTransformationProps" id="aws-cdk-pipes-rfc.IInputTransformationProps"></a>
+### IInputTransformation <a name="IInputTransformation" id="aws-cdk-pipes-rfc.IInputTransformation"></a>
 
-- *Implemented By:* <a href="#aws-cdk-pipes-rfc.IInputTransformationProps">IInputTransformationProps</a>
+- *Implemented By:* <a href="#aws-cdk-pipes-rfc.PipeInputTransformation">PipeInputTransformation</a>, <a href="#aws-cdk-pipes-rfc.IInputTransformation">IInputTransformation</a>
 
 
 #### Properties <a name="Properties" id="Properties"></a>
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#aws-cdk-pipes-rfc.IInputTransformationProps.property.inputTemplate">inputTemplate</a></code> | <code>string \| {[ key: string ]: string \| {[ key: string ]: string} \| {[ key: string ]: string \| {[ key: string ]: string}}}</code> | *No description.* |
+| <code><a href="#aws-cdk-pipes-rfc.IInputTransformation.property.inputTemplate">inputTemplate</a></code> | <code>string</code> | *No description.* |
 
 ---
 
-##### `inputTemplate`<sup>Required</sup> <a name="inputTemplate" id="aws-cdk-pipes-rfc.IInputTransformationProps.property.inputTemplate"></a>
+##### `inputTemplate`<sup>Required</sup> <a name="inputTemplate" id="aws-cdk-pipes-rfc.IInputTransformation.property.inputTemplate"></a>
 
 ```typescript
-public readonly inputTemplate: string | {[ key: string ]: string | {[ key: string ]: string} | {[ key: string ]: string | {[ key: string ]: string}}};
+public readonly inputTemplate: string;
 ```
 
-- *Type:* string | {[ key: string ]: string | {[ key: string ]: string} | {[ key: string ]: string | {[ key: string ]: string}}}
+- *Type:* string
 
 ---
 
@@ -758,6 +598,59 @@ The role used by the pipe.
 
 ---
 
+### IPipeEnrichment <a name="IPipeEnrichment" id="aws-cdk-pipes-rfc.IPipeEnrichment"></a>
+
+- *Implemented By:* <a href="#aws-cdk-pipes-rfc.PipeEnrichment">PipeEnrichment</a>, <a href="#aws-cdk-pipes-rfc.IPipeEnrichment">IPipeEnrichment</a>
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-cdk-pipes-rfc.IPipeEnrichment.grantInvoke">grantInvoke</a></code> | *No description.* |
+
+---
+
+##### `grantInvoke` <a name="grantInvoke" id="aws-cdk-pipes-rfc.IPipeEnrichment.grantInvoke"></a>
+
+```typescript
+public grantInvoke(grantee: IRole): void
+```
+
+###### `grantee`<sup>Required</sup> <a name="grantee" id="aws-cdk-pipes-rfc.IPipeEnrichment.grantInvoke.parameter.grantee"></a>
+
+- *Type:* aws-cdk-lib.aws_iam.IRole
+
+---
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-cdk-pipes-rfc.IPipeEnrichment.property.enrichmentArn">enrichmentArn</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-cdk-pipes-rfc.IPipeEnrichment.property.enrichmentParameters">enrichmentParameters</a></code> | <code>aws-cdk-lib.aws_pipes.CfnPipe.PipeEnrichmentParametersProperty</code> | *No description.* |
+
+---
+
+##### `enrichmentArn`<sup>Required</sup> <a name="enrichmentArn" id="aws-cdk-pipes-rfc.IPipeEnrichment.property.enrichmentArn"></a>
+
+```typescript
+public readonly enrichmentArn: string;
+```
+
+- *Type:* string
+
+---
+
+##### `enrichmentParameters`<sup>Required</sup> <a name="enrichmentParameters" id="aws-cdk-pipes-rfc.IPipeEnrichment.property.enrichmentParameters"></a>
+
+```typescript
+public readonly enrichmentParameters: PipeEnrichmentParametersProperty;
+```
+
+- *Type:* aws-cdk-lib.aws_pipes.CfnPipe.PipeEnrichmentParametersProperty
+
+---
+
 ### IPipeFilterPattern <a name="IPipeFilterPattern" id="aws-cdk-pipes-rfc.IPipeFilterPattern"></a>
 
 - *Implemented By:* <a href="#aws-cdk-pipes-rfc.IPipeFilterPattern">IPipeFilterPattern</a>
@@ -790,14 +683,14 @@ public readonly pattern: string;
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#aws-cdk-pipes-rfc.IPipeProps.property.source">source</a></code> | <code><a href="#aws-cdk-pipes-rfc.IPipeSource">IPipeSource</a></code> | *No description.* |
-| <code><a href="#aws-cdk-pipes-rfc.IPipeProps.property.target">target</a></code> | <code><a href="#aws-cdk-pipes-rfc.PipeTarget">PipeTarget</a></code> | *No description.* |
-| <code><a href="#aws-cdk-pipes-rfc.IPipeProps.property.description">description</a></code> | <code>string</code> | `AWS::Pipes::Pipe.Description`. |
-| <code><a href="#aws-cdk-pipes-rfc.IPipeProps.property.desiredState">desiredState</a></code> | <code><a href="#aws-cdk-pipes-rfc.DesiredState">DesiredState</a></code> | `AWS::Pipes::Pipe.DesiredState`. |
-| <code><a href="#aws-cdk-pipes-rfc.IPipeProps.property.enrichment">enrichment</a></code> | <code><a href="#aws-cdk-pipes-rfc.PipeEnrichment">PipeEnrichment</a></code> | *No description.* |
-| <code><a href="#aws-cdk-pipes-rfc.IPipeProps.property.name">name</a></code> | <code>string</code> | `AWS::Pipes::Pipe.Name`. |
-| <code><a href="#aws-cdk-pipes-rfc.IPipeProps.property.role">role</a></code> | <code>aws-cdk-lib.aws_iam.IRole</code> | *No description.* |
-| <code><a href="#aws-cdk-pipes-rfc.IPipeProps.property.sourceFilter">sourceFilter</a></code> | <code><a href="#aws-cdk-pipes-rfc.PipeSourceFilter">PipeSourceFilter</a></code> | *No description.* |
+| <code><a href="#aws-cdk-pipes-rfc.IPipeProps.property.source">source</a></code> | <code><a href="#aws-cdk-pipes-rfc.IPipeSource">IPipeSource</a></code> | The source of the pipe. |
+| <code><a href="#aws-cdk-pipes-rfc.IPipeProps.property.target">target</a></code> | <code><a href="#aws-cdk-pipes-rfc.IPipeTarget">IPipeTarget</a></code> | The target of the pipe. |
+| <code><a href="#aws-cdk-pipes-rfc.IPipeProps.property.description">description</a></code> | <code>string</code> | A description of the pipe displayed in the AWS console. |
+| <code><a href="#aws-cdk-pipes-rfc.IPipeProps.property.desiredState">desiredState</a></code> | <code><a href="#aws-cdk-pipes-rfc.DesiredState">DesiredState</a></code> | The desired state of the pipe. |
+| <code><a href="#aws-cdk-pipes-rfc.IPipeProps.property.enrichment">enrichment</a></code> | <code><a href="#aws-cdk-pipes-rfc.IPipeEnrichment">IPipeEnrichment</a></code> | *No description.* |
+| <code><a href="#aws-cdk-pipes-rfc.IPipeProps.property.filter">filter</a></code> | <code><a href="#aws-cdk-pipes-rfc.PipeSourceFilter">PipeSourceFilter</a></code> | The filter pattern for the pipe source. |
+| <code><a href="#aws-cdk-pipes-rfc.IPipeProps.property.name">name</a></code> | <code>string</code> | Name of the pipe in the AWS console. |
+| <code><a href="#aws-cdk-pipes-rfc.IPipeProps.property.role">role</a></code> | <code>aws-cdk-lib.aws_iam.IRole</code> | The role used by the pipe which has permissions to read from the source and write to the target. |
 | <code><a href="#aws-cdk-pipes-rfc.IPipeProps.property.tags">tags</a></code> | <code>{[ key: string ]: string}</code> | `AWS::Pipes::Pipe.Tags`. |
 
 ---
@@ -810,15 +703,19 @@ public readonly source: IPipeSource;
 
 - *Type:* <a href="#aws-cdk-pipes-rfc.IPipeSource">IPipeSource</a>
 
+The source of the pipe.
+
 ---
 
 ##### `target`<sup>Required</sup> <a name="target" id="aws-cdk-pipes-rfc.IPipeProps.property.target"></a>
 
 ```typescript
-public readonly target: PipeTarget;
+public readonly target: IPipeTarget;
 ```
 
-- *Type:* <a href="#aws-cdk-pipes-rfc.PipeTarget">PipeTarget</a>
+- *Type:* <a href="#aws-cdk-pipes-rfc.IPipeTarget">IPipeTarget</a>
+
+The target of the pipe.
 
 ---
 
@@ -830,7 +727,7 @@ public readonly description: string;
 
 - *Type:* string
 
-`AWS::Pipes::Pipe.Description`.
+A description of the pipe displayed in the AWS console.
 
 > [http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pipes-pipe.html#cfn-pipes-pipe-description](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pipes-pipe.html#cfn-pipes-pipe-description)
 
@@ -844,7 +741,9 @@ public readonly desiredState: DesiredState;
 
 - *Type:* <a href="#aws-cdk-pipes-rfc.DesiredState">DesiredState</a>
 
-`AWS::Pipes::Pipe.DesiredState`.
+The desired state of the pipe.
+
+If the state is set to STOPPED, the pipe will not process events.
 
 > [https://docs.aws.amazon.com/eventbridge/latest/pipes-reference/API_Pipe.html#eventbridge-Type-Pipe-DesiredState](https://docs.aws.amazon.com/eventbridge/latest/pipes-reference/API_Pipe.html#eventbridge-Type-Pipe-DesiredState)
 
@@ -853,10 +752,22 @@ public readonly desiredState: DesiredState;
 ##### `enrichment`<sup>Optional</sup> <a name="enrichment" id="aws-cdk-pipes-rfc.IPipeProps.property.enrichment"></a>
 
 ```typescript
-public readonly enrichment: PipeEnrichment;
+public readonly enrichment: IPipeEnrichment;
 ```
 
-- *Type:* <a href="#aws-cdk-pipes-rfc.PipeEnrichment">PipeEnrichment</a>
+- *Type:* <a href="#aws-cdk-pipes-rfc.IPipeEnrichment">IPipeEnrichment</a>
+
+---
+
+##### `filter`<sup>Optional</sup> <a name="filter" id="aws-cdk-pipes-rfc.IPipeProps.property.filter"></a>
+
+```typescript
+public readonly filter: PipeSourceFilter;
+```
+
+- *Type:* <a href="#aws-cdk-pipes-rfc.PipeSourceFilter">PipeSourceFilter</a>
+
+The filter pattern for the pipe source.
 
 ---
 
@@ -868,7 +779,7 @@ public readonly name: string;
 
 - *Type:* string
 
-`AWS::Pipes::Pipe.Name`.
+Name of the pipe in the AWS console.
 
 > [http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pipes-pipe.html#cfn-pipes-pipe-name](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-pipes-pipe.html#cfn-pipes-pipe-name)
 
@@ -882,15 +793,10 @@ public readonly role: IRole;
 
 - *Type:* aws-cdk-lib.aws_iam.IRole
 
----
+The role used by the pipe which has permissions to read from the source and write to the target.
 
-##### `sourceFilter`<sup>Optional</sup> <a name="sourceFilter" id="aws-cdk-pipes-rfc.IPipeProps.property.sourceFilter"></a>
-
-```typescript
-public readonly sourceFilter: PipeSourceFilter;
-```
-
-- *Type:* <a href="#aws-cdk-pipes-rfc.PipeSourceFilter">PipeSourceFilter</a>
+If an enriched target is used, the role also have permissions to call the enriched target.
+If no role is provided, a role will be created.
 
 ---
 
@@ -910,7 +816,7 @@ public readonly tags: {[ key: string ]: string};
 
 ### IPipeSource <a name="IPipeSource" id="aws-cdk-pipes-rfc.IPipeSource"></a>
 
-- *Implemented By:* <a href="#aws-cdk-pipes-rfc.PipeSource">PipeSource</a>, <a href="#aws-cdk-pipes-rfc.IPipeSource">IPipeSource</a>
+- *Implemented By:* <a href="#aws-cdk-pipes-rfc.IPipeSource">IPipeSource</a>
 
 #### Methods <a name="Methods" id="Methods"></a>
 
@@ -961,6 +867,44 @@ public readonly sourceParameters: PipeSourceParametersProperty | IResolvable;
 
 ---
 
+### IPipeSourceCommonParameters <a name="IPipeSourceCommonParameters" id="aws-cdk-pipes-rfc.IPipeSourceCommonParameters"></a>
+
+- *Implemented By:* <a href="#aws-cdk-pipes-rfc.IPipeSourceCommonParameters">IPipeSourceCommonParameters</a>
+
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-cdk-pipes-rfc.IPipeSourceCommonParameters.property.batchSize">batchSize</a></code> | <code>number</code> | The maximum number of records to include in each batch. |
+| <code><a href="#aws-cdk-pipes-rfc.IPipeSourceCommonParameters.property.maximumBatchingWindowInSeconds">maximumBatchingWindowInSeconds</a></code> | <code>number</code> | The maximum length of a time to wait for events. |
+
+---
+
+##### `batchSize`<sup>Optional</sup> <a name="batchSize" id="aws-cdk-pipes-rfc.IPipeSourceCommonParameters.property.batchSize"></a>
+
+```typescript
+public readonly batchSize: number;
+```
+
+- *Type:* number
+
+The maximum number of records to include in each batch.
+
+---
+
+##### `maximumBatchingWindowInSeconds`<sup>Optional</sup> <a name="maximumBatchingWindowInSeconds" id="aws-cdk-pipes-rfc.IPipeSourceCommonParameters.property.maximumBatchingWindowInSeconds"></a>
+
+```typescript
+public readonly maximumBatchingWindowInSeconds: number;
+```
+
+- *Type:* number
+
+The maximum length of a time to wait for events.
+
+---
+
 ### IPipeSourceFilter <a name="IPipeSourceFilter" id="aws-cdk-pipes-rfc.IPipeSourceFilter"></a>
 
 - *Implemented By:* <a href="#aws-cdk-pipes-rfc.PipeSourceFilter">PipeSourceFilter</a>, <a href="#aws-cdk-pipes-rfc.IPipeSourceFilter">IPipeSourceFilter</a>
@@ -984,9 +928,126 @@ public readonly filters: IPipeFilterPattern[];
 
 ---
 
+### IPipeSourceProperties <a name="IPipeSourceProperties" id="aws-cdk-pipes-rfc.IPipeSourceProperties"></a>
+
+- *Implemented By:* <a href="#aws-cdk-pipes-rfc.IPipeSourceProperties">IPipeSourceProperties</a>
+
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-cdk-pipes-rfc.IPipeSourceProperties.property.activeMqBrokerParameters">activeMqBrokerParameters</a></code> | <code>aws-cdk-lib.aws_pipes.CfnPipe.PipeSourceActiveMQBrokerParametersProperty \| aws-cdk-lib.IResolvable</code> | `CfnPipe.PipeSourceParametersProperty.ActiveMQBrokerParameters`. |
+| <code><a href="#aws-cdk-pipes-rfc.IPipeSourceProperties.property.dynamoDbStreamParameters">dynamoDbStreamParameters</a></code> | <code>aws-cdk-lib.aws_pipes.CfnPipe.PipeSourceDynamoDBStreamParametersProperty \| aws-cdk-lib.IResolvable</code> | `CfnPipe.PipeSourceParametersProperty.DynamoDBStreamParameters`. |
+| <code><a href="#aws-cdk-pipes-rfc.IPipeSourceProperties.property.kinesisStreamParameters">kinesisStreamParameters</a></code> | <code>aws-cdk-lib.aws_pipes.CfnPipe.PipeSourceKinesisStreamParametersProperty \| aws-cdk-lib.IResolvable</code> | `CfnPipe.PipeSourceParametersProperty.KinesisStreamParameters`. |
+| <code><a href="#aws-cdk-pipes-rfc.IPipeSourceProperties.property.managedStreamingKafkaParameters">managedStreamingKafkaParameters</a></code> | <code>aws-cdk-lib.aws_pipes.CfnPipe.PipeSourceManagedStreamingKafkaParametersProperty \| aws-cdk-lib.IResolvable</code> | `CfnPipe.PipeSourceParametersProperty.ManagedStreamingKafkaParameters`. |
+| <code><a href="#aws-cdk-pipes-rfc.IPipeSourceProperties.property.rabbitMqBrokerParameters">rabbitMqBrokerParameters</a></code> | <code>aws-cdk-lib.aws_pipes.CfnPipe.PipeSourceRabbitMQBrokerParametersProperty \| aws-cdk-lib.IResolvable</code> | `CfnPipe.PipeSourceParametersProperty.RabbitMQBrokerParameters`. |
+| <code><a href="#aws-cdk-pipes-rfc.IPipeSourceProperties.property.selfManagedKafkaParameters">selfManagedKafkaParameters</a></code> | <code>aws-cdk-lib.aws_pipes.CfnPipe.PipeSourceSelfManagedKafkaParametersProperty \| aws-cdk-lib.IResolvable</code> | `CfnPipe.PipeSourceParametersProperty.SelfManagedKafkaParameters`. |
+| <code><a href="#aws-cdk-pipes-rfc.IPipeSourceProperties.property.sqsQueueParameters">sqsQueueParameters</a></code> | <code>aws-cdk-lib.aws_pipes.CfnPipe.PipeSourceSqsQueueParametersProperty \| aws-cdk-lib.IResolvable</code> | `CfnPipe.PipeSourceParametersProperty.SqsQueueParameters`. |
+
+---
+
+##### `activeMqBrokerParameters`<sup>Optional</sup> <a name="activeMqBrokerParameters" id="aws-cdk-pipes-rfc.IPipeSourceProperties.property.activeMqBrokerParameters"></a>
+
+```typescript
+public readonly activeMqBrokerParameters: PipeSourceActiveMQBrokerParametersProperty | IResolvable;
+```
+
+- *Type:* aws-cdk-lib.aws_pipes.CfnPipe.PipeSourceActiveMQBrokerParametersProperty | aws-cdk-lib.IResolvable
+
+`CfnPipe.PipeSourceParametersProperty.ActiveMQBrokerParameters`.
+
+> [http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipesourceparameters.html#cfn-pipes-pipe-pipesourceparameters-activemqbrokerparameters](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipesourceparameters.html#cfn-pipes-pipe-pipesourceparameters-activemqbrokerparameters)
+
+---
+
+##### `dynamoDbStreamParameters`<sup>Optional</sup> <a name="dynamoDbStreamParameters" id="aws-cdk-pipes-rfc.IPipeSourceProperties.property.dynamoDbStreamParameters"></a>
+
+```typescript
+public readonly dynamoDbStreamParameters: PipeSourceDynamoDBStreamParametersProperty | IResolvable;
+```
+
+- *Type:* aws-cdk-lib.aws_pipes.CfnPipe.PipeSourceDynamoDBStreamParametersProperty | aws-cdk-lib.IResolvable
+
+`CfnPipe.PipeSourceParametersProperty.DynamoDBStreamParameters`.
+
+> [http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipesourceparameters.html#cfn-pipes-pipe-pipesourceparameters-dynamodbstreamparameters](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipesourceparameters.html#cfn-pipes-pipe-pipesourceparameters-dynamodbstreamparameters)
+
+---
+
+##### `kinesisStreamParameters`<sup>Optional</sup> <a name="kinesisStreamParameters" id="aws-cdk-pipes-rfc.IPipeSourceProperties.property.kinesisStreamParameters"></a>
+
+```typescript
+public readonly kinesisStreamParameters: PipeSourceKinesisStreamParametersProperty | IResolvable;
+```
+
+- *Type:* aws-cdk-lib.aws_pipes.CfnPipe.PipeSourceKinesisStreamParametersProperty | aws-cdk-lib.IResolvable
+
+`CfnPipe.PipeSourceParametersProperty.KinesisStreamParameters`.
+
+> [http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipesourceparameters.html#cfn-pipes-pipe-pipesourceparameters-kinesisstreamparameters](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipesourceparameters.html#cfn-pipes-pipe-pipesourceparameters-kinesisstreamparameters)
+
+---
+
+##### `managedStreamingKafkaParameters`<sup>Optional</sup> <a name="managedStreamingKafkaParameters" id="aws-cdk-pipes-rfc.IPipeSourceProperties.property.managedStreamingKafkaParameters"></a>
+
+```typescript
+public readonly managedStreamingKafkaParameters: PipeSourceManagedStreamingKafkaParametersProperty | IResolvable;
+```
+
+- *Type:* aws-cdk-lib.aws_pipes.CfnPipe.PipeSourceManagedStreamingKafkaParametersProperty | aws-cdk-lib.IResolvable
+
+`CfnPipe.PipeSourceParametersProperty.ManagedStreamingKafkaParameters`.
+
+> [http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipesourceparameters.html#cfn-pipes-pipe-pipesourceparameters-managedstreamingkafkaparameters](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipesourceparameters.html#cfn-pipes-pipe-pipesourceparameters-managedstreamingkafkaparameters)
+
+---
+
+##### `rabbitMqBrokerParameters`<sup>Optional</sup> <a name="rabbitMqBrokerParameters" id="aws-cdk-pipes-rfc.IPipeSourceProperties.property.rabbitMqBrokerParameters"></a>
+
+```typescript
+public readonly rabbitMqBrokerParameters: PipeSourceRabbitMQBrokerParametersProperty | IResolvable;
+```
+
+- *Type:* aws-cdk-lib.aws_pipes.CfnPipe.PipeSourceRabbitMQBrokerParametersProperty | aws-cdk-lib.IResolvable
+
+`CfnPipe.PipeSourceParametersProperty.RabbitMQBrokerParameters`.
+
+> [http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipesourceparameters.html#cfn-pipes-pipe-pipesourceparameters-rabbitmqbrokerparameters](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipesourceparameters.html#cfn-pipes-pipe-pipesourceparameters-rabbitmqbrokerparameters)
+
+---
+
+##### `selfManagedKafkaParameters`<sup>Optional</sup> <a name="selfManagedKafkaParameters" id="aws-cdk-pipes-rfc.IPipeSourceProperties.property.selfManagedKafkaParameters"></a>
+
+```typescript
+public readonly selfManagedKafkaParameters: PipeSourceSelfManagedKafkaParametersProperty | IResolvable;
+```
+
+- *Type:* aws-cdk-lib.aws_pipes.CfnPipe.PipeSourceSelfManagedKafkaParametersProperty | aws-cdk-lib.IResolvable
+
+`CfnPipe.PipeSourceParametersProperty.SelfManagedKafkaParameters`.
+
+> [http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipesourceparameters.html#cfn-pipes-pipe-pipesourceparameters-selfmanagedkafkaparameters](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipesourceparameters.html#cfn-pipes-pipe-pipesourceparameters-selfmanagedkafkaparameters)
+
+---
+
+##### `sqsQueueParameters`<sup>Optional</sup> <a name="sqsQueueParameters" id="aws-cdk-pipes-rfc.IPipeSourceProperties.property.sqsQueueParameters"></a>
+
+```typescript
+public readonly sqsQueueParameters: PipeSourceSqsQueueParametersProperty | IResolvable;
+```
+
+- *Type:* aws-cdk-lib.aws_pipes.CfnPipe.PipeSourceSqsQueueParametersProperty | aws-cdk-lib.IResolvable
+
+`CfnPipe.PipeSourceParametersProperty.SqsQueueParameters`.
+
+> [http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipesourceparameters.html#cfn-pipes-pipe-pipesourceparameters-sqsqueueparameters](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipesourceparameters.html#cfn-pipes-pipe-pipesourceparameters-sqsqueueparameters)
+
+---
+
 ### IPipeTarget <a name="IPipeTarget" id="aws-cdk-pipes-rfc.IPipeTarget"></a>
 
-- *Implemented By:* <a href="#aws-cdk-pipes-rfc.PipeTarget">PipeTarget</a>, <a href="#aws-cdk-pipes-rfc.IPipeTarget">IPipeTarget</a>
+- *Implemented By:* <a href="#aws-cdk-pipes-rfc.IPipeTarget">IPipeTarget</a>
 
 #### Methods <a name="Methods" id="Methods"></a>
 

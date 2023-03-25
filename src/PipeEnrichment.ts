@@ -10,7 +10,7 @@ export interface IPipeEnrichment {
 
 
 export abstract class PipeEnrichment implements IPipeEnrichment {
-  public readonly enrichmentArn: string;
+  public enrichmentArn: string;
   public enrichmentParameters: CfnPipe.PipeEnrichmentParametersProperty;
 
   constructor(

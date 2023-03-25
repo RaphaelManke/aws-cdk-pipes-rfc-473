@@ -25,7 +25,7 @@ export class PipeInputTransformation implements IInputTransformation {
     return new PipeInputTransformation({ inputTemplate });
   }
 
-  readonly inputTemplate: string;
+  inputTemplate: string;
 
   constructor(inputTemplate: PipeInputTransformationValue) {
     this.inputTemplate = JSON.stringify(inputTemplate);

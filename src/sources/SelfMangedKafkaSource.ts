@@ -2,14 +2,10 @@ import { IResolvable } from 'aws-cdk-lib';
 import { IRole, Policy, PolicyStatement } from 'aws-cdk-lib/aws-iam';
 import { CfnPipe } from 'aws-cdk-lib/aws-pipes';
 import { ISecret } from 'aws-cdk-lib/aws-secretsmanager';
+import { IMskSourceCredentials } from './MskSource';
 import { PipeSourceStartingPosition } from './PipeSourceStartingPosition';
 import { IPipeSource, IPipeSourceCommonParameters } from '../PipeSource';
 
-
-export interface IMskSourceCredentials {
-  readonly clientCertificateTlsAuth?: ISecret;
-  readonly saslScram512Auth?: ISecret;
-}
 
 export interface ISelfManagedKafkaAccessConfigurationVpcProperty {
   /**
@@ -25,7 +21,8 @@ export interface ISelfManagedKafkaAccessConfigurationVpcProperty {
     */
   readonly subnets?: string[];
 }
-export interface IMskSourceProps extends IPipeSourceCommonParameters {
+
+export interface ISelfManagedKafkaSourceProps extends IPipeSourceCommonParameters {
   topicName: string;
   consumerGroupId?: string;
   startingPosition?: PipeSourceStartingPosition;
@@ -41,7 +38,7 @@ export class SelfManagedKafkakSource implements IPipeSource {
   sourceArn: string;
   sourceParameters?: IResolvable | CfnPipe.PipeSourceParametersProperty | undefined;
 
-  constructor(bootstrapUrl:string, props: IMskSourceProps) {
+  constructor(bootstrapUrl:string, props: ISelfManagedKafkaSourceProps) {
     this.sourceArn = `smk://${bootstrapUrl}`;
 
     const credentials = props.credentials ? {

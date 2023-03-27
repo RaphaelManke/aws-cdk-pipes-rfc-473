@@ -41,6 +41,30 @@
       ],
       "condition": "! git log --oneline -1 | grep -q \"chore(release):\""
     },
+    "cdk:deploy:source:dynamodb": {
+      "name": "cdk:deploy:source:dynamodb",
+      "steps": [
+        {
+          "exec": "cdk deploy --app 'npx ts-node --prefer-ts-exts e2e/sources/DynamoDbStream.ts'"
+        }
+      ]
+    },
+    "cdk:deploy:source:kafka-serverless": {
+      "name": "cdk:deploy:source:kafka-serverless",
+      "steps": [
+        {
+          "exec": "cdk deploy --app 'npx ts-node --prefer-ts-exts e2e/sources/MskServerless.ts'"
+        }
+      ]
+    },
+    "cdk:deploy:source:sqs": {
+      "name": "cdk:deploy:source:sqs",
+      "steps": [
+        {
+          "exec": "cdk deploy --app 'npx ts-node --prefer-ts-exts e2e/sources/Sqs.ts'"
+        }
+      ]
+    },
     "clobber": {
       "name": "clobber",
       "description": "hard resets to HEAD of origin and cleans the local repo",

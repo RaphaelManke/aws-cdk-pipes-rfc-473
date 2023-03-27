@@ -109,13 +109,13 @@ const createReadPolicyStatements = (cluster: CfnCluster | CfnServerlessCluster) 
     subnetIds = brokerNodeGroupInfo.clientSubnets;
 
   } else {
-    if ( cluster.vpcConfigs instanceof Token || !isResolvableObject(cluster.vpcConfigs)) {
-      throw new Error('Unable to resolve brokerNodeGroupInfo');
-    }
+    // if ( cluster.vpcConfigs instanceof Token || !isResolvableObject(cluster.vpcConfigs)) {
+    //   throw new Error('Unable to resolve vpcConfigs');
+    // }
 
-    const vpcConfig: CfnServerlessCluster.VpcConfigProperty =
-      cluster.vpcConfigs as unknown as CfnServerlessCluster.VpcConfigProperty ;
-    subnetIds = vpcConfig.subnetIds;
+    const vpcConfig: CfnServerlessCluster.VpcConfigProperty[]=
+      cluster.vpcConfigs as unknown as CfnServerlessCluster.VpcConfigProperty[] ;
+    subnetIds = vpcConfig[0].subnetIds;
   }
 
   statements.push(new PolicyStatement({

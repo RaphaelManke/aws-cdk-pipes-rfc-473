@@ -1,3 +1,4 @@
+import { IResolvable } from 'aws-cdk-lib';
 import { ITable } from 'aws-cdk-lib/aws-dynamodb';
 import { IRole } from 'aws-cdk-lib/aws-iam';
 import { CfnPipe } from 'aws-cdk-lib/aws-pipes';
@@ -51,7 +52,7 @@ export class DynamoDBStreamSource implements IPipeSource {
   private table: ITable;
 
   sourceArn: string;
-  sourceParameters?: CfnPipe.PipeSourceParametersProperty;
+  sourceParameters?: CfnPipe.PipeSourceParametersProperty | IResolvable;
 
   constructor(table: ITable, props: IDynamoDBStreamSourceProps) {
     this.table = table;

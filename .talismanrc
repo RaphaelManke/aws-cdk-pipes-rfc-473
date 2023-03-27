@@ -5,7 +5,7 @@ fileignoreconfig:
   - filename: src/PipeInputTransformation.ts
     checksum: ae01f55ea11fec45f66696ca5d9eee11e33d8662bc59afc9b924b56c2b039222
   - filename: API.md
-    checksum: b73822c47b157a38823a71048d793aacbd45ca52ed894c85ddbaa2c6e3495182
+    checksum: ed01def760c59e4a6d4526f8f0dce6ed295ba4bd40b3fdfeea256adcee76a38a
   - filename: src/sources/AmazonMqBrokerSource.ts
     checksum: 6684e57ab52938b886749dd61d9b460c53f1f45fc19d96273bdb105857741fbd
   - filename: src/sources/SelfMangedKafkaSource.ts
@@ -14,3 +14,5 @@ fileignoreconfig:
     checksum: 3444650c80a1bf1e2f59b036d3b5d872d8289c57fa2929a752686d52bb0d7f9b
   - filename: README.md
     checksum: 8a2f98a1f8d100a03a0a101815453bea7fa7e0ae2c82c360410e537b9f7ea501
+  - filename: e2e/sources/kafkaProducer.ts
+    checksum: d8518b18d16551a7ffc49b7c0683b5fdf4c82a9d1709ca3330eada84c0993183

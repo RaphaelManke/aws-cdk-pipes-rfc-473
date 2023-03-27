@@ -1,11 +1,11 @@
-import { IRole, Role, ServicePrincipal } from 'aws-cdk-lib/aws-iam';
-import { CfnPipe } from 'aws-cdk-lib/aws-pipes';
 import {
   IResource,
   Lazy,
   Names,
   Resource,
-} from 'aws-cdk-lib/core';
+} from 'aws-cdk-lib';
+import { IRole, Role, ServicePrincipal } from 'aws-cdk-lib/aws-iam';
+import { CfnPipe } from 'aws-cdk-lib/aws-pipes';
 import { Construct } from 'constructs';
 import { IPipeEnrichment } from './PipeEnrichment';
 import { IPipeSource } from './PipeSource';

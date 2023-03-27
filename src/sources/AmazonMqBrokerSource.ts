@@ -1,3 +1,4 @@
+import { IResolvable } from 'aws-cdk-lib';
 import { CfnBroker } from 'aws-cdk-lib/aws-amazonmq';
 import { IRole, Policy, PolicyStatement } from 'aws-cdk-lib/aws-iam';
 import { CfnPipe } from 'aws-cdk-lib/aws-pipes';
@@ -30,7 +31,7 @@ export abstract class AmazonMqBrokerSource implements IPipeSource {
   private readonly broker: CfnBroker;
   private readonly basicAuthSecret: ISecret;
   sourceArn: string;
-  sourceParameters?: CfnPipe.PipeSourceParametersProperty;
+  sourceParameters?: CfnPipe.PipeSourceParametersProperty | IResolvable;
 
   constructor(broker: CfnBroker, props: IAmazonMqBrokerSourceProps) {
 

@@ -872,3 +872,100 @@ export class PipeInputTransformation {
       ]
   }
   ```
+
+  ### Target Payloads
+
+  - Dynamo stream --> EventBus (--> cloudwatch)
+  ```json
+  {
+    "version": "0",
+    "id": "e200e70a-2e54-ebe4-f426-c9207fcab3b3",
+    "detail-type": "Event from aws:dynamodb",
+    "source": "Pipe DynamoEventbus",
+    "account": "XXXXXXXXXXX",
+    "time": "2023-03-29T19:51:10Z",
+    "region": "eu-central-1",
+    "resources": [],
+    "detail": {
+        "eventID": "f8fb797b24108ef3903d18847f099b56",
+        "eventName": "INSERT",
+        "eventVersion": "1.1",
+        "eventSource": "aws:dynamodb",
+        "awsRegion": "eu-central-1",
+        "dynamodb": {
+            "ApproximateCreationDateTime": 1680119470,
+            "Keys": {
+                "id": {
+                    "S": "3"
+                }
+            },
+            "NewImage": {
+                "id": {
+                    "S": "3"
+                }
+            },
+            "SequenceNumber": "18538200000000012739337629",
+            "SizeBytes": 6,
+            "StreamViewType": "NEW_AND_OLD_IMAGES"
+        },
+        "eventSourceARN": "arn:aws:dynamodb:eu-central-1:XXXXXXXXXXX:table/E2EPipesDynamoDb-SourceTable70380C26-17A6A67APO6JG/stream/2023-03-25T21:18:12.753"
+    }
+  }
+  ```
+
+- SQS --> EventBus (--> cloudwatch)
+  ```json
+  {
+    "version": "0",
+    "id": "98c24e95-444a-73bd-d447-4ddfe514e0de",
+    "detail-type": "Event from aws:sqs",
+    "source": "Pipe SqsEventBridge",
+    "account": "XXXXXXXXXXX",
+    "time": "2023-03-29T19:41:01Z",
+    "region": "eu-central-1",
+    "resources": [],
+    "detail": {
+        "messageId": "e8d76dc5-4cf3-4e71-9ede-dfc3f9b70232",
+        "receiptHandle": "AQEB6w1YWZKOeLkBu4bngtpwGeWzsbJFrk5bTQgcWXAQIhAMATuf9YZBfKvdxsE5CbnIK9q1wq+tiVc82CB1wE3VlLya/J3QJe56lnSB7eAu1fEkWRVz/EtEz4Ro126q3aD+HX94iJiJKL+JftW+r48b3MaUsXUCqXz7pjODVQlKc1mW8GxQ4BhYqCJODsBOsL+A6gR3QqPke+mYt0g+Q1AIhC2V/4IbYkiEq8FKhyyC9+/KqIj7Jfzc+TAldYjEQa1eTLiqqFWUSkW4tCu6g0VyqFjhHGnLw5tk8iypG9YYkj2YLODnjnuZvyYUnOmt0jjtKFPUJNfVe4Ms6/5P1se2clqga0JR0pHW0zVdrgHp+lW1w0bAa1WrFDOAbx3HG6hyherCAL22x1ZlBu1RVfbXog==",
+        "body": "Hello",
+        "attributes": {
+            "ApproximateReceiveCount": "1",
+            "SentTimestamp": "1680118861660",
+            "SenderId": "AROAUHJD7O7N7OKFHRVWS:raphael.manke",
+            "ApproximateFirstReceiveTimestamp": "1680118861665"
+        },
+        "messageAttributes": {},
+        "md5OfBody": "8b1a9953c4611296a827abf8c47804d7",
+        "eventSource": "aws:sqs",
+        "eventSourceARN": "arn:aws:sqs:eu-central-1:XXXXXXXXXXX:PipeSource",
+        "awsRegion": "eu-central-1"
+    }
+  }
+  ```
+- Kinesis --> EventBus (--> Cloudwatch)
+  ```json
+  {
+    "version": "0",
+    "id": "2d2603b7-8171-6d15-c41b-de1854e0c781",
+    "detail-type": "Event from aws:kinesis",
+    "source": "Pipe Pipe7793F8A1-MZ6Uu60BB42E",
+    "account": "XXXXXXXXXXX",
+    "time": "2023-03-29T20:55:47Z",
+    "region": "eu-central-1",
+    "resources": [],
+    "detail": {
+        "eventSource": "aws:kinesis",
+        "eventVersion": "1.0",
+        "eventID": "shardId-000000000000:49639344670955332939983043889605004987500509634079227906",
+        "eventName": "aws:kinesis:record",
+        "invokeIdentityArn": "arn:aws:iam::XXXXXXXXXXX:role/E2EPipesKinesisEventBus-PipeRole7D4AFC73-I0RSRHWMKUTC",
+        "awsRegion": "eu-central-1",
+        "eventSourceARN": "arn:aws:kinesis:eu-central-1:XXXXXXXXXXX:stream/E2EPipesKinesisEventBus-KinesisStream46752A3E-SSL4iQQD77p7",
+        "kinesisSchemaVersion": "1.0",
+        "partitionKey": "my-partition-key",
+        "sequenceNumber": "49639344670955332939983043889605004987500509634079227906",
+        "data": "bXktZXZlbnQtZGF0YQo=",
+        "approximateArrivalTimestamp": 1680123347.074
+    }
+  }
+  ```

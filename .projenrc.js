@@ -27,6 +27,9 @@ const project = new awscdk.AwsCdkConstructLibrary({
     'cdk:deploy:source:sqs': "cdk deploy --app 'npx ts-node --prefer-ts-exts e2e/sources/Sqs.ts'",
     'cdk:deploy:source:dynamodb': "cdk deploy --app 'npx ts-node --prefer-ts-exts e2e/sources/DynamoDbStream.ts'",
     'cdk:deploy:source:kafka-serverless': "cdk deploy --app 'npx ts-node --prefer-ts-exts e2e/sources/MskServerless.ts'",
+    'cdk:deploy:target:eventbus:dynamo-stream': "cdk deploy --app 'npx ts-node --prefer-ts-exts e2e/targets/EventBus/DynamoStreamEventBus.ts'",
+    'cdk:deploy:target:eventbus:sqs': "cdk deploy --app 'npx ts-node --prefer-ts-exts e2e/targets/EventBus/SqsEventBus.ts'",
+    'cdk:deploy:target:eventbus:kinesis-stream': "cdk deploy --app 'npx ts-node --prefer-ts-exts e2e/targets/EventBus/KinesisStreamEventBus.ts'",
   },
   deps: [
     '@jm18457/kafkajs-msk-iam-authentication-mechanism@2.0.3',

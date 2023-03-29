@@ -13,6 +13,6 @@ fileignoreconfig:
   - filename: src/sources/MskSource.ts
     checksum: 3444650c80a1bf1e2f59b036d3b5d872d8289c57fa2929a752686d52bb0d7f9b
   - filename: README.md
-    checksum: 8a2f98a1f8d100a03a0a101815453bea7fa7e0ae2c82c360410e537b9f7ea501
+    checksum: 3ad06860bbaaa3b41e9e3dfe665ede1564446fa7052a4ed7fdf609af7ce5bcc1
   - filename: e2e/sources/kafkaProducer.ts
     checksum: d8518b18d16551a7ffc49b7c0683b5fdf4c82a9d1709ca3330eada84c0993183

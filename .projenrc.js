@@ -58,4 +58,6 @@ project.addPackageIgnore('cdk.out');
 project.addPackageIgnore('e2e');
 project.addPackageIgnore('yarn-error.log');
 project.addPackageIgnore('cdk.context.json');
+project.addPackageIgnore('.talismanrc');
+project.addPackageIgnore('.jsii');
 project.synth();

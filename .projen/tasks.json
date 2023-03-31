@@ -65,6 +65,30 @@
         }
       ]
     },
+    "cdk:deploy:target:eventbus:dynamo-stream": {
+      "name": "cdk:deploy:target:eventbus:dynamo-stream",
+      "steps": [
+        {
+          "exec": "cdk deploy --app 'npx ts-node --prefer-ts-exts e2e/targets/EventBus/DynamoStreamEventBus.ts'"
+        }
+      ]
+    },
+    "cdk:deploy:target:eventbus:kinesis-stream": {
+      "name": "cdk:deploy:target:eventbus:kinesis-stream",
+      "steps": [
+        {
+          "exec": "cdk deploy --app 'npx ts-node --prefer-ts-exts e2e/targets/EventBus/KinesisStreamEventBus.ts'"
+        }
+      ]
+    },
+    "cdk:deploy:target:eventbus:sqs": {
+      "name": "cdk:deploy:target:eventbus:sqs",
+      "steps": [
+        {
+          "exec": "cdk deploy --app 'npx ts-node --prefer-ts-exts e2e/targets/EventBus/SqsEventBus.ts'"
+        }
+      ]
+    },
     "clobber": {
       "name": "clobber",
       "description": "hard resets to HEAD of origin and cleans the local repo",

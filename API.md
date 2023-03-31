@@ -477,6 +477,170 @@ public readonly sourceParameters: PipeSourceParametersProperty | IResolvable;
 ---
 
 
+### ApiDestinationTarget <a name="ApiDestinationTarget" id="aws-cdk-pipes-rfc.ApiDestinationTarget"></a>
+
+- *Implements:* <a href="#aws-cdk-pipes-rfc.IPipeTarget">IPipeTarget</a>
+
+#### Initializers <a name="Initializers" id="aws-cdk-pipes-rfc.ApiDestinationTarget.Initializer"></a>
+
+```typescript
+import { ApiDestinationTarget } from 'aws-cdk-pipes-rfc'
+
+new ApiDestinationTarget(http: IApiDestination, props: IApiDestinationTargetProps)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-cdk-pipes-rfc.ApiDestinationTarget.Initializer.parameter.http">http</a></code> | <code>aws-cdk-lib.aws_events.IApiDestination</code> | *No description.* |
+| <code><a href="#aws-cdk-pipes-rfc.ApiDestinationTarget.Initializer.parameter.props">props</a></code> | <code><a href="#aws-cdk-pipes-rfc.IApiDestinationTargetProps">IApiDestinationTargetProps</a></code> | *No description.* |
+
+---
+
+##### `http`<sup>Required</sup> <a name="http" id="aws-cdk-pipes-rfc.ApiDestinationTarget.Initializer.parameter.http"></a>
+
+- *Type:* aws-cdk-lib.aws_events.IApiDestination
+
+---
+
+##### `props`<sup>Required</sup> <a name="props" id="aws-cdk-pipes-rfc.ApiDestinationTarget.Initializer.parameter.props"></a>
+
+- *Type:* <a href="#aws-cdk-pipes-rfc.IApiDestinationTargetProps">IApiDestinationTargetProps</a>
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-cdk-pipes-rfc.ApiDestinationTarget.grantPush">grantPush</a></code> | *No description.* |
+
+---
+
+##### `grantPush` <a name="grantPush" id="aws-cdk-pipes-rfc.ApiDestinationTarget.grantPush"></a>
+
+```typescript
+public grantPush(grantee: IRole): void
+```
+
+###### `grantee`<sup>Required</sup> <a name="grantee" id="aws-cdk-pipes-rfc.ApiDestinationTarget.grantPush.parameter.grantee"></a>
+
+- *Type:* aws-cdk-lib.aws_iam.IRole
+
+---
+
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-cdk-pipes-rfc.ApiDestinationTarget.property.targetArn">targetArn</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-cdk-pipes-rfc.ApiDestinationTarget.property.targetParameters">targetParameters</a></code> | <code>aws-cdk-lib.aws_pipes.CfnPipe.PipeTargetParametersProperty</code> | *No description.* |
+
+---
+
+##### `targetArn`<sup>Required</sup> <a name="targetArn" id="aws-cdk-pipes-rfc.ApiDestinationTarget.property.targetArn"></a>
+
+```typescript
+public readonly targetArn: string;
+```
+
+- *Type:* string
+
+---
+
+##### `targetParameters`<sup>Required</sup> <a name="targetParameters" id="aws-cdk-pipes-rfc.ApiDestinationTarget.property.targetParameters"></a>
+
+```typescript
+public readonly targetParameters: PipeTargetParametersProperty;
+```
+
+- *Type:* aws-cdk-lib.aws_pipes.CfnPipe.PipeTargetParametersProperty
+
+---
+
+
+### ApiGatewayTarget <a name="ApiGatewayTarget" id="aws-cdk-pipes-rfc.ApiGatewayTarget"></a>
+
+- *Implements:* <a href="#aws-cdk-pipes-rfc.IPipeTarget">IPipeTarget</a>
+
+#### Initializers <a name="Initializers" id="aws-cdk-pipes-rfc.ApiGatewayTarget.Initializer"></a>
+
+```typescript
+import { ApiGatewayTarget } from 'aws-cdk-pipes-rfc'
+
+new ApiGatewayTarget(http: IRestApi, props: IApiGatewayTargetProps)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-cdk-pipes-rfc.ApiGatewayTarget.Initializer.parameter.http">http</a></code> | <code>aws-cdk-lib.aws_apigateway.IRestApi</code> | *No description.* |
+| <code><a href="#aws-cdk-pipes-rfc.ApiGatewayTarget.Initializer.parameter.props">props</a></code> | <code><a href="#aws-cdk-pipes-rfc.IApiGatewayTargetProps">IApiGatewayTargetProps</a></code> | *No description.* |
+
+---
+
+##### `http`<sup>Required</sup> <a name="http" id="aws-cdk-pipes-rfc.ApiGatewayTarget.Initializer.parameter.http"></a>
+
+- *Type:* aws-cdk-lib.aws_apigateway.IRestApi
+
+---
+
+##### `props`<sup>Required</sup> <a name="props" id="aws-cdk-pipes-rfc.ApiGatewayTarget.Initializer.parameter.props"></a>
+
+- *Type:* <a href="#aws-cdk-pipes-rfc.IApiGatewayTargetProps">IApiGatewayTargetProps</a>
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-cdk-pipes-rfc.ApiGatewayTarget.grantPush">grantPush</a></code> | *No description.* |
+
+---
+
+##### `grantPush` <a name="grantPush" id="aws-cdk-pipes-rfc.ApiGatewayTarget.grantPush"></a>
+
+```typescript
+public grantPush(grantee: IRole): void
+```
+
+###### `grantee`<sup>Required</sup> <a name="grantee" id="aws-cdk-pipes-rfc.ApiGatewayTarget.grantPush.parameter.grantee"></a>
+
+- *Type:* aws-cdk-lib.aws_iam.IRole
+
+---
+
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-cdk-pipes-rfc.ApiGatewayTarget.property.targetArn">targetArn</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-cdk-pipes-rfc.ApiGatewayTarget.property.targetParameters">targetParameters</a></code> | <code>aws-cdk-lib.aws_pipes.CfnPipe.PipeTargetParametersProperty</code> | *No description.* |
+
+---
+
+##### `targetArn`<sup>Required</sup> <a name="targetArn" id="aws-cdk-pipes-rfc.ApiGatewayTarget.property.targetArn"></a>
+
+```typescript
+public readonly targetArn: string;
+```
+
+- *Type:* string
+
+---
+
+##### `targetParameters`<sup>Required</sup> <a name="targetParameters" id="aws-cdk-pipes-rfc.ApiGatewayTarget.property.targetParameters"></a>
+
+```typescript
+public readonly targetParameters: PipeTargetParametersProperty;
+```
+
+- *Type:* aws-cdk-lib.aws_pipes.CfnPipe.PipeTargetParametersProperty
+
+---
+
+
 ### DynamoDBStreamSource <a name="DynamoDBStreamSource" id="aws-cdk-pipes-rfc.DynamoDBStreamSource"></a>
 
 - *Implements:* <a href="#aws-cdk-pipes-rfc.IPipeSource">IPipeSource</a>
@@ -559,6 +723,88 @@ public readonly sourceParameters: PipeSourceParametersProperty | IResolvable;
 ---
 
 
+### EventBridgeEventBusTarget <a name="EventBridgeEventBusTarget" id="aws-cdk-pipes-rfc.EventBridgeEventBusTarget"></a>
+
+- *Implements:* <a href="#aws-cdk-pipes-rfc.IPipeTarget">IPipeTarget</a>
+
+#### Initializers <a name="Initializers" id="aws-cdk-pipes-rfc.EventBridgeEventBusTarget.Initializer"></a>
+
+```typescript
+import { EventBridgeEventBusTarget } from 'aws-cdk-pipes-rfc'
+
+new EventBridgeEventBusTarget(eventBus: IEventBus, props: IEventBusTargetProps)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-cdk-pipes-rfc.EventBridgeEventBusTarget.Initializer.parameter.eventBus">eventBus</a></code> | <code>aws-cdk-lib.aws_events.IEventBus</code> | *No description.* |
+| <code><a href="#aws-cdk-pipes-rfc.EventBridgeEventBusTarget.Initializer.parameter.props">props</a></code> | <code><a href="#aws-cdk-pipes-rfc.IEventBusTargetProps">IEventBusTargetProps</a></code> | *No description.* |
+
+---
+
+##### `eventBus`<sup>Required</sup> <a name="eventBus" id="aws-cdk-pipes-rfc.EventBridgeEventBusTarget.Initializer.parameter.eventBus"></a>
+
+- *Type:* aws-cdk-lib.aws_events.IEventBus
+
+---
+
+##### `props`<sup>Required</sup> <a name="props" id="aws-cdk-pipes-rfc.EventBridgeEventBusTarget.Initializer.parameter.props"></a>
+
+- *Type:* <a href="#aws-cdk-pipes-rfc.IEventBusTargetProps">IEventBusTargetProps</a>
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-cdk-pipes-rfc.EventBridgeEventBusTarget.grantPush">grantPush</a></code> | *No description.* |
+
+---
+
+##### `grantPush` <a name="grantPush" id="aws-cdk-pipes-rfc.EventBridgeEventBusTarget.grantPush"></a>
+
+```typescript
+public grantPush(grantee: IRole): void
+```
+
+###### `grantee`<sup>Required</sup> <a name="grantee" id="aws-cdk-pipes-rfc.EventBridgeEventBusTarget.grantPush.parameter.grantee"></a>
+
+- *Type:* aws-cdk-lib.aws_iam.IRole
+
+---
+
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-cdk-pipes-rfc.EventBridgeEventBusTarget.property.targetArn">targetArn</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-cdk-pipes-rfc.EventBridgeEventBusTarget.property.targetParameters">targetParameters</a></code> | <code>aws-cdk-lib.aws_pipes.CfnPipe.PipeTargetParametersProperty</code> | *No description.* |
+
+---
+
+##### `targetArn`<sup>Required</sup> <a name="targetArn" id="aws-cdk-pipes-rfc.EventBridgeEventBusTarget.property.targetArn"></a>
+
+```typescript
+public readonly targetArn: string;
+```
+
+- *Type:* string
+
+---
+
+##### `targetParameters`<sup>Required</sup> <a name="targetParameters" id="aws-cdk-pipes-rfc.EventBridgeEventBusTarget.property.targetParameters"></a>
+
+```typescript
+public readonly targetParameters: PipeTargetParametersProperty;
+```
+
+- *Type:* aws-cdk-lib.aws_pipes.CfnPipe.PipeTargetParametersProperty
+
+---
+
+
 ### KinesisStreamSource <a name="KinesisStreamSource" id="aws-cdk-pipes-rfc.KinesisStreamSource"></a>
 
 - *Implements:* <a href="#aws-cdk-pipes-rfc.IPipeSource">IPipeSource</a>
@@ -637,6 +883,170 @@ public readonly sourceParameters: PipeSourceParametersProperty | IResolvable;
 ```
 
 - *Type:* aws-cdk-lib.aws_pipes.CfnPipe.PipeSourceParametersProperty | aws-cdk-lib.IResolvable
+
+---
+
+
+### KinesisStreamTarget <a name="KinesisStreamTarget" id="aws-cdk-pipes-rfc.KinesisStreamTarget"></a>
+
+- *Implements:* <a href="#aws-cdk-pipes-rfc.IPipeTarget">IPipeTarget</a>
+
+#### Initializers <a name="Initializers" id="aws-cdk-pipes-rfc.KinesisStreamTarget.Initializer"></a>
+
+```typescript
+import { KinesisStreamTarget } from 'aws-cdk-pipes-rfc'
+
+new KinesisStreamTarget(stream: IStream, props: IKinesisStreamTargetProps)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-cdk-pipes-rfc.KinesisStreamTarget.Initializer.parameter.stream">stream</a></code> | <code>aws-cdk-lib.aws_kinesis.IStream</code> | *No description.* |
+| <code><a href="#aws-cdk-pipes-rfc.KinesisStreamTarget.Initializer.parameter.props">props</a></code> | <code><a href="#aws-cdk-pipes-rfc.IKinesisStreamTargetProps">IKinesisStreamTargetProps</a></code> | *No description.* |
+
+---
+
+##### `stream`<sup>Required</sup> <a name="stream" id="aws-cdk-pipes-rfc.KinesisStreamTarget.Initializer.parameter.stream"></a>
+
+- *Type:* aws-cdk-lib.aws_kinesis.IStream
+
+---
+
+##### `props`<sup>Required</sup> <a name="props" id="aws-cdk-pipes-rfc.KinesisStreamTarget.Initializer.parameter.props"></a>
+
+- *Type:* <a href="#aws-cdk-pipes-rfc.IKinesisStreamTargetProps">IKinesisStreamTargetProps</a>
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-cdk-pipes-rfc.KinesisStreamTarget.grantPush">grantPush</a></code> | *No description.* |
+
+---
+
+##### `grantPush` <a name="grantPush" id="aws-cdk-pipes-rfc.KinesisStreamTarget.grantPush"></a>
+
+```typescript
+public grantPush(grantee: IRole): void
+```
+
+###### `grantee`<sup>Required</sup> <a name="grantee" id="aws-cdk-pipes-rfc.KinesisStreamTarget.grantPush.parameter.grantee"></a>
+
+- *Type:* aws-cdk-lib.aws_iam.IRole
+
+---
+
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-cdk-pipes-rfc.KinesisStreamTarget.property.targetArn">targetArn</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-cdk-pipes-rfc.KinesisStreamTarget.property.targetParameters">targetParameters</a></code> | <code>aws-cdk-lib.aws_pipes.CfnPipe.PipeTargetParametersProperty</code> | *No description.* |
+
+---
+
+##### `targetArn`<sup>Required</sup> <a name="targetArn" id="aws-cdk-pipes-rfc.KinesisStreamTarget.property.targetArn"></a>
+
+```typescript
+public readonly targetArn: string;
+```
+
+- *Type:* string
+
+---
+
+##### `targetParameters`<sup>Required</sup> <a name="targetParameters" id="aws-cdk-pipes-rfc.KinesisStreamTarget.property.targetParameters"></a>
+
+```typescript
+public readonly targetParameters: PipeTargetParametersProperty;
+```
+
+- *Type:* aws-cdk-lib.aws_pipes.CfnPipe.PipeTargetParametersProperty
+
+---
+
+
+### LambdaTarget <a name="LambdaTarget" id="aws-cdk-pipes-rfc.LambdaTarget"></a>
+
+- *Implements:* <a href="#aws-cdk-pipes-rfc.IPipeTarget">IPipeTarget</a>
+
+#### Initializers <a name="Initializers" id="aws-cdk-pipes-rfc.LambdaTarget.Initializer"></a>
+
+```typescript
+import { LambdaTarget } from 'aws-cdk-pipes-rfc'
+
+new LambdaTarget(lambda: IFunction, props?: ILambdaTargetProps)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-cdk-pipes-rfc.LambdaTarget.Initializer.parameter.lambda">lambda</a></code> | <code>aws-cdk-lib.aws_lambda.IFunction</code> | *No description.* |
+| <code><a href="#aws-cdk-pipes-rfc.LambdaTarget.Initializer.parameter.props">props</a></code> | <code><a href="#aws-cdk-pipes-rfc.ILambdaTargetProps">ILambdaTargetProps</a></code> | *No description.* |
+
+---
+
+##### `lambda`<sup>Required</sup> <a name="lambda" id="aws-cdk-pipes-rfc.LambdaTarget.Initializer.parameter.lambda"></a>
+
+- *Type:* aws-cdk-lib.aws_lambda.IFunction
+
+---
+
+##### `props`<sup>Optional</sup> <a name="props" id="aws-cdk-pipes-rfc.LambdaTarget.Initializer.parameter.props"></a>
+
+- *Type:* <a href="#aws-cdk-pipes-rfc.ILambdaTargetProps">ILambdaTargetProps</a>
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-cdk-pipes-rfc.LambdaTarget.grantPush">grantPush</a></code> | *No description.* |
+
+---
+
+##### `grantPush` <a name="grantPush" id="aws-cdk-pipes-rfc.LambdaTarget.grantPush"></a>
+
+```typescript
+public grantPush(grantee: IRole): void
+```
+
+###### `grantee`<sup>Required</sup> <a name="grantee" id="aws-cdk-pipes-rfc.LambdaTarget.grantPush.parameter.grantee"></a>
+
+- *Type:* aws-cdk-lib.aws_iam.IRole
+
+---
+
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-cdk-pipes-rfc.LambdaTarget.property.targetArn">targetArn</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-cdk-pipes-rfc.LambdaTarget.property.targetParameters">targetParameters</a></code> | <code>aws-cdk-lib.aws_pipes.CfnPipe.PipeTargetParametersProperty</code> | *No description.* |
+
+---
+
+##### `targetArn`<sup>Required</sup> <a name="targetArn" id="aws-cdk-pipes-rfc.LambdaTarget.property.targetArn"></a>
+
+```typescript
+public readonly targetArn: string;
+```
+
+- *Type:* string
+
+---
+
+##### `targetParameters`<sup>Required</sup> <a name="targetParameters" id="aws-cdk-pipes-rfc.LambdaTarget.property.targetParameters"></a>
+
+```typescript
+public readonly targetParameters: PipeTargetParametersProperty;
+```
+
+- *Type:* aws-cdk-lib.aws_pipes.CfnPipe.PipeTargetParametersProperty
 
 ---
 
@@ -1430,6 +1840,88 @@ public readonly targetParameters: PipeTargetParametersProperty;
 ---
 
 
+### StepFunctionTarget <a name="StepFunctionTarget" id="aws-cdk-pipes-rfc.StepFunctionTarget"></a>
+
+- *Implements:* <a href="#aws-cdk-pipes-rfc.IPipeTarget">IPipeTarget</a>
+
+#### Initializers <a name="Initializers" id="aws-cdk-pipes-rfc.StepFunctionTarget.Initializer"></a>
+
+```typescript
+import { StepFunctionTarget } from 'aws-cdk-pipes-rfc'
+
+new StepFunctionTarget(stateMachine: IStateMachine, props?: IStepFunctionTargetProps)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-cdk-pipes-rfc.StepFunctionTarget.Initializer.parameter.stateMachine">stateMachine</a></code> | <code>aws-cdk-lib.aws_stepfunctions.IStateMachine</code> | *No description.* |
+| <code><a href="#aws-cdk-pipes-rfc.StepFunctionTarget.Initializer.parameter.props">props</a></code> | <code><a href="#aws-cdk-pipes-rfc.IStepFunctionTargetProps">IStepFunctionTargetProps</a></code> | *No description.* |
+
+---
+
+##### `stateMachine`<sup>Required</sup> <a name="stateMachine" id="aws-cdk-pipes-rfc.StepFunctionTarget.Initializer.parameter.stateMachine"></a>
+
+- *Type:* aws-cdk-lib.aws_stepfunctions.IStateMachine
+
+---
+
+##### `props`<sup>Optional</sup> <a name="props" id="aws-cdk-pipes-rfc.StepFunctionTarget.Initializer.parameter.props"></a>
+
+- *Type:* <a href="#aws-cdk-pipes-rfc.IStepFunctionTargetProps">IStepFunctionTargetProps</a>
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-cdk-pipes-rfc.StepFunctionTarget.grantPush">grantPush</a></code> | *No description.* |
+
+---
+
+##### `grantPush` <a name="grantPush" id="aws-cdk-pipes-rfc.StepFunctionTarget.grantPush"></a>
+
+```typescript
+public grantPush(grantee: IRole): void
+```
+
+###### `grantee`<sup>Required</sup> <a name="grantee" id="aws-cdk-pipes-rfc.StepFunctionTarget.grantPush.parameter.grantee"></a>
+
+- *Type:* aws-cdk-lib.aws_iam.IRole
+
+---
+
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-cdk-pipes-rfc.StepFunctionTarget.property.targetArn">targetArn</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-cdk-pipes-rfc.StepFunctionTarget.property.targetParameters">targetParameters</a></code> | <code>aws-cdk-lib.aws_pipes.CfnPipe.PipeTargetParametersProperty</code> | *No description.* |
+
+---
+
+##### `targetArn`<sup>Required</sup> <a name="targetArn" id="aws-cdk-pipes-rfc.StepFunctionTarget.property.targetArn"></a>
+
+```typescript
+public readonly targetArn: string;
+```
+
+- *Type:* string
+
+---
+
+##### `targetParameters`<sup>Required</sup> <a name="targetParameters" id="aws-cdk-pipes-rfc.StepFunctionTarget.property.targetParameters"></a>
+
+```typescript
+public readonly targetParameters: PipeTargetParametersProperty;
+```
+
+- *Type:* aws-cdk-lib.aws_pipes.CfnPipe.PipeTargetParametersProperty
+
+---
+
+
 ## Protocols <a name="Protocols" id="Protocols"></a>
 
 ### IAmazonMqBrokerSourceProps <a name="IAmazonMqBrokerSourceProps" id="aws-cdk-pipes-rfc.IAmazonMqBrokerSourceProps"></a>
@@ -1499,6 +1991,142 @@ public readonly queueName: string;
 `CfnPipe.PipeSourceActiveMQBrokerParametersProperty.QueueName`.
 
 > [http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipesourceactivemqbrokerparameters.html#cfn-pipes-pipe-pipesourceactivemqbrokerparameters-queuename](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipesourceactivemqbrokerparameters.html#cfn-pipes-pipe-pipesourceactivemqbrokerparameters-queuename)
+
+---
+
+### IApiDestinationTargetProps <a name="IApiDestinationTargetProps" id="aws-cdk-pipes-rfc.IApiDestinationTargetProps"></a>
+
+- *Implemented By:* <a href="#aws-cdk-pipes-rfc.IApiDestinationTargetProps">IApiDestinationTargetProps</a>
+
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-cdk-pipes-rfc.IApiDestinationTargetProps.property.headerParameters">headerParameters</a></code> | <code>aws-cdk-lib.IResolvable \| {[ key: string ]: string}</code> | The headers that need to be sent as part of request invoking the API Gateway REST API or EventBridge ApiDestination. |
+| <code><a href="#aws-cdk-pipes-rfc.IApiDestinationTargetProps.property.pathParameterValues">pathParameterValues</a></code> | <code>string[]</code> | The path parameter values to be used to populate API Gateway REST API or EventBridge ApiDestination path wildcards ("*"). |
+| <code><a href="#aws-cdk-pipes-rfc.IApiDestinationTargetProps.property.queryStringParameters">queryStringParameters</a></code> | <code>aws-cdk-lib.IResolvable \| {[ key: string ]: string}</code> | The query string keys/values that need to be sent as part of request invoking the API Gateway REST API or EventBridge ApiDestination. |
+
+---
+
+##### `headerParameters`<sup>Optional</sup> <a name="headerParameters" id="aws-cdk-pipes-rfc.IApiDestinationTargetProps.property.headerParameters"></a>
+
+```typescript
+public readonly headerParameters: IResolvable | {[ key: string ]: string};
+```
+
+- *Type:* aws-cdk-lib.IResolvable | {[ key: string ]: string}
+
+The headers that need to be sent as part of request invoking the API Gateway REST API or EventBridge ApiDestination.
+
+> [http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipetargethttpparameters.html#cfn-pipes-pipe-pipetargethttpparameters-headerparameters](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipetargethttpparameters.html#cfn-pipes-pipe-pipetargethttpparameters-headerparameters)
+
+---
+
+##### `pathParameterValues`<sup>Optional</sup> <a name="pathParameterValues" id="aws-cdk-pipes-rfc.IApiDestinationTargetProps.property.pathParameterValues"></a>
+
+```typescript
+public readonly pathParameterValues: string[];
+```
+
+- *Type:* string[]
+
+The path parameter values to be used to populate API Gateway REST API or EventBridge ApiDestination path wildcards ("*").
+
+> [http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipetargethttpparameters.html#cfn-pipes-pipe-pipetargethttpparameters-pathparametervalues](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipetargethttpparameters.html#cfn-pipes-pipe-pipetargethttpparameters-pathparametervalues)
+
+---
+
+##### `queryStringParameters`<sup>Optional</sup> <a name="queryStringParameters" id="aws-cdk-pipes-rfc.IApiDestinationTargetProps.property.queryStringParameters"></a>
+
+```typescript
+public readonly queryStringParameters: IResolvable | {[ key: string ]: string};
+```
+
+- *Type:* aws-cdk-lib.IResolvable | {[ key: string ]: string}
+
+The query string keys/values that need to be sent as part of request invoking the API Gateway REST API or EventBridge ApiDestination.
+
+> [http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipetargethttpparameters.html#cfn-pipes-pipe-pipetargethttpparameters-querystringparameters](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipetargethttpparameters.html#cfn-pipes-pipe-pipetargethttpparameters-querystringparameters)
+
+---
+
+### IApiGatewayTargetProps <a name="IApiGatewayTargetProps" id="aws-cdk-pipes-rfc.IApiGatewayTargetProps"></a>
+
+- *Implemented By:* <a href="#aws-cdk-pipes-rfc.IApiGatewayTargetProps">IApiGatewayTargetProps</a>
+
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-cdk-pipes-rfc.IApiGatewayTargetProps.property.headerParameters">headerParameters</a></code> | <code>aws-cdk-lib.IResolvable \| {[ key: string ]: string}</code> | The headers that need to be sent as part of request invoking the API Gateway REST API or EventBridge ApiDestination. |
+| <code><a href="#aws-cdk-pipes-rfc.IApiGatewayTargetProps.property.pathParameterValues">pathParameterValues</a></code> | <code>string[]</code> | The path parameter values to be used to populate API Gateway REST API or EventBridge ApiDestination path wildcards ("*"). |
+| <code><a href="#aws-cdk-pipes-rfc.IApiGatewayTargetProps.property.queryStringParameters">queryStringParameters</a></code> | <code>aws-cdk-lib.IResolvable \| {[ key: string ]: string}</code> | The query string keys/values that need to be sent as part of request invoking the API Gateway REST API or EventBridge ApiDestination. |
+| <code><a href="#aws-cdk-pipes-rfc.IApiGatewayTargetProps.property.method">method</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#aws-cdk-pipes-rfc.IApiGatewayTargetProps.property.resource">resource</a></code> | <code>string</code> | *No description.* |
+
+---
+
+##### `headerParameters`<sup>Optional</sup> <a name="headerParameters" id="aws-cdk-pipes-rfc.IApiGatewayTargetProps.property.headerParameters"></a>
+
+```typescript
+public readonly headerParameters: IResolvable | {[ key: string ]: string};
+```
+
+- *Type:* aws-cdk-lib.IResolvable | {[ key: string ]: string}
+
+The headers that need to be sent as part of request invoking the API Gateway REST API or EventBridge ApiDestination.
+
+> [http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipetargethttpparameters.html#cfn-pipes-pipe-pipetargethttpparameters-headerparameters](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipetargethttpparameters.html#cfn-pipes-pipe-pipetargethttpparameters-headerparameters)
+
+---
+
+##### `pathParameterValues`<sup>Optional</sup> <a name="pathParameterValues" id="aws-cdk-pipes-rfc.IApiGatewayTargetProps.property.pathParameterValues"></a>
+
+```typescript
+public readonly pathParameterValues: string[];
+```
+
+- *Type:* string[]
+
+The path parameter values to be used to populate API Gateway REST API or EventBridge ApiDestination path wildcards ("*").
+
+> [http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipetargethttpparameters.html#cfn-pipes-pipe-pipetargethttpparameters-pathparametervalues](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipetargethttpparameters.html#cfn-pipes-pipe-pipetargethttpparameters-pathparametervalues)
+
+---
+
+##### `queryStringParameters`<sup>Optional</sup> <a name="queryStringParameters" id="aws-cdk-pipes-rfc.IApiGatewayTargetProps.property.queryStringParameters"></a>
+
+```typescript
+public readonly queryStringParameters: IResolvable | {[ key: string ]: string};
+```
+
+- *Type:* aws-cdk-lib.IResolvable | {[ key: string ]: string}
+
+The query string keys/values that need to be sent as part of request invoking the API Gateway REST API or EventBridge ApiDestination.
+
+> [http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipetargethttpparameters.html#cfn-pipes-pipe-pipetargethttpparameters-querystringparameters](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipetargethttpparameters.html#cfn-pipes-pipe-pipetargethttpparameters-querystringparameters)
+
+---
+
+##### `method`<sup>Required</sup> <a name="method" id="aws-cdk-pipes-rfc.IApiGatewayTargetProps.property.method"></a>
+
+```typescript
+public readonly method: string;
+```
+
+- *Type:* string
+
+---
+
+##### `resource`<sup>Required</sup> <a name="resource" id="aws-cdk-pipes-rfc.IApiGatewayTargetProps.property.resource"></a>
+
+```typescript
+public readonly resource: string;
+```
+
+- *Type:* string
 
 ---
 
@@ -1629,6 +2257,97 @@ public readonly parallelizationFactor: number;
 `CfnPipe.PipeSourceDynamoDBStreamParametersProperty.ParallelizationFactor`.
 
 > [http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipesourcedynamodbstreamparameters.html#cfn-pipes-pipe-pipesourcedynamodbstreamparameters-parallelizationfactor](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipesourcedynamodbstreamparameters.html#cfn-pipes-pipe-pipesourcedynamodbstreamparameters-parallelizationfactor)
+
+---
+
+### IEventBusTargetProps <a name="IEventBusTargetProps" id="aws-cdk-pipes-rfc.IEventBusTargetProps"></a>
+
+- *Implemented By:* <a href="#aws-cdk-pipes-rfc.IEventBusTargetProps">IEventBusTargetProps</a>
+
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-cdk-pipes-rfc.IEventBusTargetProps.property.detailType">detailType</a></code> | <code>string</code> | A free-form string, with a maximum of 128 characters, used to decide what fields to expect in the event detail. |
+| <code><a href="#aws-cdk-pipes-rfc.IEventBusTargetProps.property.endpointId">endpointId</a></code> | <code>string</code> | The URL subdomain of the endpoint. |
+| <code><a href="#aws-cdk-pipes-rfc.IEventBusTargetProps.property.resources">resources</a></code> | <code>string[]</code> | AWS resources, identified by Amazon Resource Name (ARN), which the event primarily concerns. |
+| <code><a href="#aws-cdk-pipes-rfc.IEventBusTargetProps.property.source">source</a></code> | <code>string</code> | The source of the event. |
+| <code><a href="#aws-cdk-pipes-rfc.IEventBusTargetProps.property.time">time</a></code> | <code>string</code> | The time stamp of the event, per [RFC3339](https://docs.aws.amazon.com/https://www.rfc-editor.org/rfc/rfc3339.txt) . If no time stamp is provided, the time stamp of the [PutEvents](https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutEvents.html) call is used. |
+
+---
+
+##### `detailType`<sup>Optional</sup> <a name="detailType" id="aws-cdk-pipes-rfc.IEventBusTargetProps.property.detailType"></a>
+
+```typescript
+public readonly detailType: string;
+```
+
+- *Type:* string
+
+A free-form string, with a maximum of 128 characters, used to decide what fields to expect in the event detail.
+
+> [http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipetargeteventbridgeeventbusparameters.html#cfn-pipes-pipe-pipetargeteventbridgeeventbusparameters-detailtype](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipetargeteventbridgeeventbusparameters.html#cfn-pipes-pipe-pipetargeteventbridgeeventbusparameters-detailtype)
+
+---
+
+##### `endpointId`<sup>Optional</sup> <a name="endpointId" id="aws-cdk-pipes-rfc.IEventBusTargetProps.property.endpointId"></a>
+
+```typescript
+public readonly endpointId: string;
+```
+
+- *Type:* string
+
+The URL subdomain of the endpoint.
+
+For example, if the URL for Endpoint is https://abcde.veo.endpoints.event.amazonaws.com, then the EndpointId is `abcde.veo` .
+
+> [http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipetargeteventbridgeeventbusparameters.html#cfn-pipes-pipe-pipetargeteventbridgeeventbusparameters-endpointid](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipetargeteventbridgeeventbusparameters.html#cfn-pipes-pipe-pipetargeteventbridgeeventbusparameters-endpointid)
+
+---
+
+##### `resources`<sup>Optional</sup> <a name="resources" id="aws-cdk-pipes-rfc.IEventBusTargetProps.property.resources"></a>
+
+```typescript
+public readonly resources: string[];
+```
+
+- *Type:* string[]
+
+AWS resources, identified by Amazon Resource Name (ARN), which the event primarily concerns.
+
+Any number, including zero, may be present.
+
+> [http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipetargeteventbridgeeventbusparameters.html#cfn-pipes-pipe-pipetargeteventbridgeeventbusparameters-resources](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipetargeteventbridgeeventbusparameters.html#cfn-pipes-pipe-pipetargeteventbridgeeventbusparameters-resources)
+
+---
+
+##### `source`<sup>Optional</sup> <a name="source" id="aws-cdk-pipes-rfc.IEventBusTargetProps.property.source"></a>
+
+```typescript
+public readonly source: string;
+```
+
+- *Type:* string
+
+The source of the event.
+
+> [http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipetargeteventbridgeeventbusparameters.html#cfn-pipes-pipe-pipetargeteventbridgeeventbusparameters-source](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipetargeteventbridgeeventbusparameters.html#cfn-pipes-pipe-pipetargeteventbridgeeventbusparameters-source)
+
+---
+
+##### `time`<sup>Optional</sup> <a name="time" id="aws-cdk-pipes-rfc.IEventBusTargetProps.property.time"></a>
+
+```typescript
+public readonly time: string;
+```
+
+- *Type:* string
+
+The time stamp of the event, per [RFC3339](https://docs.aws.amazon.com/https://www.rfc-editor.org/rfc/rfc3339.txt) . If no time stamp is provided, the time stamp of the [PutEvents](https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutEvents.html) call is used.
+
+> [http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipetargeteventbridgeeventbusparameters.html#cfn-pipes-pipe-pipetargeteventbridgeeventbusparameters-time](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipetargeteventbridgeeventbusparameters.html#cfn-pipes-pipe-pipetargeteventbridgeeventbusparameters-time)
 
 ---
 
@@ -1797,6 +2516,58 @@ public readonly startingPositionTimestamp: string;
 `CfnPipe.PipeSourceKinesisStreamParametersProperty.StartingPositionTimestamp`.
 
 > [http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipesourcekinesisstreamparameters.html#cfn-pipes-pipe-pipesourcekinesisstreamparameters-startingpositiontimestamp](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipesourcekinesisstreamparameters.html#cfn-pipes-pipe-pipesourcekinesisstreamparameters-startingpositiontimestamp)
+
+---
+
+### IKinesisStreamTargetProps <a name="IKinesisStreamTargetProps" id="aws-cdk-pipes-rfc.IKinesisStreamTargetProps"></a>
+
+- *Implemented By:* <a href="#aws-cdk-pipes-rfc.IKinesisStreamTargetProps">IKinesisStreamTargetProps</a>
+
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-cdk-pipes-rfc.IKinesisStreamTargetProps.property.partitionKey">partitionKey</a></code> | <code>string</code> | Determines which shard in the stream the data record is assigned to. |
+
+---
+
+##### `partitionKey`<sup>Required</sup> <a name="partitionKey" id="aws-cdk-pipes-rfc.IKinesisStreamTargetProps.property.partitionKey"></a>
+
+```typescript
+public readonly partitionKey: string;
+```
+
+- *Type:* string
+
+Determines which shard in the stream the data record is assigned to.
+
+Partition keys are Unicode strings with a maximum length limit of 256 characters for each key. Amazon Kinesis Data Streams uses the partition key as input to a hash function that maps the partition key and associated data to a specific shard. Specifically, an MD5 hash function is used to map partition keys to 128-bit integer values and to map associated data records to shards. As a result of this hashing mechanism, all data records with the same partition key map to the same shard within the stream.
+
+> [http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipetargetkinesisstreamparameters.html#cfn-pipes-pipe-pipetargetkinesisstreamparameters-partitionkey](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipetargetkinesisstreamparameters.html#cfn-pipes-pipe-pipetargetkinesisstreamparameters-partitionkey)
+
+---
+
+### ILambdaTargetProps <a name="ILambdaTargetProps" id="aws-cdk-pipes-rfc.ILambdaTargetProps"></a>
+
+- *Implemented By:* <a href="#aws-cdk-pipes-rfc.ILambdaTargetProps">ILambdaTargetProps</a>
+
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-cdk-pipes-rfc.ILambdaTargetProps.property.invocationType">invocationType</a></code> | <code><a href="#aws-cdk-pipes-rfc.IInvocationType">IInvocationType</a></code> | *No description.* |
+
+---
+
+##### `invocationType`<sup>Optional</sup> <a name="invocationType" id="aws-cdk-pipes-rfc.ILambdaTargetProps.property.invocationType"></a>
+
+```typescript
+public readonly invocationType: IInvocationType;
+```
+
+- *Type:* <a href="#aws-cdk-pipes-rfc.IInvocationType">IInvocationType</a>
 
 ---
 
@@ -2529,7 +3300,7 @@ public readonly sqsQueueParameters: PipeSourceSqsQueueParametersProperty | IReso
 
 ### IPipeTarget <a name="IPipeTarget" id="aws-cdk-pipes-rfc.IPipeTarget"></a>
 
-- *Implemented By:* <a href="#aws-cdk-pipes-rfc.LogsTarget">LogsTarget</a>, <a href="#aws-cdk-pipes-rfc.SqsTarget">SqsTarget</a>, <a href="#aws-cdk-pipes-rfc.IPipeTarget">IPipeTarget</a>
+- *Implemented By:* <a href="#aws-cdk-pipes-rfc.ApiDestinationTarget">ApiDestinationTarget</a>, <a href="#aws-cdk-pipes-rfc.ApiGatewayTarget">ApiGatewayTarget</a>, <a href="#aws-cdk-pipes-rfc.EventBridgeEventBusTarget">EventBridgeEventBusTarget</a>, <a href="#aws-cdk-pipes-rfc.KinesisStreamTarget">KinesisStreamTarget</a>, <a href="#aws-cdk-pipes-rfc.LambdaTarget">LambdaTarget</a>, <a href="#aws-cdk-pipes-rfc.LogsTarget">LogsTarget</a>, <a href="#aws-cdk-pipes-rfc.SqsTarget">SqsTarget</a>, <a href="#aws-cdk-pipes-rfc.StepFunctionTarget">StepFunctionTarget</a>, <a href="#aws-cdk-pipes-rfc.IPipeTarget">IPipeTarget</a>
 
 #### Methods <a name="Methods" id="Methods"></a>
 
@@ -3027,6 +3798,29 @@ The maximum length of a time to wait for events.
 
 ---
 
+### IStepFunctionTargetProps <a name="IStepFunctionTargetProps" id="aws-cdk-pipes-rfc.IStepFunctionTargetProps"></a>
+
+- *Implemented By:* <a href="#aws-cdk-pipes-rfc.IStepFunctionTargetProps">IStepFunctionTargetProps</a>
+
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#aws-cdk-pipes-rfc.IStepFunctionTargetProps.property.invocationType">invocationType</a></code> | <code><a href="#aws-cdk-pipes-rfc.IInvocationType">IInvocationType</a></code> | *No description.* |
+
+---
+
+##### `invocationType`<sup>Required</sup> <a name="invocationType" id="aws-cdk-pipes-rfc.IStepFunctionTargetProps.property.invocationType"></a>
+
+```typescript
+public readonly invocationType: IInvocationType;
+```
+
+- *Type:* <a href="#aws-cdk-pipes-rfc.IInvocationType">IInvocationType</a>
+
+---
+
 ## Enums <a name="Enums" id="Enums"></a>
 
 ### DesiredState <a name="DesiredState" id="aws-cdk-pipes-rfc.DesiredState"></a>
@@ -3046,6 +3840,27 @@ The maximum length of a time to wait for events.
 
 
 ##### `STOPPED` <a name="STOPPED" id="aws-cdk-pipes-rfc.DesiredState.STOPPED"></a>
+
+---
+
+
+### IInvocationType <a name="IInvocationType" id="aws-cdk-pipes-rfc.IInvocationType"></a>
+
+#### Members <a name="Members" id="Members"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#aws-cdk-pipes-rfc.IInvocationType.FIRE_AND_FORGET">FIRE_AND_FORGET</a></code> | *No description.* |
+| <code><a href="#aws-cdk-pipes-rfc.IInvocationType.REQUEST_RESPONSE">REQUEST_RESPONSE</a></code> | *No description.* |
+
+---
+
+##### `FIRE_AND_FORGET` <a name="FIRE_AND_FORGET" id="aws-cdk-pipes-rfc.IInvocationType.FIRE_AND_FORGET"></a>
+
+---
+
+
+##### `REQUEST_RESPONSE` <a name="REQUEST_RESPONSE" id="aws-cdk-pipes-rfc.IInvocationType.REQUEST_RESPONSE"></a>
 
 ---
 

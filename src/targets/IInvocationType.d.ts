@@ -1,0 +1,5 @@
+
+export enum IInvocationType {
+  FIRE_AND_FORGET = 'FIRE_AND_FORGET',
+  REQUEST_RESPONSE = 'REQUEST_RESPONSE'
+}

@@ -6,16 +6,18 @@ const project = new awscdk.AwsCdkConstructLibrary({
   defaultReleaseBranch: 'main',
   name: 'aws-cdk-pipes-rfc',
   repositoryUrl: 'https://github.com/raphael.manke/aws-cdk-pipes-rfc.git',
-  releaseToNpm: false,
+  releaseToNpm: true,
   depsUpgrade: false,
   gitignore: [
     'cdk.out',
+    'cdk.context.json',
   ],
   tsconfigDev: {
     include: [
       'e2e/**/*.ts',
     ],
   },
+
   // eslintOptions: {
   //   dirs: [
   //     '.projenrc.js',
@@ -32,21 +34,28 @@ const project = new awscdk.AwsCdkConstructLibrary({
     'cdk:deploy:target:eventbus:kinesis-stream': "cdk deploy --app 'npx ts-node --prefer-ts-exts e2e/targets/EventBus/KinesisStreamEventBus.ts'",
   },
   deps: [
+  ], /* Runtime dependencies of this module. */
+  // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
+  devDeps: [
     '@jm18457/kafkajs-msk-iam-authentication-mechanism@2.0.3',
     'aws-sdk',
     'kafkajs',
 
-  ], /* Runtime dependencies of this module. */
-  // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
-  devDeps: [
     'aws-cdk',
     'esbuild',
   ], /* Build dependencies for this module. */
-  bundledDeps: [
-    '@jm18457/kafkajs-msk-iam-authentication-mechanism@2.0.3',
-    'aws-sdk',
-    'kafkajs',
-  ],
-  // packageName: undefined,  /* The "name" in package.json. */
+  // bundledDeps: [
+  //   '@jm18457/kafkajs-msk-iam-authentication-mechanism@2.0.3',
+  //   'aws-sdk',
+  //   'kafkajs',
+  // ],
+  packageName: '@raphaelmanke/aws-cdk-pipes-rfc', /* The "name" in package.json. */
+  npmAccess: 'public', /* The npm access level to use when releasing this module. */
+
+
 });
+project.addPackageIgnore('cdk.out');
+project.addPackageIgnore('e2e');
+project.addPackageIgnore('yarn-error.log');
+project.addPackageIgnore('cdk.context.json');
 project.synth();

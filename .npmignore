@@ -22,3 +22,7 @@ dist
 tsconfig.tsbuildinfo
 /.eslintrc.json
 !.jsii
+cdk.out
+e2e
+yarn-error.log
+cdk.context.json

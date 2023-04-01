@@ -29,3 +29,6 @@ fileignoreconfig:
     checksum: 6e5f3315b3042c6bcb782252be78b6172eb8c9aef52523c4365527dc69ec89aa  
   - filename: src/targets/ApiDestinationTarget.ts
     checksum: 0e92c424afd6b9517d03f71e3dee0e242a787cf74305f70e279b48597a8c9c7a   
+
+  - filename: src/enrichments/ApiGatewayEnrichment.ts
+    checksum: c2469859d983adc0074ef78b7c3517849d75ca0883f648d7d67f056d1a019d90

@@ -4,12 +4,16 @@ import { CfnPipe } from 'aws-cdk-lib/aws-pipes';
 import { IPipeEnrichment } from '../PipeEnrichment';
 import { IInputTransformation } from '../PipeInputTransformation';
 
+export interface ILambdaEnrichmentProps {
+  inputTransformation?: IInputTransformation;
+}
+
 export class LambdaEnrichment implements IPipeEnrichment {
   private lambda: IFunction;
   public readonly enrichmentArn: string;
   public readonly enrichmentParameters: CfnPipe.PipeEnrichmentParametersProperty;
 
-  constructor(lambda: IFunction, props?: { inputTransformation?: IInputTransformation }) {
+  constructor(lambda: IFunction, props?: ILambdaEnrichmentProps) {
     this.lambda = lambda;
     this.enrichmentArn = lambda.functionArn;
     this.enrichmentParameters = {

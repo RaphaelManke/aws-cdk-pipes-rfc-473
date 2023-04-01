@@ -477,6 +477,88 @@ public readonly sourceParameters: PipeSourceParametersProperty | IResolvable;
 ---
 
 
+### ApiDestinationEnrichment <a name="ApiDestinationEnrichment" id="@raphaelmanke/aws-cdk-pipes-rfc.ApiDestinationEnrichment"></a>
+
+- *Implements:* <a href="#@raphaelmanke/aws-cdk-pipes-rfc.IPipeEnrichment">IPipeEnrichment</a>
+
+#### Initializers <a name="Initializers" id="@raphaelmanke/aws-cdk-pipes-rfc.ApiDestinationEnrichment.Initializer"></a>
+
+```typescript
+import { ApiDestinationEnrichment } from '@raphaelmanke/aws-cdk-pipes-rfc'
+
+new ApiDestinationEnrichment(apiDestination: IApiDestination, props?: IApiDestinationEnrichmentParameters)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.ApiDestinationEnrichment.Initializer.parameter.apiDestination">apiDestination</a></code> | <code>aws-cdk-lib.aws_events.IApiDestination</code> | *No description.* |
+| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.ApiDestinationEnrichment.Initializer.parameter.props">props</a></code> | <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.IApiDestinationEnrichmentParameters">IApiDestinationEnrichmentParameters</a></code> | *No description.* |
+
+---
+
+##### `apiDestination`<sup>Required</sup> <a name="apiDestination" id="@raphaelmanke/aws-cdk-pipes-rfc.ApiDestinationEnrichment.Initializer.parameter.apiDestination"></a>
+
+- *Type:* aws-cdk-lib.aws_events.IApiDestination
+
+---
+
+##### `props`<sup>Optional</sup> <a name="props" id="@raphaelmanke/aws-cdk-pipes-rfc.ApiDestinationEnrichment.Initializer.parameter.props"></a>
+
+- *Type:* <a href="#@raphaelmanke/aws-cdk-pipes-rfc.IApiDestinationEnrichmentParameters">IApiDestinationEnrichmentParameters</a>
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.ApiDestinationEnrichment.grantInvoke">grantInvoke</a></code> | *No description.* |
+
+---
+
+##### `grantInvoke` <a name="grantInvoke" id="@raphaelmanke/aws-cdk-pipes-rfc.ApiDestinationEnrichment.grantInvoke"></a>
+
+```typescript
+public grantInvoke(grantee: IRole): void
+```
+
+###### `grantee`<sup>Required</sup> <a name="grantee" id="@raphaelmanke/aws-cdk-pipes-rfc.ApiDestinationEnrichment.grantInvoke.parameter.grantee"></a>
+
+- *Type:* aws-cdk-lib.aws_iam.IRole
+
+---
+
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.ApiDestinationEnrichment.property.enrichmentArn">enrichmentArn</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.ApiDestinationEnrichment.property.enrichmentParameters">enrichmentParameters</a></code> | <code>aws-cdk-lib.aws_pipes.CfnPipe.PipeEnrichmentParametersProperty</code> | *No description.* |
+
+---
+
+##### `enrichmentArn`<sup>Required</sup> <a name="enrichmentArn" id="@raphaelmanke/aws-cdk-pipes-rfc.ApiDestinationEnrichment.property.enrichmentArn"></a>
+
+```typescript
+public readonly enrichmentArn: string;
+```
+
+- *Type:* string
+
+---
+
+##### `enrichmentParameters`<sup>Required</sup> <a name="enrichmentParameters" id="@raphaelmanke/aws-cdk-pipes-rfc.ApiDestinationEnrichment.property.enrichmentParameters"></a>
+
+```typescript
+public readonly enrichmentParameters: PipeEnrichmentParametersProperty;
+```
+
+- *Type:* aws-cdk-lib.aws_pipes.CfnPipe.PipeEnrichmentParametersProperty
+
+---
+
+
 ### ApiDestinationTarget <a name="ApiDestinationTarget" id="@raphaelmanke/aws-cdk-pipes-rfc.ApiDestinationTarget"></a>
 
 - *Implements:* <a href="#@raphaelmanke/aws-cdk-pipes-rfc.IPipeTarget">IPipeTarget</a>
@@ -555,6 +637,88 @@ public readonly targetParameters: PipeTargetParametersProperty;
 ```
 
 - *Type:* aws-cdk-lib.aws_pipes.CfnPipe.PipeTargetParametersProperty
+
+---
+
+
+### ApiGatewayEnrichment <a name="ApiGatewayEnrichment" id="@raphaelmanke/aws-cdk-pipes-rfc.ApiGatewayEnrichment"></a>
+
+- *Implements:* <a href="#@raphaelmanke/aws-cdk-pipes-rfc.IPipeEnrichment">IPipeEnrichment</a>
+
+#### Initializers <a name="Initializers" id="@raphaelmanke/aws-cdk-pipes-rfc.ApiGatewayEnrichment.Initializer"></a>
+
+```typescript
+import { ApiGatewayEnrichment } from '@raphaelmanke/aws-cdk-pipes-rfc'
+
+new ApiGatewayEnrichment(api: IRestApi, props: IApiGatewayEnrichmentProps)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.ApiGatewayEnrichment.Initializer.parameter.api">api</a></code> | <code>aws-cdk-lib.aws_apigateway.IRestApi</code> | *No description.* |
+| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.ApiGatewayEnrichment.Initializer.parameter.props">props</a></code> | <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.IApiGatewayEnrichmentProps">IApiGatewayEnrichmentProps</a></code> | *No description.* |
+
+---
+
+##### `api`<sup>Required</sup> <a name="api" id="@raphaelmanke/aws-cdk-pipes-rfc.ApiGatewayEnrichment.Initializer.parameter.api"></a>
+
+- *Type:* aws-cdk-lib.aws_apigateway.IRestApi
+
+---
+
+##### `props`<sup>Required</sup> <a name="props" id="@raphaelmanke/aws-cdk-pipes-rfc.ApiGatewayEnrichment.Initializer.parameter.props"></a>
+
+- *Type:* <a href="#@raphaelmanke/aws-cdk-pipes-rfc.IApiGatewayEnrichmentProps">IApiGatewayEnrichmentProps</a>
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.ApiGatewayEnrichment.grantInvoke">grantInvoke</a></code> | *No description.* |
+
+---
+
+##### `grantInvoke` <a name="grantInvoke" id="@raphaelmanke/aws-cdk-pipes-rfc.ApiGatewayEnrichment.grantInvoke"></a>
+
+```typescript
+public grantInvoke(grantee: IRole): void
+```
+
+###### `grantee`<sup>Required</sup> <a name="grantee" id="@raphaelmanke/aws-cdk-pipes-rfc.ApiGatewayEnrichment.grantInvoke.parameter.grantee"></a>
+
+- *Type:* aws-cdk-lib.aws_iam.IRole
+
+---
+
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.ApiGatewayEnrichment.property.enrichmentArn">enrichmentArn</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.ApiGatewayEnrichment.property.enrichmentParameters">enrichmentParameters</a></code> | <code>aws-cdk-lib.aws_pipes.CfnPipe.PipeEnrichmentParametersProperty</code> | *No description.* |
+
+---
+
+##### `enrichmentArn`<sup>Required</sup> <a name="enrichmentArn" id="@raphaelmanke/aws-cdk-pipes-rfc.ApiGatewayEnrichment.property.enrichmentArn"></a>
+
+```typescript
+public readonly enrichmentArn: string;
+```
+
+- *Type:* string
+
+---
+
+##### `enrichmentParameters`<sup>Required</sup> <a name="enrichmentParameters" id="@raphaelmanke/aws-cdk-pipes-rfc.ApiGatewayEnrichment.property.enrichmentParameters"></a>
+
+```typescript
+public readonly enrichmentParameters: PipeEnrichmentParametersProperty;
+```
+
+- *Type:* aws-cdk-lib.aws_pipes.CfnPipe.PipeEnrichmentParametersProperty
 
 ---
 
@@ -965,6 +1129,88 @@ public readonly targetParameters: PipeTargetParametersProperty;
 ```
 
 - *Type:* aws-cdk-lib.aws_pipes.CfnPipe.PipeTargetParametersProperty
+
+---
+
+
+### LambdaEnrichment <a name="LambdaEnrichment" id="@raphaelmanke/aws-cdk-pipes-rfc.LambdaEnrichment"></a>
+
+- *Implements:* <a href="#@raphaelmanke/aws-cdk-pipes-rfc.IPipeEnrichment">IPipeEnrichment</a>
+
+#### Initializers <a name="Initializers" id="@raphaelmanke/aws-cdk-pipes-rfc.LambdaEnrichment.Initializer"></a>
+
+```typescript
+import { LambdaEnrichment } from '@raphaelmanke/aws-cdk-pipes-rfc'
+
+new LambdaEnrichment(lambda: IFunction, props?: ILambdaEnrichmentProps)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.LambdaEnrichment.Initializer.parameter.lambda">lambda</a></code> | <code>aws-cdk-lib.aws_lambda.IFunction</code> | *No description.* |
+| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.LambdaEnrichment.Initializer.parameter.props">props</a></code> | <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.ILambdaEnrichmentProps">ILambdaEnrichmentProps</a></code> | *No description.* |
+
+---
+
+##### `lambda`<sup>Required</sup> <a name="lambda" id="@raphaelmanke/aws-cdk-pipes-rfc.LambdaEnrichment.Initializer.parameter.lambda"></a>
+
+- *Type:* aws-cdk-lib.aws_lambda.IFunction
+
+---
+
+##### `props`<sup>Optional</sup> <a name="props" id="@raphaelmanke/aws-cdk-pipes-rfc.LambdaEnrichment.Initializer.parameter.props"></a>
+
+- *Type:* <a href="#@raphaelmanke/aws-cdk-pipes-rfc.ILambdaEnrichmentProps">ILambdaEnrichmentProps</a>
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.LambdaEnrichment.grantInvoke">grantInvoke</a></code> | *No description.* |
+
+---
+
+##### `grantInvoke` <a name="grantInvoke" id="@raphaelmanke/aws-cdk-pipes-rfc.LambdaEnrichment.grantInvoke"></a>
+
+```typescript
+public grantInvoke(grantee: IRole): void
+```
+
+###### `grantee`<sup>Required</sup> <a name="grantee" id="@raphaelmanke/aws-cdk-pipes-rfc.LambdaEnrichment.grantInvoke.parameter.grantee"></a>
+
+- *Type:* aws-cdk-lib.aws_iam.IRole
+
+---
+
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.LambdaEnrichment.property.enrichmentArn">enrichmentArn</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.LambdaEnrichment.property.enrichmentParameters">enrichmentParameters</a></code> | <code>aws-cdk-lib.aws_pipes.CfnPipe.PipeEnrichmentParametersProperty</code> | *No description.* |
+
+---
+
+##### `enrichmentArn`<sup>Required</sup> <a name="enrichmentArn" id="@raphaelmanke/aws-cdk-pipes-rfc.LambdaEnrichment.property.enrichmentArn"></a>
+
+```typescript
+public readonly enrichmentArn: string;
+```
+
+- *Type:* string
+
+---
+
+##### `enrichmentParameters`<sup>Required</sup> <a name="enrichmentParameters" id="@raphaelmanke/aws-cdk-pipes-rfc.LambdaEnrichment.property.enrichmentParameters"></a>
+
+```typescript
+public readonly enrichmentParameters: PipeEnrichmentParametersProperty;
+```
+
+- *Type:* aws-cdk-lib.aws_pipes.CfnPipe.PipeEnrichmentParametersProperty
 
 ---
 
@@ -1840,6 +2086,88 @@ public readonly targetParameters: PipeTargetParametersProperty;
 ---
 
 
+### StepFunctionEnrichment <a name="StepFunctionEnrichment" id="@raphaelmanke/aws-cdk-pipes-rfc.StepFunctionEnrichment"></a>
+
+- *Implements:* <a href="#@raphaelmanke/aws-cdk-pipes-rfc.IPipeEnrichment">IPipeEnrichment</a>
+
+#### Initializers <a name="Initializers" id="@raphaelmanke/aws-cdk-pipes-rfc.StepFunctionEnrichment.Initializer"></a>
+
+```typescript
+import { StepFunctionEnrichment } from '@raphaelmanke/aws-cdk-pipes-rfc'
+
+new StepFunctionEnrichment(stepFunction: IStateMachine, props?: IStepFunctionEnrichmentProps)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.StepFunctionEnrichment.Initializer.parameter.stepFunction">stepFunction</a></code> | <code>aws-cdk-lib.aws_stepfunctions.IStateMachine</code> | *No description.* |
+| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.StepFunctionEnrichment.Initializer.parameter.props">props</a></code> | <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.IStepFunctionEnrichmentProps">IStepFunctionEnrichmentProps</a></code> | *No description.* |
+
+---
+
+##### `stepFunction`<sup>Required</sup> <a name="stepFunction" id="@raphaelmanke/aws-cdk-pipes-rfc.StepFunctionEnrichment.Initializer.parameter.stepFunction"></a>
+
+- *Type:* aws-cdk-lib.aws_stepfunctions.IStateMachine
+
+---
+
+##### `props`<sup>Optional</sup> <a name="props" id="@raphaelmanke/aws-cdk-pipes-rfc.StepFunctionEnrichment.Initializer.parameter.props"></a>
+
+- *Type:* <a href="#@raphaelmanke/aws-cdk-pipes-rfc.IStepFunctionEnrichmentProps">IStepFunctionEnrichmentProps</a>
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.StepFunctionEnrichment.grantInvoke">grantInvoke</a></code> | *No description.* |
+
+---
+
+##### `grantInvoke` <a name="grantInvoke" id="@raphaelmanke/aws-cdk-pipes-rfc.StepFunctionEnrichment.grantInvoke"></a>
+
+```typescript
+public grantInvoke(grantee: IRole): void
+```
+
+###### `grantee`<sup>Required</sup> <a name="grantee" id="@raphaelmanke/aws-cdk-pipes-rfc.StepFunctionEnrichment.grantInvoke.parameter.grantee"></a>
+
+- *Type:* aws-cdk-lib.aws_iam.IRole
+
+---
+
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.StepFunctionEnrichment.property.enrichmentArn">enrichmentArn</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.StepFunctionEnrichment.property.enrichmentParameters">enrichmentParameters</a></code> | <code>aws-cdk-lib.aws_pipes.CfnPipe.PipeEnrichmentParametersProperty</code> | *No description.* |
+
+---
+
+##### `enrichmentArn`<sup>Required</sup> <a name="enrichmentArn" id="@raphaelmanke/aws-cdk-pipes-rfc.StepFunctionEnrichment.property.enrichmentArn"></a>
+
+```typescript
+public readonly enrichmentArn: string;
+```
+
+- *Type:* string
+
+---
+
+##### `enrichmentParameters`<sup>Required</sup> <a name="enrichmentParameters" id="@raphaelmanke/aws-cdk-pipes-rfc.StepFunctionEnrichment.property.enrichmentParameters"></a>
+
+```typescript
+public readonly enrichmentParameters: PipeEnrichmentParametersProperty;
+```
+
+- *Type:* aws-cdk-lib.aws_pipes.CfnPipe.PipeEnrichmentParametersProperty
+
+---
+
+
 ### StepFunctionTarget <a name="StepFunctionTarget" id="@raphaelmanke/aws-cdk-pipes-rfc.StepFunctionTarget"></a>
 
 - *Implements:* <a href="#@raphaelmanke/aws-cdk-pipes-rfc.IPipeTarget">IPipeTarget</a>
@@ -1994,6 +2322,80 @@ public readonly queueName: string;
 
 ---
 
+### IApiDestinationEnrichmentParameters <a name="IApiDestinationEnrichmentParameters" id="@raphaelmanke/aws-cdk-pipes-rfc.IApiDestinationEnrichmentParameters"></a>
+
+- *Implemented By:* <a href="#@raphaelmanke/aws-cdk-pipes-rfc.IApiDestinationEnrichmentParameters">IApiDestinationEnrichmentParameters</a>
+
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.IApiDestinationEnrichmentParameters.property.headerParameters">headerParameters</a></code> | <code>{[ key: string ]: string} \| aws-cdk-lib.IResolvable</code> | The headers that need to be sent as part of request invoking the API Gateway REST API or EventBridge ApiDestination. |
+| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.IApiDestinationEnrichmentParameters.property.pathParameterValues">pathParameterValues</a></code> | <code>string[]</code> | The path parameter values to be used to populate API Gateway REST API or EventBridge ApiDestination path wildcards ("*"). |
+| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.IApiDestinationEnrichmentParameters.property.queryStringParameters">queryStringParameters</a></code> | <code>aws-cdk-lib.IResolvable \| {[ key: string ]: string}</code> | The query string keys/values that need to be sent as part of request invoking the API Gateway REST API or EventBridge ApiDestination. |
+| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.IApiDestinationEnrichmentParameters.property.inputTransformation">inputTransformation</a></code> | <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.IInputTransformation">IInputTransformation</a></code> | *No description.* |
+
+---
+
+##### `headerParameters`<sup>Optional</sup> <a name="headerParameters" id="@raphaelmanke/aws-cdk-pipes-rfc.IApiDestinationEnrichmentParameters.property.headerParameters"></a>
+
+```typescript
+public readonly headerParameters: {[ key: string ]: string} | IResolvable;
+```
+
+- *Type:* {[ key: string ]: string} | aws-cdk-lib.IResolvable
+
+The headers that need to be sent as part of request invoking the API Gateway REST API or EventBridge ApiDestination.
+
+The headers that need to be sent as part of request invoking the API Gateway REST API or EventBridge ApiDestination.
+
+> [http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipeenrichmenthttpparameters.html#cfn-pipes-pipe-pipeenrichmenthttpparameters-headerparameters](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipeenrichmenthttpparameters.html#cfn-pipes-pipe-pipeenrichmenthttpparameters-headerparameters)
+
+---
+
+##### `pathParameterValues`<sup>Optional</sup> <a name="pathParameterValues" id="@raphaelmanke/aws-cdk-pipes-rfc.IApiDestinationEnrichmentParameters.property.pathParameterValues"></a>
+
+```typescript
+public readonly pathParameterValues: string[];
+```
+
+- *Type:* string[]
+
+The path parameter values to be used to populate API Gateway REST API or EventBridge ApiDestination path wildcards ("*").
+
+The path parameter values to be used to populate API Gateway REST API or EventBridge ApiDestination path wildcards ("*").
+
+> [http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipeenrichmenthttpparameters.html#cfn-pipes-pipe-pipeenrichmenthttpparameters-pathparametervalues](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipeenrichmenthttpparameters.html#cfn-pipes-pipe-pipeenrichmenthttpparameters-pathparametervalues)
+
+---
+
+##### `queryStringParameters`<sup>Optional</sup> <a name="queryStringParameters" id="@raphaelmanke/aws-cdk-pipes-rfc.IApiDestinationEnrichmentParameters.property.queryStringParameters"></a>
+
+```typescript
+public readonly queryStringParameters: IResolvable | {[ key: string ]: string};
+```
+
+- *Type:* aws-cdk-lib.IResolvable | {[ key: string ]: string}
+
+The query string keys/values that need to be sent as part of request invoking the API Gateway REST API or EventBridge ApiDestination.
+
+The query string keys/values that need to be sent as part of request invoking the API Gateway REST API or EventBridge ApiDestination.
+
+> [http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipeenrichmenthttpparameters.html#cfn-pipes-pipe-pipeenrichmenthttpparameters-querystringparameters](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipeenrichmenthttpparameters.html#cfn-pipes-pipe-pipeenrichmenthttpparameters-querystringparameters)
+
+---
+
+##### `inputTransformation`<sup>Optional</sup> <a name="inputTransformation" id="@raphaelmanke/aws-cdk-pipes-rfc.IApiDestinationEnrichmentParameters.property.inputTransformation"></a>
+
+```typescript
+public readonly inputTransformation: IInputTransformation;
+```
+
+- *Type:* <a href="#@raphaelmanke/aws-cdk-pipes-rfc.IInputTransformation">IInputTransformation</a>
+
+---
+
 ### IApiDestinationTargetProps <a name="IApiDestinationTargetProps" id="@raphaelmanke/aws-cdk-pipes-rfc.IApiDestinationTargetProps"></a>
 
 - *Implemented By:* <a href="#@raphaelmanke/aws-cdk-pipes-rfc.IApiDestinationTargetProps">IApiDestinationTargetProps</a>
@@ -2048,6 +2450,96 @@ public readonly queryStringParameters: IResolvable | {[ key: string ]: string};
 The query string keys/values that need to be sent as part of request invoking the API Gateway REST API or EventBridge ApiDestination.
 
 > [http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipetargethttpparameters.html#cfn-pipes-pipe-pipetargethttpparameters-querystringparameters](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipetargethttpparameters.html#cfn-pipes-pipe-pipetargethttpparameters-querystringparameters)
+
+---
+
+### IApiGatewayEnrichmentProps <a name="IApiGatewayEnrichmentProps" id="@raphaelmanke/aws-cdk-pipes-rfc.IApiGatewayEnrichmentProps"></a>
+
+- *Implemented By:* <a href="#@raphaelmanke/aws-cdk-pipes-rfc.IApiGatewayEnrichmentProps">IApiGatewayEnrichmentProps</a>
+
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.IApiGatewayEnrichmentProps.property.headerParameters">headerParameters</a></code> | <code>aws-cdk-lib.IResolvable \| {[ key: string ]: string}</code> | The headers that need to be sent as part of request invoking the API Gateway REST API or EventBridge ApiDestination. |
+| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.IApiGatewayEnrichmentProps.property.pathParameterValues">pathParameterValues</a></code> | <code>string[]</code> | The path parameter values to be used to populate API Gateway REST API or EventBridge ApiDestination path wildcards ("*"). |
+| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.IApiGatewayEnrichmentProps.property.queryStringParameters">queryStringParameters</a></code> | <code>aws-cdk-lib.IResolvable \| {[ key: string ]: string}</code> | The query string keys/values that need to be sent as part of request invoking the API Gateway REST API or EventBridge ApiDestination. |
+| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.IApiGatewayEnrichmentProps.property.method">method</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.IApiGatewayEnrichmentProps.property.resource">resource</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.IApiGatewayEnrichmentProps.property.inputTransformation">inputTransformation</a></code> | <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.IInputTransformation">IInputTransformation</a></code> | *No description.* |
+
+---
+
+##### `headerParameters`<sup>Optional</sup> <a name="headerParameters" id="@raphaelmanke/aws-cdk-pipes-rfc.IApiGatewayEnrichmentProps.property.headerParameters"></a>
+
+```typescript
+public readonly headerParameters: IResolvable | {[ key: string ]: string};
+```
+
+- *Type:* aws-cdk-lib.IResolvable | {[ key: string ]: string}
+
+The headers that need to be sent as part of request invoking the API Gateway REST API or EventBridge ApiDestination.
+
+> [http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipeenrichmenthttpparameters.html#cfn-pipes-pipe-pipeenrichmenthttpparameters-headerparameters](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipeenrichmenthttpparameters.html#cfn-pipes-pipe-pipeenrichmenthttpparameters-headerparameters)
+
+---
+
+##### `pathParameterValues`<sup>Optional</sup> <a name="pathParameterValues" id="@raphaelmanke/aws-cdk-pipes-rfc.IApiGatewayEnrichmentProps.property.pathParameterValues"></a>
+
+```typescript
+public readonly pathParameterValues: string[];
+```
+
+- *Type:* string[]
+
+The path parameter values to be used to populate API Gateway REST API or EventBridge ApiDestination path wildcards ("*").
+
+> [http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipeenrichmenthttpparameters.html#cfn-pipes-pipe-pipeenrichmenthttpparameters-pathparametervalues](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipeenrichmenthttpparameters.html#cfn-pipes-pipe-pipeenrichmenthttpparameters-pathparametervalues)
+
+---
+
+##### `queryStringParameters`<sup>Optional</sup> <a name="queryStringParameters" id="@raphaelmanke/aws-cdk-pipes-rfc.IApiGatewayEnrichmentProps.property.queryStringParameters"></a>
+
+```typescript
+public readonly queryStringParameters: IResolvable | {[ key: string ]: string};
+```
+
+- *Type:* aws-cdk-lib.IResolvable | {[ key: string ]: string}
+
+The query string keys/values that need to be sent as part of request invoking the API Gateway REST API or EventBridge ApiDestination.
+
+> [http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipeenrichmenthttpparameters.html#cfn-pipes-pipe-pipeenrichmenthttpparameters-querystringparameters](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipeenrichmenthttpparameters.html#cfn-pipes-pipe-pipeenrichmenthttpparameters-querystringparameters)
+
+---
+
+##### `method`<sup>Required</sup> <a name="method" id="@raphaelmanke/aws-cdk-pipes-rfc.IApiGatewayEnrichmentProps.property.method"></a>
+
+```typescript
+public readonly method: string;
+```
+
+- *Type:* string
+
+---
+
+##### `resource`<sup>Required</sup> <a name="resource" id="@raphaelmanke/aws-cdk-pipes-rfc.IApiGatewayEnrichmentProps.property.resource"></a>
+
+```typescript
+public readonly resource: string;
+```
+
+- *Type:* string
+
+---
+
+##### `inputTransformation`<sup>Optional</sup> <a name="inputTransformation" id="@raphaelmanke/aws-cdk-pipes-rfc.IApiGatewayEnrichmentProps.property.inputTransformation"></a>
+
+```typescript
+public readonly inputTransformation: IInputTransformation;
+```
+
+- *Type:* <a href="#@raphaelmanke/aws-cdk-pipes-rfc.IInputTransformation">IInputTransformation</a>
 
 ---
 
@@ -2548,6 +3040,29 @@ Partition keys are Unicode strings with a maximum length limit of 256 characters
 
 ---
 
+### ILambdaEnrichmentProps <a name="ILambdaEnrichmentProps" id="@raphaelmanke/aws-cdk-pipes-rfc.ILambdaEnrichmentProps"></a>
+
+- *Implemented By:* <a href="#@raphaelmanke/aws-cdk-pipes-rfc.ILambdaEnrichmentProps">ILambdaEnrichmentProps</a>
+
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.ILambdaEnrichmentProps.property.inputTransformation">inputTransformation</a></code> | <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.IInputTransformation">IInputTransformation</a></code> | *No description.* |
+
+---
+
+##### `inputTransformation`<sup>Optional</sup> <a name="inputTransformation" id="@raphaelmanke/aws-cdk-pipes-rfc.ILambdaEnrichmentProps.property.inputTransformation"></a>
+
+```typescript
+public readonly inputTransformation: IInputTransformation;
+```
+
+- *Type:* <a href="#@raphaelmanke/aws-cdk-pipes-rfc.IInputTransformation">IInputTransformation</a>
+
+---
+
 ### ILambdaTargetProps <a name="ILambdaTargetProps" id="@raphaelmanke/aws-cdk-pipes-rfc.ILambdaTargetProps"></a>
 
 - *Implemented By:* <a href="#@raphaelmanke/aws-cdk-pipes-rfc.ILambdaTargetProps">ILambdaTargetProps</a>
@@ -2853,7 +3368,7 @@ The role used by the pipe.
 
 ### IPipeEnrichment <a name="IPipeEnrichment" id="@raphaelmanke/aws-cdk-pipes-rfc.IPipeEnrichment"></a>
 
-- *Implemented By:* <a href="#@raphaelmanke/aws-cdk-pipes-rfc.PipeEnrichment">PipeEnrichment</a>, <a href="#@raphaelmanke/aws-cdk-pipes-rfc.IPipeEnrichment">IPipeEnrichment</a>
+- *Implemented By:* <a href="#@raphaelmanke/aws-cdk-pipes-rfc.ApiDestinationEnrichment">ApiDestinationEnrichment</a>, <a href="#@raphaelmanke/aws-cdk-pipes-rfc.ApiGatewayEnrichment">ApiGatewayEnrichment</a>, <a href="#@raphaelmanke/aws-cdk-pipes-rfc.LambdaEnrichment">LambdaEnrichment</a>, <a href="#@raphaelmanke/aws-cdk-pipes-rfc.PipeEnrichment">PipeEnrichment</a>, <a href="#@raphaelmanke/aws-cdk-pipes-rfc.StepFunctionEnrichment">StepFunctionEnrichment</a>, <a href="#@raphaelmanke/aws-cdk-pipes-rfc.IPipeEnrichment">IPipeEnrichment</a>
 
 #### Methods <a name="Methods" id="Methods"></a>
 
@@ -3795,6 +4310,29 @@ public readonly maximumBatchingWindowInSeconds: number;
 - *Type:* number
 
 The maximum length of a time to wait for events.
+
+---
+
+### IStepFunctionEnrichmentProps <a name="IStepFunctionEnrichmentProps" id="@raphaelmanke/aws-cdk-pipes-rfc.IStepFunctionEnrichmentProps"></a>
+
+- *Implemented By:* <a href="#@raphaelmanke/aws-cdk-pipes-rfc.IStepFunctionEnrichmentProps">IStepFunctionEnrichmentProps</a>
+
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.IStepFunctionEnrichmentProps.property.inputTransformation">inputTransformation</a></code> | <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.IInputTransformation">IInputTransformation</a></code> | *No description.* |
+
+---
+
+##### `inputTransformation`<sup>Optional</sup> <a name="inputTransformation" id="@raphaelmanke/aws-cdk-pipes-rfc.IStepFunctionEnrichmentProps.property.inputTransformation"></a>
+
+```typescript
+public readonly inputTransformation: IInputTransformation;
+```
+
+- *Type:* <a href="#@raphaelmanke/aws-cdk-pipes-rfc.IInputTransformation">IInputTransformation</a>
 
 ---
 

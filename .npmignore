@@ -27,3 +27,8 @@ yarn-error.log
 cdk.context.json
 .talismanrc
 .jsii
+
+
+# Include .jsii and .jsii.gz
+!.jsii
+!.jsii.gz

@@ -2,16 +2,16 @@ import { IRole } from 'aws-cdk-lib/aws-iam';
 import { CfnPipe } from 'aws-cdk-lib/aws-pipes';
 
 export interface IPipeEnrichment {
-  enrichmentArn: string;
-  enrichmentParameters: CfnPipe.PipeEnrichmentParametersProperty;
+  readonly enrichmentArn: string;
+  readonly enrichmentParameters: CfnPipe.PipeEnrichmentParametersProperty;
 
   grantInvoke(grantee: IRole): void;
 }
 
 
 export abstract class PipeEnrichment implements IPipeEnrichment {
-  public enrichmentArn: string;
-  public enrichmentParameters: CfnPipe.PipeEnrichmentParametersProperty;
+  public readonly enrichmentArn: string;
+  public readonly enrichmentParameters: CfnPipe.PipeEnrichmentParametersProperty;
 
   constructor(
     enrichmentArn: string,

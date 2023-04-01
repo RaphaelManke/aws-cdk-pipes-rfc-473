@@ -1,3 +1,4 @@
+export * from './enrichments';
 export * from './Pipe';
 export * from './PipeEnrichment';
 export * from './PipeInputTransformation';

@@ -3,7 +3,7 @@ scopeconfig:
 
 fileignoreconfig:
   - filename: API.md
-    checksum: b5c255bdb2df20f997a4bd0ea8efec8f9d38975b02358f7c826b804f67a3ade1
+    checksum: 344f1e758aadd2fc66a98bf3b0072779b1eb5d7c5080985269e0c8e20ea6433f
   - filename: README.md
     checksum: 3ad06860bbaaa3b41e9e3dfe665ede1564446fa7052a4ed7fdf609af7ce5bcc1
 

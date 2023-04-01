@@ -3,6 +3,16 @@
 ![](https://img.shields.io/npm/v/@raphaelmanke/aws-cdk-pipes-rfc?style=for-the-badge)
 ![](https://img.shields.io/github/license/raphaelmanke/aws-cdk-pipes-rfc-473?style=for-the-badge)
 ![cdk-constructs: Experimental](https://img.shields.io/badge/cdk--constructs-experimental(RFC)-important.svg?style=for-the-badge)
+## Installation
+**NPM**
+```bash
+npm install @raphaelmanke/aws-cdk-pipes-rfc --save-dev
+```
+
+**Yarn**
+```bash
+yarn add -D @raphaelmanke/aws-cdk-pipes-rfc
+```
 
 ## Readme
 

@@ -18,13 +18,6 @@ const project = new awscdk.AwsCdkConstructLibrary({
     ],
   },
 
-  // eslintOptions: {
-  //   dirs: [
-  //     '.projenrc.js',
-  //     'src/**/*.ts',
-  //     'test/**/*.ts',
-  //   ],
-  // },
   scripts: {
     'cdk:deploy:source:sqs': "cdk deploy --app 'npx ts-node --prefer-ts-exts e2e/sources/Sqs.ts'",
     'cdk:deploy:source:dynamodb': "cdk deploy --app 'npx ts-node --prefer-ts-exts e2e/sources/DynamoDbStream.ts'",
@@ -59,5 +52,4 @@ project.addPackageIgnore('e2e');
 project.addPackageIgnore('yarn-error.log');
 project.addPackageIgnore('cdk.context.json');
 project.addPackageIgnore('.talismanrc');
-project.addPackageIgnore('.jsii');
 project.synth();

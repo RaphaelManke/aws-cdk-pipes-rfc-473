@@ -21,14 +21,9 @@ dist
 /.projenrc.js
 tsconfig.tsbuildinfo
 /.eslintrc.json
+!.jsii
 cdk.out
 e2e
 yarn-error.log
 cdk.context.json
 .talismanrc
-.jsii
-
-
-# Include .jsii and .jsii.gz
-!.jsii
-!.jsii.gz

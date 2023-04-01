@@ -1922,6 +1922,81 @@ public readonly sourceParameters: PipeSourceParametersProperty | IResolvable;
 ---
 
 
+### SnsTarget <a name="SnsTarget" id="@raphaelmanke/aws-cdk-pipes-rfc.SnsTarget"></a>
+
+- *Implements:* <a href="#@raphaelmanke/aws-cdk-pipes-rfc.IPipeTarget">IPipeTarget</a>
+
+#### Initializers <a name="Initializers" id="@raphaelmanke/aws-cdk-pipes-rfc.SnsTarget.Initializer"></a>
+
+```typescript
+import { SnsTarget } from '@raphaelmanke/aws-cdk-pipes-rfc'
+
+new SnsTarget(topic: ITopic)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.SnsTarget.Initializer.parameter.topic">topic</a></code> | <code>aws-cdk-lib.aws_sns.ITopic</code> | *No description.* |
+
+---
+
+##### `topic`<sup>Required</sup> <a name="topic" id="@raphaelmanke/aws-cdk-pipes-rfc.SnsTarget.Initializer.parameter.topic"></a>
+
+- *Type:* aws-cdk-lib.aws_sns.ITopic
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.SnsTarget.grantPush">grantPush</a></code> | *No description.* |
+
+---
+
+##### `grantPush` <a name="grantPush" id="@raphaelmanke/aws-cdk-pipes-rfc.SnsTarget.grantPush"></a>
+
+```typescript
+public grantPush(grantee: IRole): void
+```
+
+###### `grantee`<sup>Required</sup> <a name="grantee" id="@raphaelmanke/aws-cdk-pipes-rfc.SnsTarget.grantPush.parameter.grantee"></a>
+
+- *Type:* aws-cdk-lib.aws_iam.IRole
+
+---
+
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.SnsTarget.property.targetArn">targetArn</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.SnsTarget.property.targetParameters">targetParameters</a></code> | <code>aws-cdk-lib.aws_pipes.CfnPipe.PipeTargetParametersProperty</code> | *No description.* |
+
+---
+
+##### `targetArn`<sup>Required</sup> <a name="targetArn" id="@raphaelmanke/aws-cdk-pipes-rfc.SnsTarget.property.targetArn"></a>
+
+```typescript
+public readonly targetArn: string;
+```
+
+- *Type:* string
+
+---
+
+##### `targetParameters`<sup>Required</sup> <a name="targetParameters" id="@raphaelmanke/aws-cdk-pipes-rfc.SnsTarget.property.targetParameters"></a>
+
+```typescript
+public readonly targetParameters: PipeTargetParametersProperty;
+```
+
+- *Type:* aws-cdk-lib.aws_pipes.CfnPipe.PipeTargetParametersProperty
+
+---
+
+
 ### SqsSource <a name="SqsSource" id="@raphaelmanke/aws-cdk-pipes-rfc.SqsSource"></a>
 
 - *Implements:* <a href="#@raphaelmanke/aws-cdk-pipes-rfc.IPipeSource">IPipeSource</a>
@@ -3815,7 +3890,7 @@ public readonly sqsQueueParameters: PipeSourceSqsQueueParametersProperty | IReso
 
 ### IPipeTarget <a name="IPipeTarget" id="@raphaelmanke/aws-cdk-pipes-rfc.IPipeTarget"></a>
 
-- *Implemented By:* <a href="#@raphaelmanke/aws-cdk-pipes-rfc.ApiDestinationTarget">ApiDestinationTarget</a>, <a href="#@raphaelmanke/aws-cdk-pipes-rfc.ApiGatewayTarget">ApiGatewayTarget</a>, <a href="#@raphaelmanke/aws-cdk-pipes-rfc.EventBridgeEventBusTarget">EventBridgeEventBusTarget</a>, <a href="#@raphaelmanke/aws-cdk-pipes-rfc.KinesisStreamTarget">KinesisStreamTarget</a>, <a href="#@raphaelmanke/aws-cdk-pipes-rfc.LambdaTarget">LambdaTarget</a>, <a href="#@raphaelmanke/aws-cdk-pipes-rfc.LogsTarget">LogsTarget</a>, <a href="#@raphaelmanke/aws-cdk-pipes-rfc.SqsTarget">SqsTarget</a>, <a href="#@raphaelmanke/aws-cdk-pipes-rfc.StepFunctionTarget">StepFunctionTarget</a>, <a href="#@raphaelmanke/aws-cdk-pipes-rfc.IPipeTarget">IPipeTarget</a>
+- *Implemented By:* <a href="#@raphaelmanke/aws-cdk-pipes-rfc.ApiDestinationTarget">ApiDestinationTarget</a>, <a href="#@raphaelmanke/aws-cdk-pipes-rfc.ApiGatewayTarget">ApiGatewayTarget</a>, <a href="#@raphaelmanke/aws-cdk-pipes-rfc.EventBridgeEventBusTarget">EventBridgeEventBusTarget</a>, <a href="#@raphaelmanke/aws-cdk-pipes-rfc.KinesisStreamTarget">KinesisStreamTarget</a>, <a href="#@raphaelmanke/aws-cdk-pipes-rfc.LambdaTarget">LambdaTarget</a>, <a href="#@raphaelmanke/aws-cdk-pipes-rfc.LogsTarget">LogsTarget</a>, <a href="#@raphaelmanke/aws-cdk-pipes-rfc.SnsTarget">SnsTarget</a>, <a href="#@raphaelmanke/aws-cdk-pipes-rfc.SqsTarget">SqsTarget</a>, <a href="#@raphaelmanke/aws-cdk-pipes-rfc.StepFunctionTarget">StepFunctionTarget</a>, <a href="#@raphaelmanke/aws-cdk-pipes-rfc.IPipeTarget">IPipeTarget</a>
 
 #### Methods <a name="Methods" id="Methods"></a>
 

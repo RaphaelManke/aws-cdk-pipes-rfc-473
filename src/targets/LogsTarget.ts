@@ -9,8 +9,8 @@ export interface ILogsTargetProps {
 }
 export class LogsTarget implements IPipeTarget {
   private readonly logGroup: ILogGroup;
-  targetArn: string;
-  targetParameters: CfnPipe.PipeTargetParametersProperty;
+  readonly targetArn: string;
+  readonly targetParameters: CfnPipe.PipeTargetParametersProperty;
 
   constructor(logGroup : ILogGroup, props?: ILogsTargetProps) {
     this.logGroup = logGroup;

@@ -5,8 +5,8 @@ import { IPipeTarget } from '../PipeTarget';
 
 export class SnsTarget implements IPipeTarget {
   private topic: ITopic;
-  public readonly targetArn: string;
-  public readonly targetParameters: CfnPipe.PipeTargetParametersProperty;
+  readonly targetArn: string;
+  readonly targetParameters: CfnPipe.PipeTargetParametersProperty;
 
   constructor(topic: ITopic) {
     this.topic = topic;

@@ -35,8 +35,8 @@ export class ApiGatewayTarget implements IPipeTarget {
   private readonly apiGateway: IRestApi;
   private readonly resource: string;
   private readonly method: string;
-  targetArn: string;
-  targetParameters: CfnPipe.PipeTargetParametersProperty;
+  readonly targetArn: string;
+  readonly targetParameters: CfnPipe.PipeTargetParametersProperty;
 
   constructor(http: IRestApi, props: IApiGatewayTargetProps) {
     this.apiGateway = http;

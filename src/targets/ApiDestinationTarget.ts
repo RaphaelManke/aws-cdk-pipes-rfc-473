@@ -31,8 +31,8 @@ export interface IApiDestinationTargetProps{
 
 export class ApiDestinationTarget implements IPipeTarget {
   private readonly apiDestination: IApiDestination;
-  targetArn: string;
-  targetParameters: CfnPipe.PipeTargetParametersProperty;
+  readonly targetArn: string;
+  readonly targetParameters: CfnPipe.PipeTargetParametersProperty;
 
   constructor(http: IApiDestination, props: IApiDestinationTargetProps) {
     this.apiDestination = http;

@@ -10,8 +10,8 @@ export interface IStepFunctionTargetProps {
 
 export class StepFunctionTarget implements IPipeTarget {
   private readonly stateMachine: IStateMachine;
-  targetArn: string;
-  targetParameters: CfnPipe.PipeTargetParametersProperty;
+  readonly targetArn: string;
+  readonly targetParameters: CfnPipe.PipeTargetParametersProperty;
 
   constructor(stateMachine: IStateMachine, props?: IStepFunctionTargetProps ) {
     this.stateMachine = stateMachine;

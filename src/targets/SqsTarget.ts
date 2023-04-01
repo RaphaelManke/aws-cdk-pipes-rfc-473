@@ -20,8 +20,8 @@ export interface SqsTargetProps {
 
 export class SqsTarget implements IPipeTarget {
   private queue: IQueue;
-  targetArn: string;
-  targetParameters: CfnPipe.PipeTargetParametersProperty;
+  readonly targetArn: string;
+  readonly targetParameters: CfnPipe.PipeTargetParametersProperty;
 
   constructor(queue: IQueue, props?: SqsTargetProps) {
     this.queue = queue;

@@ -39,8 +39,8 @@ export interface IEventBusTargetProps {
 
 export class EventBridgeEventBusTarget implements IPipeTarget {
   private eventBus: IEventBus;
-  targetArn: string;
-  targetParameters: CfnPipe.PipeTargetParametersProperty;
+  readonly targetArn: string;
+  readonly targetParameters: CfnPipe.PipeTargetParametersProperty;
 
   constructor(eventBus: IEventBus, props: IEventBusTargetProps) {
     this.eventBus = eventBus;

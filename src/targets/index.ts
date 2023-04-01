@@ -5,5 +5,6 @@ export * from './IInvocationType';
 export * from './KinesisStreamTarget';
 export * from './LambdaTarget';
 export * from './LogsTarget';
+export * from './SnsTarget';
 export * from './SqsTarget';
 export * from './StepFunctionTarget';

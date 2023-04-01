@@ -14,8 +14,8 @@ export interface IKinesisStreamTargetProps {
 
 export class KinesisStreamTarget implements IPipeTarget {
   private readonly stream: IStream;
-  targetArn: string;
-  targetParameters: CfnPipe.PipeTargetParametersProperty;
+  readonly targetArn: string;
+  readonly targetParameters: CfnPipe.PipeTargetParametersProperty;
 
   constructor(stream: IStream, props: IKinesisStreamTargetProps) {
     this.stream = stream;

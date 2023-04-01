@@ -9,8 +9,8 @@ export interface ILambdaTargetProps {
 }
 export class LambdaTarget implements IPipeTarget {
   private readonly lambda: IFunction;
-  targetArn: string;
-  targetParameters: CfnPipe.PipeTargetParametersProperty;
+  readonly targetArn: string;
+  readonly targetParameters: CfnPipe.PipeTargetParametersProperty;
 
   constructor(lambda: IFunction, props? : ILambdaTargetProps ) {
     this.lambda = lambda;

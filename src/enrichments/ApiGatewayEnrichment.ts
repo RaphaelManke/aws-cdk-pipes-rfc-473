@@ -5,7 +5,7 @@ import { CfnPipe } from 'aws-cdk-lib/aws-pipes';
 import { IPipeEnrichment } from '../PipeEnrichment';
 import { IInputTransformation } from '../PipeInputTransformation';
 
-interface IApiGatewayEnrichmentProps {
+export interface IApiGatewayEnrichmentProps {
   method: string;
   resource: string;
   inputTransformation?: IInputTransformation;

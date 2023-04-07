@@ -14,6 +14,7 @@ export class StepFunctionEnrichment implements IPipeEnrichment {
   public readonly enrichmentParameters: CfnPipe.PipeEnrichmentParametersProperty;
 
   constructor(stepFunction: IStateMachine, props?: IStepFunctionEnrichmentProps) {
+    // TODO: Is it possible to detect if the state machine is as express step function?
     this.stepFunction = stepFunction;
     this.enrichmentArn = stepFunction.stateMachineArn;
     this.enrichmentParameters = {
@@ -22,6 +23,6 @@ export class StepFunctionEnrichment implements IPipeEnrichment {
   }
 
   grantInvoke(grantee: IRole): void {
-    this.stepFunction.grantExecution(grantee);
+    this.stepFunction.grantStartSyncExecution(grantee);
   }
 }

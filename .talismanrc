@@ -1,8 +1,8 @@
 fileignoreconfig:
-- filename: API.md
-  checksum: 344f1e758aadd2fc66a98bf3b0072779b1eb5d7c5080985269e0c8e20ea6433f
-- filename: README.md
-  checksum: 3ad06860bbaaa3b41e9e3dfe665ede1564446fa7052a4ed7fdf609af7ce5bcc1
+- filename: e2e/SqsSfnEventBus.ts
+  checksum: 5f1ecebc35cd23f2b7b05239a2f17795e18936ce5bd08c5b5e761fa746d94c0c
+version: ""
+cksum: 3ad06860bbaaa3b41e9e3dfe665ede1564446fa7052a4ed7fdf609af7ce5bcc1
 - filename: e2e/sources/kafkaProducer.ts
   checksum: d8518b18d16551a7ffc49b7c0683b5fdf4c82a9d1709ca3330eada84c0993183
 - filename: src/PipeInputTransformation.test.ts

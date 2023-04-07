@@ -41,6 +41,14 @@
       ],
       "condition": "! git log --oneline -1 | grep -q \"chore(release):\""
     },
+    "cdk:deploy:all:sqs:sfn:eventbus": {
+      "name": "cdk:deploy:all:sqs:sfn:eventbus",
+      "steps": [
+        {
+          "exec": "cdk deploy --app 'npx ts-node --prefer-ts-exts e2e/SqsSfnEventBus.ts'"
+        }
+      ]
+    },
     "cdk:deploy:source:dynamodb": {
       "name": "cdk:deploy:source:dynamodb",
       "steps": [

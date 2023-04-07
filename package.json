@@ -7,6 +7,7 @@
   "scripts": {
     "build": "npx projen build",
     "bump": "npx projen bump",
+    "cdk:deploy:all:sqs:sfn:eventbus": "npx projen cdk:deploy:all:sqs:sfn:eventbus",
     "cdk:deploy:source:dynamodb": "npx projen cdk:deploy:source:dynamodb",
     "cdk:deploy:source:kafka-serverless": "npx projen cdk:deploy:source:kafka-serverless",
     "cdk:deploy:source:sqs": "npx projen cdk:deploy:source:sqs",

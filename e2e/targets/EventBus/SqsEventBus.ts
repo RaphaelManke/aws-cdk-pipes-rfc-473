@@ -3,7 +3,7 @@ import { EventBus, Rule } from 'aws-cdk-lib/aws-events';
 import { CloudWatchLogGroup } from 'aws-cdk-lib/aws-events-targets';
 import { LogGroup } from 'aws-cdk-lib/aws-logs';
 import { Queue } from 'aws-cdk-lib/aws-sqs';
-import { EventBusTarget, Pipe, SqsSource } from '../../../src';
+import { EventBridgeEventBusTarget, Pipe, SqsSource } from '../../../src';
 
 const app = new App();
 const stack = new Stack(app, 'E2EPipesSqsEventBus', {});
@@ -13,7 +13,7 @@ const source = new SqsSource(sourceQueue);
 const targetEventBus = new EventBus(stack, 'TargetEventBus', {
 
 });
-const target = new EventBusTarget(targetEventBus, {
+const target = new EventBridgeEventBusTarget(targetEventBus, {
 
 });
 new Pipe(stack, 'Pipe', {

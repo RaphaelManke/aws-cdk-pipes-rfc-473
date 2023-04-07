@@ -3,7 +3,7 @@ import { EventBus, Rule } from 'aws-cdk-lib/aws-events';
 import { CloudWatchLogGroup } from 'aws-cdk-lib/aws-events-targets';
 import { Stream } from 'aws-cdk-lib/aws-kinesis';
 import { LogGroup } from 'aws-cdk-lib/aws-logs';
-import { EventBusTarget, KinesisStreamSource, Pipe, PipeSourceStartingPosition } from '../../../src';
+import { EventBridgeEventBusTarget, KinesisStreamSource, Pipe, PipeSourceStartingPosition } from '../../../src';
 
 const app = new App();
 const stack = new Stack(app, 'E2EPipesKinesisEventBus', {});
@@ -17,7 +17,7 @@ const source = new KinesisStreamSource(kinesisStream, {
 const targetEventBus = new EventBus(stack, 'TargetEventBus', {
 
 });
-const target = new EventBusTarget(targetEventBus, {
+const target = new EventBridgeEventBusTarget(targetEventBus, {
 
 });
 new Pipe(stack, 'Pipe', {

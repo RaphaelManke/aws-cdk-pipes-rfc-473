@@ -124,7 +124,9 @@ export class Pipe extends PipeBase {
       ...props.source.sourceParameters,
       filterCriteria: props.filter,
     };
-
+    if (props.enrichment) {
+      props.enrichment.grantInvoke(this.pipeRole);
+    }
     props.source.grantRead(this.pipeRole);
     props.target.grantPush(this.pipeRole);
 

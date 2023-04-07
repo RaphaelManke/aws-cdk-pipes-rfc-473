@@ -22,12 +22,21 @@ export interface IInputTransformation {
 
 export class PipeInputTransformation implements IInputTransformation {
   static fromJson(inputTemplate: Record<string, any>): PipeInputTransformation {
-    return new PipeInputTransformation({ inputTemplate });
+    return new PipeInputTransformation(inputTemplate );
   }
 
   inputTemplate: string;
 
+
   constructor(inputTemplate: PipeInputTransformationValue) {
-    this.inputTemplate = JSON.stringify(inputTemplate);
+    this.inputTemplate = this.unquoteKeyPlaceholders(inputTemplate);
+  }
+
+  private unquoteKeyPlaceholders(obj: any) {
+    const jsonString = JSON.stringify(obj);
+
+    const result = jsonString.replace(/"(<(?:\$\.|aws\.pipes)[^"]*?)"/g, '$1'); // Retain the "<>" and remove the outer quotes for the values that start with either "<$." or "<aws.pipes"
+
+    return result;
   }
 }

@@ -1,9 +1,9 @@
 import { IEventBus } from 'aws-cdk-lib/aws-events';
 import { IRole } from 'aws-cdk-lib/aws-iam';
 import { CfnPipe } from 'aws-cdk-lib/aws-pipes';
-import { IPipeTarget } from '../PipeTarget';
+import { IPipeTarget, IPipeTargetCommonParameters } from '../PipeTarget';
 
-export interface IEventBusTargetProps {
+export interface IEventBusTargetProps extends IPipeTargetCommonParameters {
   /**
          * A free-form string, with a maximum of 128 characters, used to decide what fields to expect in the event detail.
          *
@@ -46,6 +46,7 @@ export class EventBridgeEventBusTarget implements IPipeTarget {
     this.eventBus = eventBus;
     this.targetArn = eventBus.eventBusArn;
     this.targetParameters = {
+      inputTemplate: props.inputTemplate?.inputTemplate,
       eventBridgeEventBusParameters: {
         detailType: props.detailType,
         endpointId: props.endpointId,

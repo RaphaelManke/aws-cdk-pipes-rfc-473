@@ -70,7 +70,7 @@ Object {
           ],
         },
         "EnrichmentParameters": Object {
-          "InputTemplate": "{\\"inputTemplate\\":{\\"foo\\":\\"bar\\"}}",
+          "InputTemplate": "{\\"foo\\":\\"bar\\"}",
         },
         "RoleArn": Object {
           "Fn::GetAtt": Array [

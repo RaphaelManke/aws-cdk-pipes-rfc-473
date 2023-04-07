@@ -1,9 +1,9 @@
 import { IRole } from 'aws-cdk-lib/aws-iam';
 import { ILogGroup } from 'aws-cdk-lib/aws-logs';
 import { CfnPipe } from 'aws-cdk-lib/aws-pipes';
-import { IPipeTarget } from '../PipeTarget';
+import { IPipeTarget, IPipeTargetCommonParameters } from '../PipeTarget';
 
-export interface ILogsTargetProps {
+export interface ILogsTargetProps extends IPipeTargetCommonParameters {
   logStreamName?: string;
   timestamp?: string;
 }
@@ -16,6 +16,7 @@ export class LogsTarget implements IPipeTarget {
     this.logGroup = logGroup;
     this.targetArn = logGroup.logGroupArn;
     this.targetParameters = {
+      inputTemplate: props?.inputTemplate?.inputTemplate,
       cloudWatchLogsParameters: {
         logStreamName: props?.logStreamName,
         timestamp: props?.timestamp,

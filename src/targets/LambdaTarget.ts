@@ -2,9 +2,9 @@ import { IRole } from 'aws-cdk-lib/aws-iam';
 import { IFunction } from 'aws-cdk-lib/aws-lambda';
 import { CfnPipe } from 'aws-cdk-lib/aws-pipes';
 import { IInvocationType } from './IInvocationType';
-import { IPipeTarget } from '../PipeTarget';
+import { IPipeTarget, IPipeTargetCommonParameters } from '../PipeTarget';
 
-export interface ILambdaTargetProps {
+export interface ILambdaTargetProps extends IPipeTargetCommonParameters{
   invocationType?: IInvocationType;
 }
 export class LambdaTarget implements IPipeTarget {
@@ -16,6 +16,7 @@ export class LambdaTarget implements IPipeTarget {
     this.lambda = lambda;
     this.targetArn = lambda.functionArn;
     this.targetParameters = {
+      inputTemplate: props?.inputTemplate?.inputTemplate,
       lambdaFunctionParameters: {
         invocationType: props?.invocationType,
       },

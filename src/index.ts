@@ -5,5 +5,6 @@ export * from './PipeInputTransformation';
 export * from './PipeSource';
 export * from './PipeSourceFilter';
 export * from './PipeTarget';
+export * from './PipeTargetParameter';
 export * from './sources';
 export * from './targets';

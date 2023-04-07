@@ -1,36 +1,33 @@
-scopeconfig:
-  - scope: node
-
 fileignoreconfig:
-  - filename: API.md
-    checksum: 344f1e758aadd2fc66a98bf3b0072779b1eb5d7c5080985269e0c8e20ea6433f
-  - filename: README.md
-    checksum: 3ad06860bbaaa3b41e9e3dfe665ede1564446fa7052a4ed7fdf609af7ce5bcc1
-
-  - filename: src/PipeInputTransformation.ts
-    checksum: ae01f55ea11fec45f66696ca5d9eee11e33d8662bc59afc9b924b56c2b039222
-
-  - filename: src/sources/AmazonMqBrokerSource.ts
-    checksum: 6684e57ab52938b886749dd61d9b460c53f1f45fc19d96273bdb105857741fbd
-  - filename: src/sources/SelfMangedKafkaSource.ts
-    checksum: d872436389869f77a9586dfe14b04f6af1a25d9b5f20e6f933561d7b6cbf2f12
-  - filename: src/sources/MskSource.ts
-    checksum: 3444650c80a1bf1e2f59b036d3b5d872d8289c57fa2929a752686d52bb0d7f9b
-  - filename: e2e/sources/kafkaProducer.ts
-    checksum: d8518b18d16551a7ffc49b7c0683b5fdf4c82a9d1709ca3330eada84c0993183
-  
-  - filename: src/targets/KinesisStreamTarget.ts
-    checksum: 3e66b4c86ee60f9b439fe5f3141bcaeee3509345daf81361517d51a5e1ac6117
-  - filename: src/targets/ApiGatewayTarget.ts
-    checksum: 6e5f3315b3042c6bcb782252be78b6172eb8c9aef52523c4365527dc69ec89aa
-  - filename: src/targets/KinesisStreamTarget.ts
-    checksum: 3e66b4c86ee60f9b439fe5f3141bcaeee3509345daf81361517d51a5e1ac6117
-  - filename: src/targets/ApiGatewayTarget.ts
-    checksum: 6e5f3315b3042c6bcb782252be78b6172eb8c9aef52523c4365527dc69ec89aa  
-  - filename: src/targets/ApiDestinationTarget.ts
-    checksum: 0e92c424afd6b9517d03f71e3dee0e242a787cf74305f70e279b48597a8c9c7a   
-
-  - filename: src/enrichments/ApiGatewayEnrichment.ts
-    checksum: c2469859d983adc0074ef78b7c3517849d75ca0883f648d7d67f056d1a019d90
+- filename: API.md
+  checksum: 344f1e758aadd2fc66a98bf3b0072779b1eb5d7c5080985269e0c8e20ea6433f
+- filename: README.md
+  checksum: 3ad06860bbaaa3b41e9e3dfe665ede1564446fa7052a4ed7fdf609af7ce5bcc1
+- filename: e2e/sources/kafkaProducer.ts
+  checksum: d8518b18d16551a7ffc49b7c0683b5fdf4c82a9d1709ca3330eada84c0993183
+- filename: src/PipeInputTransformation.test.ts
+  checksum: 483f85b773625258dbdf0eb9db6bb4bad785962ef2f81278a9e6978bb6f83c46
+- filename: src/PipeInputTransformation.ts
+  checksum: ae01f55ea11fec45f66696ca5d9eee11e33d8662bc59afc9b924b56c2b039222
+- filename: src/enrichments/ApiDestinationEnrichment.ts
+  checksum: d7387d66f68a70e3f8c79f7829afd1d42853878730d322fa8977ca21ee4fa0f6
+- filename: src/enrichments/ApiGatewayEnrichment.ts
+  checksum: c2469859d983adc0074ef78b7c3517849d75ca0883f648d7d67f056d1a019d90
+- filename: src/sources/AmazonMqBrokerSource.ts
+  checksum: 6684e57ab52938b886749dd61d9b460c53f1f45fc19d96273bdb105857741fbd
+- filename: src/sources/MskSource.ts
+  checksum: 3444650c80a1bf1e2f59b036d3b5d872d8289c57fa2929a752686d52bb0d7f9b
+- filename: src/sources/SelfMangedKafkaSource.ts
+  checksum: d872436389869f77a9586dfe14b04f6af1a25d9b5f20e6f933561d7b6cbf2f12
+- filename: src/targets/ApiDestinationTarget.ts
+  checksum: 0e92c424afd6b9517d03f71e3dee0e242a787cf74305f70e279b48597a8c9c7a
+- filename: src/targets/ApiGatewayTarget.ts
+  checksum: 6e5f3315b3042c6bcb782252be78b6172eb8c9aef52523c4365527dc69ec89aa
+- filename: src/targets/KinesisStreamTarget.ts
+  checksum: 3e66b4c86ee60f9b439fe5f3141bcaeee3509345daf81361517d51a5e1ac6117
+scopeconfig:
+- scope: node
+version: "1.0"
+517849d75ca0883f648d7d67f056d1a019d90
   - filename: src/enrichments/ApiDestinationEnrichment.ts
     checksum: d7387d66f68a70e3f8c79f7829afd1d42853878730d322fa8977ca21ee4fa0f6

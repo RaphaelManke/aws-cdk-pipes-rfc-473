@@ -2,9 +2,9 @@ import { IResolvable } from 'aws-cdk-lib';
 import { IApiDestination } from 'aws-cdk-lib/aws-events';
 import { IRole, PolicyStatement } from 'aws-cdk-lib/aws-iam';
 import { CfnPipe } from 'aws-cdk-lib/aws-pipes';
-import { IPipeTarget } from '../PipeTarget';
+import { IPipeTarget, IPipeTargetCommonParameters } from '../PipeTarget';
 
-export interface IApiDestinationTargetProps{
+export interface IApiDestinationTargetProps extends IPipeTargetCommonParameters {
   /**
  * The headers that need to be sent as part of request invoking the API Gateway REST API or EventBridge ApiDestination.
  *
@@ -39,6 +39,7 @@ export class ApiDestinationTarget implements IPipeTarget {
     this.targetArn = http.apiDestinationArn;
 
     this.targetParameters = {
+      inputTemplate: props?.inputTemplate?.inputTemplate,
       httpParameters: {
         headerParameters: props?.headerParameters,
         queryStringParameters: props?.queryStringParameters,

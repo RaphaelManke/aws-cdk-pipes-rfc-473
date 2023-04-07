@@ -2,9 +2,9 @@ import { IRole } from 'aws-cdk-lib/aws-iam';
 import { CfnPipe } from 'aws-cdk-lib/aws-pipes';
 import { IStateMachine } from 'aws-cdk-lib/aws-stepfunctions';
 import { IInvocationType } from './IInvocationType';
-import { IPipeTarget } from '../PipeTarget';
+import { IPipeTarget, IPipeTargetCommonParameters } from '../PipeTarget';
 
-export interface IStepFunctionTargetProps {
+export interface IStepFunctionTargetProps extends IPipeTargetCommonParameters{
   invocationType: IInvocationType;
 }
 
@@ -17,6 +17,7 @@ export class StepFunctionTarget implements IPipeTarget {
     this.stateMachine = stateMachine;
     this.targetArn = stateMachine.stateMachineArn;
     this.targetParameters = {
+      inputTemplate: props?.inputTemplate?.inputTemplate,
       stepFunctionStateMachineParameters: {
         invocationType: props?.invocationType,
       },

@@ -2,9 +2,9 @@ import { IResolvable } from 'aws-cdk-lib';
 import { IRestApi } from 'aws-cdk-lib/aws-apigateway';
 import { IRole, PolicyStatement } from 'aws-cdk-lib/aws-iam';
 import { CfnPipe } from 'aws-cdk-lib/aws-pipes';
-import { IPipeTarget } from '../PipeTarget';
+import { IPipeTarget, IPipeTargetCommonParameters } from '../PipeTarget';
 
-export interface IApiGatewayTargetProps{
+export interface IApiGatewayTargetProps extends IPipeTargetCommonParameters{
   resource: string;
   method: string;
   /**
@@ -48,6 +48,7 @@ export class ApiGatewayTarget implements IPipeTarget {
       throw new Error('Resource must start with a forward slash');
     }
     this.targetParameters = {
+      inputTemplate: props?.inputTemplate?.inputTemplate,
       httpParameters: {
         headerParameters: props?.headerParameters,
         queryStringParameters: props?.queryStringParameters,

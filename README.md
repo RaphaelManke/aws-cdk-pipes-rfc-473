@@ -15,7 +15,9 @@ yarn add -D @raphaelmanke/aws-cdk-pipes-rfc
 ```
 
 ## Readme
+This is a RFC for a CDK construct library for AWS EventBridge Pipes.
 
+[CDK RFC Issue - 473](https://github.com/aws/aws-cdk-rfcs/issues/473)
 # Amazon Eventbridge Pipes Construct Library
 
 This library contains constructs for working with Amazon EventBridge Pipes.

@@ -266,53 +266,6 @@ see https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-propertie
 
 ---
 
-### SqsTargetProps <a name="SqsTargetProps" id="@raphaelmanke/aws-cdk-pipes-rfc.SqsTargetProps"></a>
-
-#### Initializer <a name="Initializer" id="@raphaelmanke/aws-cdk-pipes-rfc.SqsTargetProps.Initializer"></a>
-
-```typescript
-import { SqsTargetProps } from '@raphaelmanke/aws-cdk-pipes-rfc'
-
-const sqsTargetProps: SqsTargetProps = { ... }
-```
-
-#### Properties <a name="Properties" id="Properties"></a>
-
-| **Name** | **Type** | **Description** |
-| --- | --- | --- |
-| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.SqsTargetProps.property.messageDeduplicationId">messageDeduplicationId</a></code> | <code>string</code> | `CfnPipe.PipeTargetSqsQueueParametersProperty.MessageDeduplicationId`. |
-| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.SqsTargetProps.property.messageGroupId">messageGroupId</a></code> | <code>string</code> | `CfnPipe.PipeTargetSqsQueueParametersProperty.MessageGroupId`. |
-
----
-
-##### `messageDeduplicationId`<sup>Optional</sup> <a name="messageDeduplicationId" id="@raphaelmanke/aws-cdk-pipes-rfc.SqsTargetProps.property.messageDeduplicationId"></a>
-
-```typescript
-public readonly messageDeduplicationId: string;
-```
-
-- *Type:* string
-
-`CfnPipe.PipeTargetSqsQueueParametersProperty.MessageDeduplicationId`.
-
-> [http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipetargetsqsqueueparameters.html#cfn-pipes-pipe-pipetargetsqsqueueparameters-messagededuplicationid](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipetargetsqsqueueparameters.html#cfn-pipes-pipe-pipetargetsqsqueueparameters-messagededuplicationid)
-
----
-
-##### `messageGroupId`<sup>Optional</sup> <a name="messageGroupId" id="@raphaelmanke/aws-cdk-pipes-rfc.SqsTargetProps.property.messageGroupId"></a>
-
-```typescript
-public readonly messageGroupId: string;
-```
-
-- *Type:* string
-
-`CfnPipe.PipeTargetSqsQueueParametersProperty.MessageGroupId`.
-
-> [http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipetargetsqsqueueparameters.html#cfn-pipes-pipe-pipetargetsqsqueueparameters-messagegroupid](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipetargetsqsqueueparameters.html#cfn-pipes-pipe-pipetargetsqsqueueparameters-messagegroupid)
-
----
-
 ## Classes <a name="Classes" id="Classes"></a>
 
 ### ActiveMqBrokerSource <a name="ActiveMqBrokerSource" id="@raphaelmanke/aws-cdk-pipes-rfc.ActiveMqBrokerSource"></a>
@@ -1760,6 +1713,61 @@ public readonly filters: IPipeFilterPattern[];
 ---
 
 
+### PipeTargetParameter <a name="PipeTargetParameter" id="@raphaelmanke/aws-cdk-pipes-rfc.PipeTargetParameter"></a>
+
+#### Initializers <a name="Initializers" id="@raphaelmanke/aws-cdk-pipes-rfc.PipeTargetParameter.Initializer"></a>
+
+```typescript
+import { PipeTargetParameter } from '@raphaelmanke/aws-cdk-pipes-rfc'
+
+new PipeTargetParameter()
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+
+---
+
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.PipeTargetParameter.fromJsonPath">fromJsonPath</a></code> | *No description.* |
+| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.PipeTargetParameter.fromPipeVariable">fromPipeVariable</a></code> | *No description.* |
+
+---
+
+##### `fromJsonPath` <a name="fromJsonPath" id="@raphaelmanke/aws-cdk-pipes-rfc.PipeTargetParameter.fromJsonPath"></a>
+
+```typescript
+import { PipeTargetParameter } from '@raphaelmanke/aws-cdk-pipes-rfc'
+
+PipeTargetParameter.fromJsonPath(jsonPath: string)
+```
+
+###### `jsonPath`<sup>Required</sup> <a name="jsonPath" id="@raphaelmanke/aws-cdk-pipes-rfc.PipeTargetParameter.fromJsonPath.parameter.jsonPath"></a>
+
+- *Type:* string
+
+---
+
+##### `fromPipeVariable` <a name="fromPipeVariable" id="@raphaelmanke/aws-cdk-pipes-rfc.PipeTargetParameter.fromPipeVariable"></a>
+
+```typescript
+import { PipeTargetParameter } from '@raphaelmanke/aws-cdk-pipes-rfc'
+
+PipeTargetParameter.fromPipeVariable(pipeVariable: PipeVariables)
+```
+
+###### `pipeVariable`<sup>Required</sup> <a name="pipeVariable" id="@raphaelmanke/aws-cdk-pipes-rfc.PipeTargetParameter.fromPipeVariable.parameter.pipeVariable"></a>
+
+- *Type:* <a href="#@raphaelmanke/aws-cdk-pipes-rfc.PipeVariables">PipeVariables</a>
+
+---
+
+
+
 ### RabbitMqBrokerSource <a name="RabbitMqBrokerSource" id="@raphaelmanke/aws-cdk-pipes-rfc.RabbitMqBrokerSource"></a>
 
 #### Initializers <a name="Initializers" id="@raphaelmanke/aws-cdk-pipes-rfc.RabbitMqBrokerSource.Initializer"></a>
@@ -1931,18 +1939,25 @@ public readonly sourceParameters: PipeSourceParametersProperty | IResolvable;
 ```typescript
 import { SnsTarget } from '@raphaelmanke/aws-cdk-pipes-rfc'
 
-new SnsTarget(topic: ITopic)
+new SnsTarget(topic: ITopic, props?: ISnsTargetProps)
 ```
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.SnsTarget.Initializer.parameter.topic">topic</a></code> | <code>aws-cdk-lib.aws_sns.ITopic</code> | *No description.* |
+| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.SnsTarget.Initializer.parameter.props">props</a></code> | <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.ISnsTargetProps">ISnsTargetProps</a></code> | *No description.* |
 
 ---
 
 ##### `topic`<sup>Required</sup> <a name="topic" id="@raphaelmanke/aws-cdk-pipes-rfc.SnsTarget.Initializer.parameter.topic"></a>
 
 - *Type:* aws-cdk-lib.aws_sns.ITopic
+
+---
+
+##### `props`<sup>Optional</sup> <a name="props" id="@raphaelmanke/aws-cdk-pipes-rfc.SnsTarget.Initializer.parameter.props"></a>
+
+- *Type:* <a href="#@raphaelmanke/aws-cdk-pipes-rfc.ISnsTargetProps">ISnsTargetProps</a>
 
 ---
 
@@ -2088,13 +2103,13 @@ public readonly sourceParameters: PipeSourceParametersProperty | IResolvable;
 ```typescript
 import { SqsTarget } from '@raphaelmanke/aws-cdk-pipes-rfc'
 
-new SqsTarget(queue: IQueue, props?: SqsTargetProps)
+new SqsTarget(queue: IQueue, props?: ISqsTargetProps)
 ```
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.SqsTarget.Initializer.parameter.queue">queue</a></code> | <code>aws-cdk-lib.aws_sqs.IQueue</code> | *No description.* |
-| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.SqsTarget.Initializer.parameter.props">props</a></code> | <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.SqsTargetProps">SqsTargetProps</a></code> | *No description.* |
+| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.SqsTarget.Initializer.parameter.props">props</a></code> | <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.ISqsTargetProps">ISqsTargetProps</a></code> | *No description.* |
 
 ---
 
@@ -2106,7 +2121,7 @@ new SqsTarget(queue: IQueue, props?: SqsTargetProps)
 
 ##### `props`<sup>Optional</sup> <a name="props" id="@raphaelmanke/aws-cdk-pipes-rfc.SqsTarget.Initializer.parameter.props"></a>
 
-- *Type:* <a href="#@raphaelmanke/aws-cdk-pipes-rfc.SqsTargetProps">SqsTargetProps</a>
+- *Type:* <a href="#@raphaelmanke/aws-cdk-pipes-rfc.ISqsTargetProps">ISqsTargetProps</a>
 
 ---
 
@@ -2473,6 +2488,8 @@ public readonly inputTransformation: IInputTransformation;
 
 ### IApiDestinationTargetProps <a name="IApiDestinationTargetProps" id="@raphaelmanke/aws-cdk-pipes-rfc.IApiDestinationTargetProps"></a>
 
+- *Extends:* <a href="#@raphaelmanke/aws-cdk-pipes-rfc.IPipeTargetCommonParameters">IPipeTargetCommonParameters</a>
+
 - *Implemented By:* <a href="#@raphaelmanke/aws-cdk-pipes-rfc.IApiDestinationTargetProps">IApiDestinationTargetProps</a>
 
 
@@ -2480,9 +2497,20 @@ public readonly inputTransformation: IInputTransformation;
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
+| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.IApiDestinationTargetProps.property.inputTemplate">inputTemplate</a></code> | <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.IInputTransformation">IInputTransformation</a></code> | *No description.* |
 | <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.IApiDestinationTargetProps.property.headerParameters">headerParameters</a></code> | <code>aws-cdk-lib.IResolvable \| {[ key: string ]: string}</code> | The headers that need to be sent as part of request invoking the API Gateway REST API or EventBridge ApiDestination. |
 | <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.IApiDestinationTargetProps.property.pathParameterValues">pathParameterValues</a></code> | <code>string[]</code> | The path parameter values to be used to populate API Gateway REST API or EventBridge ApiDestination path wildcards ("*"). |
 | <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.IApiDestinationTargetProps.property.queryStringParameters">queryStringParameters</a></code> | <code>aws-cdk-lib.IResolvable \| {[ key: string ]: string}</code> | The query string keys/values that need to be sent as part of request invoking the API Gateway REST API or EventBridge ApiDestination. |
+
+---
+
+##### `inputTemplate`<sup>Optional</sup> <a name="inputTemplate" id="@raphaelmanke/aws-cdk-pipes-rfc.IApiDestinationTargetProps.property.inputTemplate"></a>
+
+```typescript
+public readonly inputTemplate: IInputTransformation;
+```
+
+- *Type:* <a href="#@raphaelmanke/aws-cdk-pipes-rfc.IInputTransformation">IInputTransformation</a>
 
 ---
 
@@ -2620,6 +2648,8 @@ public readonly inputTransformation: IInputTransformation;
 
 ### IApiGatewayTargetProps <a name="IApiGatewayTargetProps" id="@raphaelmanke/aws-cdk-pipes-rfc.IApiGatewayTargetProps"></a>
 
+- *Extends:* <a href="#@raphaelmanke/aws-cdk-pipes-rfc.IPipeTargetCommonParameters">IPipeTargetCommonParameters</a>
+
 - *Implemented By:* <a href="#@raphaelmanke/aws-cdk-pipes-rfc.IApiGatewayTargetProps">IApiGatewayTargetProps</a>
 
 
@@ -2627,11 +2657,22 @@ public readonly inputTransformation: IInputTransformation;
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
+| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.IApiGatewayTargetProps.property.inputTemplate">inputTemplate</a></code> | <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.IInputTransformation">IInputTransformation</a></code> | *No description.* |
 | <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.IApiGatewayTargetProps.property.headerParameters">headerParameters</a></code> | <code>aws-cdk-lib.IResolvable \| {[ key: string ]: string}</code> | The headers that need to be sent as part of request invoking the API Gateway REST API or EventBridge ApiDestination. |
 | <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.IApiGatewayTargetProps.property.pathParameterValues">pathParameterValues</a></code> | <code>string[]</code> | The path parameter values to be used to populate API Gateway REST API or EventBridge ApiDestination path wildcards ("*"). |
 | <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.IApiGatewayTargetProps.property.queryStringParameters">queryStringParameters</a></code> | <code>aws-cdk-lib.IResolvable \| {[ key: string ]: string}</code> | The query string keys/values that need to be sent as part of request invoking the API Gateway REST API or EventBridge ApiDestination. |
 | <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.IApiGatewayTargetProps.property.method">method</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.IApiGatewayTargetProps.property.resource">resource</a></code> | <code>string</code> | *No description.* |
+
+---
+
+##### `inputTemplate`<sup>Optional</sup> <a name="inputTemplate" id="@raphaelmanke/aws-cdk-pipes-rfc.IApiGatewayTargetProps.property.inputTemplate"></a>
+
+```typescript
+public readonly inputTemplate: IInputTransformation;
+```
+
+- *Type:* <a href="#@raphaelmanke/aws-cdk-pipes-rfc.IInputTransformation">IInputTransformation</a>
 
 ---
 
@@ -2829,6 +2870,8 @@ public readonly parallelizationFactor: number;
 
 ### IEventBusTargetProps <a name="IEventBusTargetProps" id="@raphaelmanke/aws-cdk-pipes-rfc.IEventBusTargetProps"></a>
 
+- *Extends:* <a href="#@raphaelmanke/aws-cdk-pipes-rfc.IPipeTargetCommonParameters">IPipeTargetCommonParameters</a>
+
 - *Implemented By:* <a href="#@raphaelmanke/aws-cdk-pipes-rfc.IEventBusTargetProps">IEventBusTargetProps</a>
 
 
@@ -2836,11 +2879,22 @@ public readonly parallelizationFactor: number;
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
+| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.IEventBusTargetProps.property.inputTemplate">inputTemplate</a></code> | <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.IInputTransformation">IInputTransformation</a></code> | *No description.* |
 | <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.IEventBusTargetProps.property.detailType">detailType</a></code> | <code>string</code> | A free-form string, with a maximum of 128 characters, used to decide what fields to expect in the event detail. |
 | <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.IEventBusTargetProps.property.endpointId">endpointId</a></code> | <code>string</code> | The URL subdomain of the endpoint. |
 | <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.IEventBusTargetProps.property.resources">resources</a></code> | <code>string[]</code> | AWS resources, identified by Amazon Resource Name (ARN), which the event primarily concerns. |
 | <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.IEventBusTargetProps.property.source">source</a></code> | <code>string</code> | The source of the event. |
 | <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.IEventBusTargetProps.property.time">time</a></code> | <code>string</code> | The time stamp of the event, per [RFC3339](https://docs.aws.amazon.com/https://www.rfc-editor.org/rfc/rfc3339.txt) . If no time stamp is provided, the time stamp of the [PutEvents](https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutEvents.html) call is used. |
+
+---
+
+##### `inputTemplate`<sup>Optional</sup> <a name="inputTemplate" id="@raphaelmanke/aws-cdk-pipes-rfc.IEventBusTargetProps.property.inputTemplate"></a>
+
+```typescript
+public readonly inputTemplate: IInputTransformation;
+```
+
+- *Type:* <a href="#@raphaelmanke/aws-cdk-pipes-rfc.IInputTransformation">IInputTransformation</a>
 
 ---
 
@@ -3088,6 +3142,8 @@ public readonly startingPositionTimestamp: string;
 
 ### IKinesisStreamTargetProps <a name="IKinesisStreamTargetProps" id="@raphaelmanke/aws-cdk-pipes-rfc.IKinesisStreamTargetProps"></a>
 
+- *Extends:* <a href="#@raphaelmanke/aws-cdk-pipes-rfc.IPipeTargetCommonParameters">IPipeTargetCommonParameters</a>
+
 - *Implemented By:* <a href="#@raphaelmanke/aws-cdk-pipes-rfc.IKinesisStreamTargetProps">IKinesisStreamTargetProps</a>
 
 
@@ -3095,7 +3151,18 @@ public readonly startingPositionTimestamp: string;
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
+| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.IKinesisStreamTargetProps.property.inputTemplate">inputTemplate</a></code> | <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.IInputTransformation">IInputTransformation</a></code> | *No description.* |
 | <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.IKinesisStreamTargetProps.property.partitionKey">partitionKey</a></code> | <code>string</code> | Determines which shard in the stream the data record is assigned to. |
+
+---
+
+##### `inputTemplate`<sup>Optional</sup> <a name="inputTemplate" id="@raphaelmanke/aws-cdk-pipes-rfc.IKinesisStreamTargetProps.property.inputTemplate"></a>
+
+```typescript
+public readonly inputTemplate: IInputTransformation;
+```
+
+- *Type:* <a href="#@raphaelmanke/aws-cdk-pipes-rfc.IInputTransformation">IInputTransformation</a>
 
 ---
 
@@ -3140,6 +3207,8 @@ public readonly inputTransformation: IInputTransformation;
 
 ### ILambdaTargetProps <a name="ILambdaTargetProps" id="@raphaelmanke/aws-cdk-pipes-rfc.ILambdaTargetProps"></a>
 
+- *Extends:* <a href="#@raphaelmanke/aws-cdk-pipes-rfc.IPipeTargetCommonParameters">IPipeTargetCommonParameters</a>
+
 - *Implemented By:* <a href="#@raphaelmanke/aws-cdk-pipes-rfc.ILambdaTargetProps">ILambdaTargetProps</a>
 
 
@@ -3147,7 +3216,18 @@ public readonly inputTransformation: IInputTransformation;
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
+| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.ILambdaTargetProps.property.inputTemplate">inputTemplate</a></code> | <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.IInputTransformation">IInputTransformation</a></code> | *No description.* |
 | <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.ILambdaTargetProps.property.invocationType">invocationType</a></code> | <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.IInvocationType">IInvocationType</a></code> | *No description.* |
+
+---
+
+##### `inputTemplate`<sup>Optional</sup> <a name="inputTemplate" id="@raphaelmanke/aws-cdk-pipes-rfc.ILambdaTargetProps.property.inputTemplate"></a>
+
+```typescript
+public readonly inputTemplate: IInputTransformation;
+```
+
+- *Type:* <a href="#@raphaelmanke/aws-cdk-pipes-rfc.IInputTransformation">IInputTransformation</a>
 
 ---
 
@@ -3163,6 +3243,8 @@ public readonly invocationType: IInvocationType;
 
 ### ILogsTargetProps <a name="ILogsTargetProps" id="@raphaelmanke/aws-cdk-pipes-rfc.ILogsTargetProps"></a>
 
+- *Extends:* <a href="#@raphaelmanke/aws-cdk-pipes-rfc.IPipeTargetCommonParameters">IPipeTargetCommonParameters</a>
+
 - *Implemented By:* <a href="#@raphaelmanke/aws-cdk-pipes-rfc.ILogsTargetProps">ILogsTargetProps</a>
 
 
@@ -3170,8 +3252,19 @@ public readonly invocationType: IInvocationType;
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
+| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.ILogsTargetProps.property.inputTemplate">inputTemplate</a></code> | <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.IInputTransformation">IInputTransformation</a></code> | *No description.* |
 | <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.ILogsTargetProps.property.logStreamName">logStreamName</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.ILogsTargetProps.property.timestamp">timestamp</a></code> | <code>string</code> | *No description.* |
+
+---
+
+##### `inputTemplate`<sup>Optional</sup> <a name="inputTemplate" id="@raphaelmanke/aws-cdk-pipes-rfc.ILogsTargetProps.property.inputTemplate"></a>
+
+```typescript
+public readonly inputTemplate: IInputTransformation;
+```
+
+- *Type:* <a href="#@raphaelmanke/aws-cdk-pipes-rfc.IInputTransformation">IInputTransformation</a>
 
 ---
 
@@ -3941,6 +4034,29 @@ public readonly targetParameters: PipeTargetParametersProperty;
 
 ---
 
+### IPipeTargetCommonParameters <a name="IPipeTargetCommonParameters" id="@raphaelmanke/aws-cdk-pipes-rfc.IPipeTargetCommonParameters"></a>
+
+- *Implemented By:* <a href="#@raphaelmanke/aws-cdk-pipes-rfc.IApiDestinationTargetProps">IApiDestinationTargetProps</a>, <a href="#@raphaelmanke/aws-cdk-pipes-rfc.IApiGatewayTargetProps">IApiGatewayTargetProps</a>, <a href="#@raphaelmanke/aws-cdk-pipes-rfc.IEventBusTargetProps">IEventBusTargetProps</a>, <a href="#@raphaelmanke/aws-cdk-pipes-rfc.IKinesisStreamTargetProps">IKinesisStreamTargetProps</a>, <a href="#@raphaelmanke/aws-cdk-pipes-rfc.ILambdaTargetProps">ILambdaTargetProps</a>, <a href="#@raphaelmanke/aws-cdk-pipes-rfc.ILogsTargetProps">ILogsTargetProps</a>, <a href="#@raphaelmanke/aws-cdk-pipes-rfc.IPipeTargetCommonParameters">IPipeTargetCommonParameters</a>, <a href="#@raphaelmanke/aws-cdk-pipes-rfc.ISnsTargetProps">ISnsTargetProps</a>, <a href="#@raphaelmanke/aws-cdk-pipes-rfc.ISqsTargetProps">ISqsTargetProps</a>, <a href="#@raphaelmanke/aws-cdk-pipes-rfc.IStepFunctionTargetProps">IStepFunctionTargetProps</a>
+
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.IPipeTargetCommonParameters.property.inputTemplate">inputTemplate</a></code> | <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.IInputTransformation">IInputTransformation</a></code> | *No description.* |
+
+---
+
+##### `inputTemplate`<sup>Optional</sup> <a name="inputTemplate" id="@raphaelmanke/aws-cdk-pipes-rfc.IPipeTargetCommonParameters.property.inputTemplate"></a>
+
+```typescript
+public readonly inputTemplate: IInputTransformation;
+```
+
+- *Type:* <a href="#@raphaelmanke/aws-cdk-pipes-rfc.IInputTransformation">IInputTransformation</a>
+
+---
+
 ### IRabbitMqBrokerSourceProps <a name="IRabbitMqBrokerSourceProps" id="@raphaelmanke/aws-cdk-pipes-rfc.IRabbitMqBrokerSourceProps"></a>
 
 - *Extends:* <a href="#@raphaelmanke/aws-cdk-pipes-rfc.IAmazonMqBrokerSourceProps">IAmazonMqBrokerSourceProps</a>
@@ -4181,6 +4297,31 @@ public readonly startingPosition: PipeSourceStartingPosition;
 
 ---
 
+### ISnsTargetProps <a name="ISnsTargetProps" id="@raphaelmanke/aws-cdk-pipes-rfc.ISnsTargetProps"></a>
+
+- *Extends:* <a href="#@raphaelmanke/aws-cdk-pipes-rfc.IPipeTargetCommonParameters">IPipeTargetCommonParameters</a>
+
+- *Implemented By:* <a href="#@raphaelmanke/aws-cdk-pipes-rfc.ISnsTargetProps">ISnsTargetProps</a>
+
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.ISnsTargetProps.property.inputTemplate">inputTemplate</a></code> | <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.IInputTransformation">IInputTransformation</a></code> | *No description.* |
+
+---
+
+##### `inputTemplate`<sup>Optional</sup> <a name="inputTemplate" id="@raphaelmanke/aws-cdk-pipes-rfc.ISnsTargetProps.property.inputTemplate"></a>
+
+```typescript
+public readonly inputTemplate: IInputTransformation;
+```
+
+- *Type:* <a href="#@raphaelmanke/aws-cdk-pipes-rfc.IInputTransformation">IInputTransformation</a>
+
+---
+
 ### ISqsAttributes <a name="ISqsAttributes" id="@raphaelmanke/aws-cdk-pipes-rfc.ISqsAttributes"></a>
 
 - *Implemented By:* <a href="#@raphaelmanke/aws-cdk-pipes-rfc.ISqsAttributes">ISqsAttributes</a>
@@ -4388,6 +4529,61 @@ The maximum length of a time to wait for events.
 
 ---
 
+### ISqsTargetProps <a name="ISqsTargetProps" id="@raphaelmanke/aws-cdk-pipes-rfc.ISqsTargetProps"></a>
+
+- *Extends:* <a href="#@raphaelmanke/aws-cdk-pipes-rfc.IPipeTargetCommonParameters">IPipeTargetCommonParameters</a>
+
+- *Implemented By:* <a href="#@raphaelmanke/aws-cdk-pipes-rfc.ISqsTargetProps">ISqsTargetProps</a>
+
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.ISqsTargetProps.property.inputTemplate">inputTemplate</a></code> | <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.IInputTransformation">IInputTransformation</a></code> | *No description.* |
+| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.ISqsTargetProps.property.messageDeduplicationId">messageDeduplicationId</a></code> | <code>string</code> | `CfnPipe.PipeTargetSqsQueueParametersProperty.MessageDeduplicationId`. |
+| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.ISqsTargetProps.property.messageGroupId">messageGroupId</a></code> | <code>string</code> | `CfnPipe.PipeTargetSqsQueueParametersProperty.MessageGroupId`. |
+
+---
+
+##### `inputTemplate`<sup>Optional</sup> <a name="inputTemplate" id="@raphaelmanke/aws-cdk-pipes-rfc.ISqsTargetProps.property.inputTemplate"></a>
+
+```typescript
+public readonly inputTemplate: IInputTransformation;
+```
+
+- *Type:* <a href="#@raphaelmanke/aws-cdk-pipes-rfc.IInputTransformation">IInputTransformation</a>
+
+---
+
+##### `messageDeduplicationId`<sup>Optional</sup> <a name="messageDeduplicationId" id="@raphaelmanke/aws-cdk-pipes-rfc.ISqsTargetProps.property.messageDeduplicationId"></a>
+
+```typescript
+public readonly messageDeduplicationId: string;
+```
+
+- *Type:* string
+
+`CfnPipe.PipeTargetSqsQueueParametersProperty.MessageDeduplicationId`.
+
+> [http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipetargetsqsqueueparameters.html#cfn-pipes-pipe-pipetargetsqsqueueparameters-messagededuplicationid](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipetargetsqsqueueparameters.html#cfn-pipes-pipe-pipetargetsqsqueueparameters-messagededuplicationid)
+
+---
+
+##### `messageGroupId`<sup>Optional</sup> <a name="messageGroupId" id="@raphaelmanke/aws-cdk-pipes-rfc.ISqsTargetProps.property.messageGroupId"></a>
+
+```typescript
+public readonly messageGroupId: string;
+```
+
+- *Type:* string
+
+`CfnPipe.PipeTargetSqsQueueParametersProperty.MessageGroupId`.
+
+> [http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipetargetsqsqueueparameters.html#cfn-pipes-pipe-pipetargetsqsqueueparameters-messagegroupid](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipetargetsqsqueueparameters.html#cfn-pipes-pipe-pipetargetsqsqueueparameters-messagegroupid)
+
+---
+
 ### IStepFunctionEnrichmentProps <a name="IStepFunctionEnrichmentProps" id="@raphaelmanke/aws-cdk-pipes-rfc.IStepFunctionEnrichmentProps"></a>
 
 - *Implemented By:* <a href="#@raphaelmanke/aws-cdk-pipes-rfc.IStepFunctionEnrichmentProps">IStepFunctionEnrichmentProps</a>
@@ -4413,6 +4609,8 @@ public readonly inputTransformation: IInputTransformation;
 
 ### IStepFunctionTargetProps <a name="IStepFunctionTargetProps" id="@raphaelmanke/aws-cdk-pipes-rfc.IStepFunctionTargetProps"></a>
 
+- *Extends:* <a href="#@raphaelmanke/aws-cdk-pipes-rfc.IPipeTargetCommonParameters">IPipeTargetCommonParameters</a>
+
 - *Implemented By:* <a href="#@raphaelmanke/aws-cdk-pipes-rfc.IStepFunctionTargetProps">IStepFunctionTargetProps</a>
 
 
@@ -4420,7 +4618,18 @@ public readonly inputTransformation: IInputTransformation;
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
+| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.IStepFunctionTargetProps.property.inputTemplate">inputTemplate</a></code> | <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.IInputTransformation">IInputTransformation</a></code> | *No description.* |
 | <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.IStepFunctionTargetProps.property.invocationType">invocationType</a></code> | <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.IInvocationType">IInvocationType</a></code> | *No description.* |
+
+---
+
+##### `inputTemplate`<sup>Optional</sup> <a name="inputTemplate" id="@raphaelmanke/aws-cdk-pipes-rfc.IStepFunctionTargetProps.property.inputTemplate"></a>
+
+```typescript
+public readonly inputTemplate: IInputTransformation;
+```
+
+- *Type:* <a href="#@raphaelmanke/aws-cdk-pipes-rfc.IInputTransformation">IInputTransformation</a>
 
 ---
 
@@ -4516,6 +4725,81 @@ public readonly invocationType: IInvocationType;
 
 
 ##### `AT_TIMESTAMP` <a name="AT_TIMESTAMP" id="@raphaelmanke/aws-cdk-pipes-rfc.PipeSourceStartingPosition.AT_TIMESTAMP"></a>
+
+---
+
+
+### PipeVariables <a name="PipeVariables" id="@raphaelmanke/aws-cdk-pipes-rfc.PipeVariables"></a>
+
+#### Members <a name="Members" id="Members"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.PipeVariables.PIPE_ARN">PIPE_ARN</a></code> | The Amazon Resource Name (ARN) of the pipe. |
+| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.PipeVariables.PIPE_NAME">PIPE_NAME</a></code> | The name of the pipe. |
+| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.PipeVariables.PIPE_SOURCE_ARN">PIPE_SOURCE_ARN</a></code> | The ARN of the event source of the pipe. |
+| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.PipeVariables.PIPE_ENRICHMENT_ARN">PIPE_ENRICHMENT_ARN</a></code> | The ARN of the enrichment of the pipe. |
+| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.PipeVariables.PIPE_TARGET_ARN">PIPE_TARGET_ARN</a></code> | The ARN of the target of the pipe. |
+| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.PipeVariables.PIPE_EVENT_INGESTION_TIME">PIPE_EVENT_INGESTION_TIME</a></code> | The time at which the event was received by the input transformer. |
+| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.PipeVariables.PIPE_EVENT">PIPE_EVENT</a></code> | The event as received by the input transformer. |
+| <code><a href="#@raphaelmanke/aws-cdk-pipes-rfc.PipeVariables.PIPE_EVENT_JSON">PIPE_EVENT_JSON</a></code> | The same as aws.pipes.event, but the variable only has a value if the original payload, either from the source or returned by the enrichment, is JSON. If the pipe has an encoded field, such as the Amazon SQS body field or the Kinesis data, those fields are decoded and turned into valid JSON. Because it isn't escaped, the variable can only be used as a value for a JSON field. For more information, see Implicit body data parsing. |
+
+---
+
+##### `PIPE_ARN` <a name="PIPE_ARN" id="@raphaelmanke/aws-cdk-pipes-rfc.PipeVariables.PIPE_ARN"></a>
+
+The Amazon Resource Name (ARN) of the pipe.
+
+---
+
+
+##### `PIPE_NAME` <a name="PIPE_NAME" id="@raphaelmanke/aws-cdk-pipes-rfc.PipeVariables.PIPE_NAME"></a>
+
+The name of the pipe.
+
+---
+
+
+##### `PIPE_SOURCE_ARN` <a name="PIPE_SOURCE_ARN" id="@raphaelmanke/aws-cdk-pipes-rfc.PipeVariables.PIPE_SOURCE_ARN"></a>
+
+The ARN of the event source of the pipe.
+
+---
+
+
+##### `PIPE_ENRICHMENT_ARN` <a name="PIPE_ENRICHMENT_ARN" id="@raphaelmanke/aws-cdk-pipes-rfc.PipeVariables.PIPE_ENRICHMENT_ARN"></a>
+
+The ARN of the enrichment of the pipe.
+
+---
+
+
+##### `PIPE_TARGET_ARN` <a name="PIPE_TARGET_ARN" id="@raphaelmanke/aws-cdk-pipes-rfc.PipeVariables.PIPE_TARGET_ARN"></a>
+
+The ARN of the target of the pipe.
+
+---
+
+
+##### `PIPE_EVENT_INGESTION_TIME` <a name="PIPE_EVENT_INGESTION_TIME" id="@raphaelmanke/aws-cdk-pipes-rfc.PipeVariables.PIPE_EVENT_INGESTION_TIME"></a>
+
+The time at which the event was received by the input transformer.
+
+This is an ISO 8601 timestamp. This time is different for the enrichment input transformer and the target input transformer, depending on when the enrichment completed processing the event.
+
+---
+
+
+##### `PIPE_EVENT` <a name="PIPE_EVENT" id="@raphaelmanke/aws-cdk-pipes-rfc.PipeVariables.PIPE_EVENT"></a>
+
+The event as received by the input transformer.
+
+---
+
+
+##### `PIPE_EVENT_JSON` <a name="PIPE_EVENT_JSON" id="@raphaelmanke/aws-cdk-pipes-rfc.PipeVariables.PIPE_EVENT_JSON"></a>
+
+The same as aws.pipes.event, but the variable only has a value if the original payload, either from the source or returned by the enrichment, is JSON. If the pipe has an encoded field, such as the Amazon SQS body field or the Kinesis data, those fields are decoded and turned into valid JSON. Because it isn't escaped, the variable can only be used as a value for a JSON field. For more information, see Implicit body data parsing.
 
 ---
 

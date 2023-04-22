@@ -63,7 +63,7 @@ describe('Pipe', () => {
       template.findResources('AWS::IAM::Policy', {}),
     )[0];
 
-    expect(pipeRolePolicy.Properties.PolicyDocument.Statement).toHaveLength(2);
+    expect(pipeRolePolicy.Properties.PolicyDocument.Statement).toHaveLength(3);
 
     expect(template).toMatchSnapshot();
   });

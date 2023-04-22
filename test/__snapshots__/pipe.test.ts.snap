@@ -130,6 +130,32 @@ Object {
         "PolicyDocument": Object {
           "Statement": Array [
             Object {
+              "Action": "lambda:InvokeFunction",
+              "Effect": "Allow",
+              "Resource": Array [
+                Object {
+                  "Fn::GetAtt": Array [
+                    "testlambdaC73320F8",
+                    "Arn",
+                  ],
+                },
+                Object {
+                  "Fn::Join": Array [
+                    "",
+                    Array [
+                      Object {
+                        "Fn::GetAtt": Array [
+                          "testlambdaC73320F8",
+                          "Arn",
+                        ],
+                      },
+                      ":*",
+                    ],
+                  ],
+                },
+              ],
+            },
+            Object {
               "Action": Array [
                 "sqs:ReceiveMessage",
                 "sqs:ChangeMessageVisibility",

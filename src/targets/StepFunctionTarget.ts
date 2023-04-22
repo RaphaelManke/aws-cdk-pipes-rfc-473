@@ -25,6 +25,6 @@ export class StepFunctionTarget implements IPipeTarget {
   }
 
   grantPush(grantee: IRole): void {
-    this.stateMachine.grantExecution(grantee);
+    this.stateMachine.grantExecution(grantee, 'states:StartSyncExecution', 'states:StartExecution');
   }
 }

@@ -1,8 +1,8 @@
 fileignoreconfig:
-- filename: e2e/SqsSfnEventBus.ts
-  checksum: 5f1ecebc35cd23f2b7b05239a2f17795e18936ce5bd08c5b5e761fa746d94c0c
+- filename: e2e/targets/StepFunction/SqsStepFunction.ts
+  checksum: 08ee1494a9bab2ff12f3075469db17734b4a407bd5335e56012c296ff36d7b3b
 version: ""
-cksum: 3ad06860bbaaa3b41e9e3dfe665ede1564446fa7052a4ed7fdf609af7ce5bcc1
+41e9e3dfe665ede1564446fa7052a4ed7fdf609af7ce5bcc1
 - filename: e2e/sources/kafkaProducer.ts
   checksum: d8518b18d16551a7ffc49b7c0683b5fdf4c82a9d1709ca3330eada84c0993183
 - filename: src/PipeInputTransformation.test.ts

@@ -97,6 +97,14 @@
         }
       ]
     },
+    "cdk:deploy:target:stepfunction:sqs": {
+      "name": "cdk:deploy:target:stepfunction:sqs",
+      "steps": [
+        {
+          "exec": "cdk deploy --app 'npx ts-node --prefer-ts-exts e2e/targets/StepFunction/SqsStepFunction.ts'"
+        }
+      ]
+    },
     "clobber": {
       "name": "clobber",
       "description": "hard resets to HEAD of origin and cleans the local repo",

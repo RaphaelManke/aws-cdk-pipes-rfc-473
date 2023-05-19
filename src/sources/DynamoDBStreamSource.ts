@@ -2,6 +2,7 @@ import { IResolvable } from 'aws-cdk-lib';
 import { ITable } from 'aws-cdk-lib/aws-dynamodb';
 import { IRole } from 'aws-cdk-lib/aws-iam';
 import { CfnPipe } from 'aws-cdk-lib/aws-pipes';
+import { IQueue } from 'aws-cdk-lib/aws-sqs';
 import { PipeSourceDeadLetterConfig } from './PipeSourceDeadLetterConfig';
 import { PipeSourceOnPartialBatchItemFailure } from './PipeSourceOnPartialBatchItemFailure';
 import { PipeSourceStartingPosition } from './PipeSourceStartingPosition';
@@ -49,7 +50,8 @@ export interface IDynamoDBStreamSourceProps extends IPipeSourceCommonParameters 
 
 
 export class DynamoDBStreamSource implements IPipeSource {
-  private table: ITable;
+  private readonly table: ITable;
+  private readonly dlq?: IQueue;
 
   sourceArn: string;
   sourceParameters?: CfnPipe.PipeSourceParametersProperty | IResolvable;
@@ -64,6 +66,10 @@ export class DynamoDBStreamSource implements IPipeSource {
     const deadLetterConfig: CfnPipe.DeadLetterConfigProperty | undefined = props.deadLetterConfig ? {
       arn: props.deadLetterConfig.queue.queueArn,
     } : undefined;
+
+    if ( props.deadLetterConfig?.queue ) {
+      this.dlq = props.deadLetterConfig?.queue;
+    }
 
     this.sourceArn = table.tableStreamArn;
     this.sourceParameters = {
@@ -83,5 +89,8 @@ export class DynamoDBStreamSource implements IPipeSource {
 
   public grantRead(grantee: IRole): void {
     this.table.grantStreamRead(grantee);
+    if (this.dlq) {
+      this.dlq.grantSendMessages(grantee);
+    }
   }
 }

@@ -2,6 +2,7 @@ import { IResolvable } from 'aws-cdk-lib';
 import { IRole } from 'aws-cdk-lib/aws-iam';
 import { Stream } from 'aws-cdk-lib/aws-kinesis';
 import { CfnPipe } from 'aws-cdk-lib/aws-pipes';
+import { IQueue } from 'aws-cdk-lib/aws-sqs';
 import { PipeSourceDeadLetterConfig } from './PipeSourceDeadLetterConfig';
 import { PipeSourceOnPartialBatchItemFailure } from './PipeSourceOnPartialBatchItemFailure';
 import { PipeSourceStartingPosition } from './PipeSourceStartingPosition';
@@ -14,7 +15,6 @@ export interface IKinesisStreamSourceProps extends IPipeSourceCommonParameters {
       *
       * @link http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipesourcekinesisstreamparameters.html#cfn-pipes-pipe-pipesourcekinesisstreamparameters-deadletterconfig
       */
-  // TODO: what is this config? What kind of arn is required here?
   readonly deadLetterConfig?: PipeSourceDeadLetterConfig;
 
   /**
@@ -58,6 +58,8 @@ export interface IKinesisStreamSourceProps extends IPipeSourceCommonParameters {
 
 export class KinesisStreamSource implements IPipeSource {
   private readonly stream: Stream;
+  private readonly dlq?: IQueue;
+
   sourceArn: string;
   sourceParameters?: IResolvable | CfnPipe.PipeSourceParametersProperty | undefined;
 
@@ -70,6 +72,10 @@ export class KinesisStreamSource implements IPipeSource {
     const deadLetterConfig = props.deadLetterConfig ? {
       arn: props.deadLetterConfig.queue.queueArn,
     } : undefined;
+
+    if ( props.deadLetterConfig?.queue ) {
+      this.dlq = props.deadLetterConfig?.queue;
+    }
 
     this.sourceArn = kinesisStream.streamArn;
     this.sourceParameters = {
@@ -88,5 +94,8 @@ export class KinesisStreamSource implements IPipeSource {
   }
   grantRead(grantee: IRole): void {
     this.stream.grantRead(grantee);
+    if (this.dlq) {
+      this.dlq.grantSendMessages(grantee);
+    }
   }
 }

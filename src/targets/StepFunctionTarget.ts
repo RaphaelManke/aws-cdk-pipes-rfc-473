@@ -10,6 +10,7 @@ export interface IStepFunctionTargetProps extends IPipeTargetCommonParameters{
 
 export class StepFunctionTarget implements IPipeTarget {
   private readonly stateMachine: IStateMachine;
+  private readonly invocationType: IInvocationType | undefined;
   readonly targetArn: string;
   readonly targetParameters: CfnPipe.PipeTargetParametersProperty;
 
@@ -25,6 +26,10 @@ export class StepFunctionTarget implements IPipeTarget {
   }
 
   grantPush(grantee: IRole): void {
-    this.stateMachine.grantExecution(grantee, 'states:StartSyncExecution', 'states:StartExecution');
+    if (this.invocationType === IInvocationType.FIRE_AND_FORGET) {
+      this.stateMachine.grantStartExecution(grantee);
+    } else {
+      this.stateMachine.grantStartSyncExecution(grantee);
+    }
   }
 }

@@ -30,31 +30,6 @@ export interface IApiDestinationEnrichmentParameters {
     [key: string]: (string);
   } | IResolvable;
 }
-export interface IApiDestinationEnrichmentParameters {
-  inputTransformation?: IInputTransformation;
-  /**
-     * The headers that need to be sent as part of request invoking the API Gateway REST API or EventBridge ApiDestination.
-     *
-     * @link http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipeenrichmenthttpparameters.html#cfn-pipes-pipe-pipeenrichmenthttpparameters-headerparameters
-     */
-  readonly headerParameters?: {
-    [key: string]: (string);
-  } | IResolvable;
-  /**
-     * The path parameter values to be used to populate API Gateway REST API or EventBridge ApiDestination path wildcards ("*").
-     *
-     * @link http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipeenrichmenthttpparameters.html#cfn-pipes-pipe-pipeenrichmenthttpparameters-pathparametervalues
-     */
-  readonly pathParameterValues?: string[];
-  /**
-     * The query string keys/values that need to be sent as part of request invoking the API Gateway REST API or EventBridge ApiDestination.
-     *
-     * @link http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipeenrichmenthttpparameters.html#cfn-pipes-pipe-pipeenrichmenthttpparameters-querystringparameters
-     */
-  readonly queryStringParameters?: {
-    [key: string]: (string);
-  } | IResolvable;
-}
 
 export class ApiDestinationEnrichment implements IPipeEnrichment {
   private apiDestination: IApiDestination;

@@ -1,9 +1,10 @@
 fileignoreconfig:
-- filename: e2e/targets/StepFunction/SqsStepFunction.ts
-  checksum: 08ee1494a9bab2ff12f3075469db17734b4a407bd5335e56012c296ff36d7b3b
+- filename: e2e/enrichments/ApiDestination.ts
+  checksum: 95ce6d1aee110b1f4dc282649a1a0df7206385de1ff75bc1e91ecd99799e9013
+- filename: yarn.lock
+  checksum: 3ce4b12c255a59ef778941f69502a40787743da56ea09236bda4ce76ee8e23e5
 version: ""
-41e9e3dfe665ede1564446fa7052a4ed7fdf609af7ce5bcc1
-- filename: e2e/sources/kafkaProducer.ts
+s
   checksum: d8518b18d16551a7ffc49b7c0683b5fdf4c82a9d1709ca3330eada84c0993183
 - filename: src/PipeInputTransformation.test.ts
   checksum: 483f85b773625258dbdf0eb9db6bb4bad785962ef2f81278a9e6978bb6f83c46

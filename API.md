@@ -2438,8 +2438,6 @@ public readonly headerParameters: {[ key: string ]: string} | IResolvable;
 
 The headers that need to be sent as part of request invoking the API Gateway REST API or EventBridge ApiDestination.
 
-The headers that need to be sent as part of request invoking the API Gateway REST API or EventBridge ApiDestination.
-
 > [http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipeenrichmenthttpparameters.html#cfn-pipes-pipe-pipeenrichmenthttpparameters-headerparameters](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipeenrichmenthttpparameters.html#cfn-pipes-pipe-pipeenrichmenthttpparameters-headerparameters)
 
 ---
@@ -2454,8 +2452,6 @@ public readonly pathParameterValues: string[];
 
 The path parameter values to be used to populate API Gateway REST API or EventBridge ApiDestination path wildcards ("*").
 
-The path parameter values to be used to populate API Gateway REST API or EventBridge ApiDestination path wildcards ("*").
-
 > [http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipeenrichmenthttpparameters.html#cfn-pipes-pipe-pipeenrichmenthttpparameters-pathparametervalues](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-pipes-pipe-pipeenrichmenthttpparameters.html#cfn-pipes-pipe-pipeenrichmenthttpparameters-pathparametervalues)
 
 ---
@@ -2467,8 +2463,6 @@ public readonly queryStringParameters: IResolvable | {[ key: string ]: string};
 ```
 
 - *Type:* aws-cdk-lib.IResolvable | {[ key: string ]: string}
-
-The query string keys/values that need to be sent as part of request invoking the API Gateway REST API or EventBridge ApiDestination.
 
 The query string keys/values that need to be sent as part of request invoking the API Gateway REST API or EventBridge ApiDestination.
 

@@ -21,21 +21,26 @@ const project = new awscdk.AwsCdkConstructLibrary({
   scripts: {
     'cdk:deploy:source:sqs': "cdk deploy --app 'npx ts-node --prefer-ts-exts e2e/sources/Sqs.ts'",
     'cdk:deploy:source:dynamodb': "cdk deploy --app 'npx ts-node --prefer-ts-exts e2e/sources/DynamoDbStream.ts'",
+    'cdk:deploy:source:dynamodb:lambda:loggroup': "cdk deploy --app 'npx ts-node --prefer-ts-exts e2e/sources/DynamoDbStreamEnrichment.ts'",
     'cdk:deploy:source:kafka-serverless': "cdk deploy --app 'npx ts-node --prefer-ts-exts e2e/sources/MskServerless.ts'",
     'cdk:deploy:target:eventbus:dynamo-stream': "cdk deploy --app 'npx ts-node --prefer-ts-exts e2e/targets/EventBus/DynamoStreamEventBus.ts'",
     'cdk:deploy:target:eventbus:sqs': "cdk deploy --app 'npx ts-node --prefer-ts-exts e2e/targets/EventBus/SqsEventBus.ts'",
     'cdk:deploy:target:eventbus:kinesis-stream': "cdk deploy --app 'npx ts-node --prefer-ts-exts e2e/targets/EventBus/KinesisStreamEventBus.ts'",
     'cdk:deploy:target:stepfunction:sqs': "cdk deploy --app 'npx ts-node --prefer-ts-exts e2e/targets/StepFunction/SqsStepFunction.ts'",
+    'cdk:deploy:enrichment:apidestination': "cdk deploy --app 'npx ts-node --prefer-ts-exts e2e/enrichments/ApiDestination.ts'",
     'cdk:deploy:all:sqs:sfn:eventbus': "cdk deploy --app 'npx ts-node --prefer-ts-exts e2e/SqsSfnEventBus.ts'",
   },
+  bundledDeps: [
+    '@types/aws-lambda',
+  ],
   deps: [
+    '@types/aws-lambda',
   ], /* Runtime dependencies of this module. */
   // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
   devDeps: [
     '@jm18457/kafkajs-msk-iam-authentication-mechanism@2.0.3',
     'aws-sdk',
     'kafkajs',
-
     'aws-cdk',
     'esbuild',
   ], /* Build dependencies for this module. */

@@ -49,11 +49,27 @@
         }
       ]
     },
+    "cdk:deploy:enrichment:apidestination": {
+      "name": "cdk:deploy:enrichment:apidestination",
+      "steps": [
+        {
+          "exec": "cdk deploy --app 'npx ts-node --prefer-ts-exts e2e/enrichments/ApiDestination.ts'"
+        }
+      ]
+    },
     "cdk:deploy:source:dynamodb": {
       "name": "cdk:deploy:source:dynamodb",
       "steps": [
         {
           "exec": "cdk deploy --app 'npx ts-node --prefer-ts-exts e2e/sources/DynamoDbStream.ts'"
+        }
+      ]
+    },
+    "cdk:deploy:source:dynamodb:lambda:loggroup": {
+      "name": "cdk:deploy:source:dynamodb:lambda:loggroup",
+      "steps": [
+        {
+          "exec": "cdk deploy --app 'npx ts-node --prefer-ts-exts e2e/sources/DynamoDbStreamEnrichment.ts'"
         }
       ]
     },

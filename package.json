@@ -8,7 +8,9 @@
     "build": "npx projen build",
     "bump": "npx projen bump",
     "cdk:deploy:all:sqs:sfn:eventbus": "npx projen cdk:deploy:all:sqs:sfn:eventbus",
+    "cdk:deploy:enrichment:apidestination": "npx projen cdk:deploy:enrichment:apidestination",
     "cdk:deploy:source:dynamodb": "npx projen cdk:deploy:source:dynamodb",
+    "cdk:deploy:source:dynamodb:lambda:loggroup": "npx projen cdk:deploy:source:dynamodb:lambda:loggroup",
     "cdk:deploy:source:kafka-serverless": "npx projen cdk:deploy:source:kafka-serverless",
     "cdk:deploy:source:sqs": "npx projen cdk:deploy:source:sqs",
     "cdk:deploy:target:eventbus:dynamo-stream": "npx projen cdk:deploy:target:eventbus:dynamo-stream",
@@ -71,6 +73,12 @@
     "aws-cdk-lib": "^2.66.1",
     "constructs": "^10.0.5"
   },
+  "dependencies": {
+    "@types/aws-lambda": "^8.10.115"
+  },
+  "bundledDependencies": [
+    "@types/aws-lambda"
+  ],
   "keywords": [
     "cdk"
   ],

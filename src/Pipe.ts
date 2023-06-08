@@ -1,7 +1,5 @@
 import {
   IResource,
-  Lazy,
-  Names,
   Resource,
 } from 'aws-cdk-lib';
 import { IRole, Role, ServicePrincipal } from 'aws-cdk-lib/aws-iam';
@@ -110,7 +108,7 @@ export class Pipe extends PipeBase {
 
   constructor(scope: Construct, id: string, props: IPipeProps) {
     const pipeName =
-      props.name || Lazy.string({ produce: () => Names.uniqueId(this) });
+      props.name;
     super(scope, id, { physicalName: pipeName });
 
     this.pipeRole =
@@ -118,7 +116,6 @@ export class Pipe extends PipeBase {
       new Role(this, 'Role', {
         assumedBy: new ServicePrincipal('pipes.amazonaws.com'),
       });
-    this.pipeName = pipeName;
 
     const sourceParameters = {
       ...props.source.sourceParameters,
@@ -143,6 +140,9 @@ export class Pipe extends PipeBase {
       enrichmentParameters: props.enrichment?.enrichmentParameters,
       tags: props.tags,
     });
+
+    this.pipeName = resource.ref;
     this.pipeArn = resource.attrArn;
+
   }
 }
